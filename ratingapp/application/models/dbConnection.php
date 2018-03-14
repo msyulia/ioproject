@@ -2,14 +2,17 @@
 
     //połączenie z bazą danych
     class dbConnection{
-        private static $dbHost = "localhost";
-        private static $dbUser = "root";
-        private static $dbPassword = "";
-        private static $dbName = "aplikacja_pracodawcy";
+        private $dbHost;
+        private $dbUser;
+        private $dbPassword;
+        private $dbName;
         
-        public static function connect(){
-
-            $connection = mysqli_connect(self::$dbHost,self::$dbUser,self::$dbPassword, self::$dbName);
+        protected function connect(){
+            $this->dbHost = "localhost";
+            $this->dbUser = "root";
+            $this->dbPassword = "";
+            $this->dbName = "aplikacja_pracodawcy"; 
+            $connection = mysqli_connect($this->dbHost, $this->dbUser,$this->dbPassword, $this->dbName);
 
             if($connection == false){
                 echo "Connection error <br />";
@@ -17,12 +20,11 @@
             }
             $connection -> query("SET NAMES utf8");
             $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
+
             return $connection;
         }
 
-        public static function disconnect(){
 
-        }
     }
 
 ?>

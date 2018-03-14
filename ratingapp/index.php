@@ -1,7 +1,9 @@
 <?php 
     require "./application/application.php";
-    dbConnection::connect();
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,6 @@
     <title>Document</title>
 </head>
 <body>
-
 
 </body>
 </html>

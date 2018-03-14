@@ -1,6 +1,6 @@
 <?php
   // wyciąganie komentarzy
-  class employerComments{
+  class employerComments extends dbConnection{
 
-    }
+  }
 ?>

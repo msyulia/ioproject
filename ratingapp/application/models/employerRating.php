@@ -1,6 +1,6 @@
 <?php
     //pobieranie ocen
-    class employerRating{
+    class employerRating extends dbConnection{
 
     }
 ?>
