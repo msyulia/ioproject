@@ -6,7 +6,7 @@
         private static $dbUser = "root";
         private static $dbPassword = "";
         private static $dbName = "aplikacja_pracodawcy";
-
+        
         public static function connect(){
 
             $connection = mysqli_connect(self::$dbHost,self::$dbUser,self::$dbPassword, self::$dbName);
@@ -17,7 +17,7 @@
             }
             $connection -> query("SET NAMES utf8");
             $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
-
+            return $connection;
         }
 
         public static function disconnect(){
