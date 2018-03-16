@@ -7,6 +7,8 @@
         private $dbPassword;
         private $dbName;
         
+        protected static $connection;
+
         protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
@@ -20,11 +22,10 @@
             }
             $connection -> query("SET NAMES utf8");
             $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
-
+            
+            self::$connection = $connection;   //Dodałem statyczne pole connection bo reason's
             return $connection;
         }
-
-
     }
 
 ?>

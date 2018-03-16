@@ -13,6 +13,13 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div>
+        <form action="/application/controllers/login.php" method="POST">
+            <input type="text" name="PESEL" placeholder="PESEL">
+            <input type="text" name="login" placeholder="Login">
+            <input type="password" name="pwd" placeholder="Password">
+            <input type="submit" name="register" placeholder="Register">
+        </form>
+    </div>
 </body>
 </html>
