@@ -12,7 +12,7 @@
         public $kat4;
         public $komentarz;
         // Konstruktor
-        public function __construct($$pracodawca, $pracownik, $kat1, $kat2, $kat3, $kat4, $komentarz) {
+        public function __construct($pracodawca, $pracownik, $kat1, $kat2, $kat3, $kat4, $komentarz) {  //Błąd $$pracodawca w parametrach konstruktora
           $this->id = $id;
           $this->pracodawca = $pracodawca;
           $this->pracownik = $pracownik;
@@ -36,7 +36,7 @@
         }
 
         public function zapisz(){   // zapisanie w bazie danych
-          $zapytanie = connection->prepare("INSERT oceny (Pracodawca, Pracownik, Kat1, Kat2, Kat3, Kat4, Komentarz) VALUES (?,?,?,?,?,?,?)");
+          $zapytanie = dbConnection::getConnection()->prepare("INSERT oceny (Pracodawca, Pracownik, Kat1, Kat2, Kat3, Kat4, Komentarz) VALUES (?,?,?,?,?,?,?)");  //
           $zapytanie->bind_param("sssiiis",$pracodawca,$pracownik,$kat1,$kat2,$kat3,$kat4,$komentarz);
           $zapytanie->execute();
           $zapytanie->close();
