@@ -18,7 +18,7 @@
         <br/> Zwykłe logowanie
         <form action="">
             <input type="text" name="login" placeholder="login">
-            <input type="password" name="login" placeholder="password">
+            <input type="password" name="password" placeholder="password">
             <button>Login</button>
         </form>
 
