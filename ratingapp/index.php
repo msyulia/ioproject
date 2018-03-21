@@ -14,12 +14,24 @@
 </head>
 <body>
     <div>
-        <form action="../ratingapp/application/controllers/login.php" method="POST">
-            <input type="text" name="PESEL" placeholder="PESEL">
-            <input type="text" name="login" placeholder="Login">
-            <input type="password" name="pwd" placeholder="Password">
-            <input type="submit" name="register" placeholder="Register">
+        <!-- tu login -->
+        <br/> Zwykłe logowanie
+        <form action="">
+            <input type="text" name="login" placeholder="login">
+            <input type="password" name="login" placeholder="password">
+            <button>Login</button>
         </form>
+
+<!-- tu pierwsze logowanie -->
+<br>Pierwsze logowanie. np:
+<form action="">
+    <input type="text" name="login" placeholder="Imię">
+    <input type="text" name="nazwisko" placeholder="Nazwisko">
+    <input type="text" name="pesel" placeholder="PESEL">
+    <input type="password" name="PWD1" placeholder="Hasło">
+    <input type="password" name="PWD2" placeholder="Powtórz hasło">
+    <button>Rejestracja</button>
+</form>
     </div>
 </body>
 </html>

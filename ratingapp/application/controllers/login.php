@@ -25,25 +25,34 @@ else
         }
         else
         {
-            //Formularz dobrze wypełniony użytkownik chce się zalogować    
-            //Sprawdź poprawność danych później jakaś walidacja loginu i hasła
-            $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-            $dbpwd = dbConnection::sendquery('select pwd from pracownicy where login='.$Login);
-            if($Pwd==$dbpwd)
+            $dbLogin = dbConnection::sendquery('select login from pracownicy where login='.$login);
+            empty($dbLogin['login']);
+            if(empty($dbLogin['login']))
             {
-                //Poprawne hasło
-                $Imie = dbConnection::sendquery('select Imie from pracownicy where login='.$Login);
-                $Nazwisko = dbConnection::sendquery('select Nazwisko from pracownicy where login='.$Login);
-                Sessions::setLogin($Login);
-                Sessions::setImie($Imie);
-                Sessions::setNazwisko($Nazwisko);
-
-                redirect("../../index.php");    //Zmienić na odpowiednią stronę   
+                errorRedirect('?form=userexists');
             }
             else
             {
-                //Hasło niepoprawne 
-                errorRedirect('?form=incorrect');
+                //Formularz dobrze wypełniony użytkownik chce się zalogować    
+                //Sprawdź poprawność danych później jakaś walidacja loginu i hasła
+                $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+                $dbpwd = dbConnection::sendquery('select pwd from pracownicy where login='.$Login);
+                if($Pwd==$dbpwd)
+                {
+                    //Poprawne hasło
+                    $Imie = dbConnection::sendquery('select Imie from pracownicy where login='.$Login);
+                    $Nazwisko = dbConnection::sendquery('select Nazwisko from pracownicy where login='.$Login);
+                    Sessions::setLogin($Login);
+                    Sessions::setImie($Imie);
+                    Sessions::setNazwisko($Nazwisko);
+
+                    redirect("../../index.php");    //Zmienić na odpowiednią stronę   
+                }
+                else
+                {
+                    //Hasło niepoprawne 
+                    errorRedirect('?form=incorrect');
+                }
             }
         }
     }
