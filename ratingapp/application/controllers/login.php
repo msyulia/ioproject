@@ -28,7 +28,7 @@ else
             //Formularz dobrze wypełniony użytkownik chce się zalogować    
             //Sprawdź poprawność danych później jakaś walidacja loginu i hasła
             $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-            $dbpwd = dbConnection::sendquery('select login from pracownicy where login='.$Login);
+            $dbpwd = dbConnection::sendquery('select pwd from pracownicy where login='.$Login);
             if($Pwd==$dbpwd)
             {
                 //Poprawne hasło
