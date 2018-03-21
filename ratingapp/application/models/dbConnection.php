@@ -21,8 +21,9 @@
         {
             return mysqli_real_escape_string(self::$connection, $_POST[$columnName]);
         }
-        protected function connect()
-        {
+
+        
+         protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
             $this->dbPassword = "";
