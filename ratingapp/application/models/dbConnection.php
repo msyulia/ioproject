@@ -1,7 +1,7 @@
 <?php
-
     //połączenie z bazą danych
-    class dbConnection{
+    class dbConnection
+    {
         private $dbHost;
         private $dbUser;
         private $dbPassword;
@@ -9,7 +9,20 @@
         
         protected static $connection;
 
-        protected function connect(){
+        public static function sendquery($queryString)
+        {
+            return mysqli_query(self::$connection,$queryString);
+        }
+        protected static function getInfo($columnName)
+        {
+            return mysqli_real_escape_string(self::$connection, $_GET[$columnName]);
+        }
+        protected static function postInfo($columnName)
+        {
+            return mysqli_real_escape_string(self::$connection, $_POST[$columnName]);
+        }
+        protected function connect()
+        {
             $this->dbHost = "localhost";
             $this->dbUser = "root";
             $this->dbPassword = "";

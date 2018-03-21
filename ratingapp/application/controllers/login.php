@@ -1,40 +1,59 @@
 <?php
 
-include "../dbConnection.php";//poop
+require "../dbConnection.php";
 require "../application.php";
 
 if(!isset($_POST['submit']))
 {
-    redirect();
+    errorRedirect();
 }
 else
 {
-    //myślę że dbConnection powinno mieć statyczne pole connection żeby tego poniżej użyć
-    $PESEL =mysqli_real_escape_string(dbConnection::$connection, $_POST['PESEL']);
-    //$login =$_POST['login'];
+    $Login = dbConnection::postInfo('login');
+    $Pwd = dbConnection::postInfo('pwd');
 
-    if(empty($PESEL))
+    if(empty($Login) && empty($Pwd))
     {
-        redirect('?form=emptypesel');
+        //Wszystkie pola puste
+        errorRedirect('?form=empty');
     }
     else
     {
-        //Walidacja tego co użytkownik wpisał
-        if(!preg_match("/^[0-9]*$",$PESEL))  //login to pesel więc zawiera liczby od 0-9
+        if(empty($Login) || empty($Pwd))
         {
-            redirect('?form=invalidpesel');
+            errorRedirect('?form=incomplete');
         }
         else
         {
-            
+            //Formularz dobrze wypełniony użytkownik chce się zalogować    
+            //Sprawdź poprawność danych później jakaś walidacja loginu i hasła
+            $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+            $dbpwd = dbConnection::sendquery('select login from pracownicy where login='.$Login);
+            if($Pwd==$dbpwd)
+            {
+                //Poprawne hasło
+                $Imie = dbConnection::sendquery('select Imie from pracownicy where login='.$Login);
+                $Nazwisko = dbConnection::sendquery('select Nazwisko from pracownicy where login='.$Login);
+                Sessions::setLogin($Login);
+                Sessions::setImie($Imie);
+                Sessions::setNazwisko($Nazwisko);
+
+                redirect("../../index.php");    //Zmienić na odpowiednią stronę   
+            }
+            else
+            {
+                //Hasło niepoprawne 
+                errorRedirect('?form=incorrect');
+            }
         }
     }
 }
-////////
-//example
-//
-///////
-function redirect($errorstring = '')
+function redirect($path)
+{
+    header("Location: ".$path);
+    die();
+}
+function errorRedirect($errorstring = '')
 {
     header("Location: ../../index.php".$errorstring);
     die(); 

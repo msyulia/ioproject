@@ -1,61 +1,50 @@
 <?php
-    //sesje, potem ktoś będzie pisał logowanie jako późniejszy Task
-    //maja być przygotowanie pola pod PESEL , Imie, Nazwisko
+
     class Sessions
     {
-        public $PESEL;
-        public $Imie;
-        public $Nazwisko;
-    
-        public function __construct()
-        {
-            session_start();
-    
-            //Zapobiega dopisywaniu do url PHPSESSID i tworzeniu własnej sesji
-            if(!isset($_SESSION['init']))
-            {
-                session_regenerate_id();
-                $_SESSION['init']=true;
-                $_SESSION['ip']=$_SERVER['REMOTE_ADDR'];
-            }
+        private static $_sessionStart = false;
 
-            //Zapobiega session hijacking
-            if($_SESSION['ip']!=$_SERVER['REMOTE_ADDR'])
-            {
-                die('Session hijacking failure');
+        public static function startSession(){
+            if(self::$_sessionStart == false){
+                session_start();
+                self::$_sessionStart = true;
             }
-
-            //Ustawienie zmiennych w sesji
-            if(!isset($_SESSION['counter']))
-            {
-                $_SESSION['counter'] = 0;
+        }
+        public static function stopSession(){
+            if(self::$_sessionStart == true){
+                session_destroy();
+                self::$_sessionStart = false;
             }
-            if(!isset($_SESSION['PESEL'])) 
-            {
-                $_SESSION['PESEL']="";
-            }
-            if(!isset($_SESSION['Imie'])) 
-            {
-                $_SESSION['Imie']="";
-            }
-            if(!isset($_SESSION['Nazwisko'])) 
-            {
-                $_SESSION['Nazwisko']="";
-            }
-            $_SESSION['counter']++;
+        }
+        public static function setImie($imie){
+            $_SESSION['imie'] = $imie;
+        }
+        public static function setNazwisko($nazwisko){
+            $_SESSION['nazwisko'] = $nazwisko;
         }
 
-        public function setPESEL($PESEL)
-        {
-            $this->$PESEL = $PESEL;
+        public static function setLogin($login){
+            $_SESSION['login'] = $login;
         }
-        public function setImie($Imie)
-        {
-            $this->$Imie = $Imie;
+
+        public static function getImie(){
+            return $_SESSION['imie'];
         }
-        public function setNazwisko($Nazwisko)
-        {
-            $this->$Nazwisko = $Nazwisko;
+        public static function getNazwisko(){
+            return $_SESSION['nazwisko'];
         }
+
+        public static function getLogin(){
+            return $_SESSION['login'];
+        }
+
+        public static function isLogged(){
+            if(isset($_SESSION['imie']) && isset($_SESSION['nazwisko']) && isset($_SESSION['login'])){
+                return "tak";
+            }else{
+                echo "nie";
+            }
+        }
+
     }
 ?>
