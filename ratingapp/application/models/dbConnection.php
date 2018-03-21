@@ -15,14 +15,13 @@
         }
         protected static function getInfo($columnName)
         {
-            return mysqli_real_escape_string(self::$connection, $_GET[$columnName]);
+            return $_GET[$columnName];
         }
         protected static function postInfo($columnName)
         {
-            return mysqli_real_escape_string(self::$connection, $_POST[$columnName]);
+            return $_POST[$columnName];
         }
 
-        
          protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
@@ -34,8 +33,8 @@
                 echo "Connection error <br />";
                 exit;
             }
-            $connection -> query("SET NAMES utf8");
-            $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
+            $connection -> sendquery("SET NAMES utf8");
+            $connection -> sendquery("SET CHARACTER_SET utf8_unicode_ci");
             
             self::$connection = $connection;   //Dodałem statyczne pole connection bo reason's
             return $connection;
