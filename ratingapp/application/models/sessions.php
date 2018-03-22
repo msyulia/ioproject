@@ -1,9 +1,12 @@
 <?php
-
+    /**
+     * Klasa obsługujaca sesje.
+     */
     class Sessions
     {
         private static $_sessionStart = false;
-
+        
+     
         public static function startSession(){
             if(self::$_sessionStart == false){
                 session_start();
@@ -39,11 +42,7 @@
         }
 
         public static function isLogged(){
-            if(isset($_SESSION['imie']) && isset($_SESSION['nazwisko']) && isset($_SESSION['login'])){
-                return "tak";
-            }else{
-                echo "nie";
-            }
+            return isset($_SESSION['login']);
         }
 
     }
