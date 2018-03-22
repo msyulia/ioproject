@@ -43,17 +43,18 @@
                 <input type="password" name="PWD2" placeholder="Powtórz hasło">
                 <button>Rejestracja</button>
             </form>
+
         <h1>Ocena pracodawców!</h1>
         <?php
-        $oceny = new Rating();
-        echo $oceny->getShowALL();
-        ?>
-        <h1>Wystaw ocenę!</h1>
+          $oceny = new Rating();
+          echo $oceny->getShowALL();
+          ?>
+          <h1>Wystaw ocenę!</h1>
         <?php
-        if(Sessions::isLogged()){
-            $wystawOcene = new accessAuthorization();
-            $wystawOcene->wystawOcene(Sessions::getLogin());
-        }
+          if(Sessions::isLogged()){
+              $wystawOcene = new accessAuthorization();
+              $wystawOcene->wystawOcene(Sessions::getLogin());
+          }
         ?>
         </div>
     </body>
