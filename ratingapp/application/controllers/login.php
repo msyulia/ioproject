@@ -26,9 +26,9 @@ else
         else
         {
             $dbLogin = dbConnection::sendquery('select login from pracownicy where login='.$login);
-            empty($dbLogin['login']);
             if(empty($dbLogin['login']))
             {
+                //Użytkownika nie ma w bazie
                 errorRedirect('?form=userexists');
             }
             else
@@ -36,8 +36,8 @@ else
                 //Formularz dobrze wypełniony użytkownik chce się zalogować    
                 //Sprawdź poprawność danych później jakaś walidacja loginu i hasła
                 $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-                $dbpwd = dbConnection::sendquery('select pwd from pracownicy where login='.$Login);
-                if($Pwd==$dbpwd)
+                $queryres = dbConnection::sendquery('select password from pracownicy where login='.$Login);
+                if($Pwd==$queryres['password'])
                 {
                     //Poprawne hasło
                     $Imie = dbConnection::sendquery('select Imie from pracownicy where login='.$Login);
