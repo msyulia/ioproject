@@ -16,6 +16,18 @@
             return mysqli_query($connect->connect(),$queryString);
         }
         protected function connect(){
+            return mysqli_query(self::$connection,$queryString);
+        }
+        protected static function getInfo($columnName)
+        {
+            return $_GET[$columnName];
+        }
+        protected static function postInfo($columnName)
+        {
+            return $_POST[$columnName];
+        }
+
+         protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
             $this->dbPassword = "";
@@ -29,7 +41,6 @@
             $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
      
             return $connection;
-        }
-
+         }
     }
 ?>
