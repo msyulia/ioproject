@@ -9,14 +9,11 @@
         private $dbName;
         
         protected static $connection;
-        public static function sendquery($queryString)
+        protected static function sendquery($queryString)
         {
             $connect = new dbConnection();
            
             return mysqli_query($connect->connect(),$queryString);
-        }
-        protected function connect(){
-            return mysqli_query(self::$connection,$queryString);
         }
         protected static function getInfo($columnName)
         {
