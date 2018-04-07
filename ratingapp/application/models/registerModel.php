@@ -2,47 +2,44 @@
 header('Content-type: text/html; charset=utf-8'); 
 
 class Register extends dbConnection {
+    private $imie;
+    private $naziwsko;
+    private $pesel;
 
-
-    public static function sprawdzWBazie($imie,$nazwisko,$pesel){
-        if(empty($imie) || empty($nazwisko) || empty($pesel)){
-            return 0;
-        }else{
-            $dbRegister = dbConnection::sendquery("SELECT * FROM pracownicy WHERE Imie='$imie' AND Nazwisko='$nazwisko' AND PESEL='$pesel'");
-            $check_result = $dbRegister->num_rows;
-            if($check_result > 0){
-                return 1;
-            }
-        }
-        return 0;
+    public function __construct($imie, $nazwisko, $pesel){
+        $this->imie = $imie;
+        $this->nazwisko = $nazwisko;
+        $this->pesel = $pesel;
     }
 
-    public static function matchPasswords($password1,$password2){
+    public function sprawdzWBazie(){
+        if(empty($this->imie) || empty($this->nazwisko) || empty($this->pesel)){
+            return 0;
+        }else{
+            $dbRegister = $this->sendquery("SELECT * FROM pracownicy WHERE Imie='$this->imie' AND Nazwisko='$this->nazwisko' AND PESEL='$this->pesel'");
+            return $dbRegister;
+        }
+       return 0;
+    }
+
+    public function matchPasswords($password1,$password2){
         return $password1 == $password2 ? 1 : 0;
     }
 
-    public static function createAccount($login, $password,$pesel){
-        $cr_account = dbConnection::getConnection()->prepare("UPDATE pracownicy SET login=?,password=?,firstlogin=? WHERE PESEL=?");
-        $cr_account->bind_param('ssis',$login,$password,$i = 0,$pesel);
+    public function createAccount($login, $password){
+        $cr_account = $this->connect()->prepare("UPDATE pracownicy SET login=?,password=?,firstlogin=? WHERE PESEL=?");
+        $cr_account->bind_param('ssis',$login,$password,$i = 0,$this->pesel);
         $cr_account->execute();
         $cr_account->close();
 
     }
-    public static function checkLogin($login){
-        $dbRegister = dbConnection::sendquery("SELECT * FROM pracownicy WHERE login='$login'");
-        $check_result = $dbRegister->num_rows;
-        if($check_result > 0){
-            return 1;
-        }
-        return 0;
+    public function checkLogin($login){
+        $dbRegister = $this->sendquery("SELECT * FROM pracownicy WHERE login='$login'");
+        return $dbRegister;
     }
-    public static function checkFirstRegiser($pesel){
-        $dbFirstLogin = dbConnection::sendquery("SELECT * FROM pracownicy WHERE PESEL='$pesel' AND firstlogin=0");
-        $check_result = $dbFirstLogin->num_rows;
-        if($check_result > 0){
-            return 1;
-        }
-        return 0;
+    public function checkFirstRegiser(){
+        $dbFirstLogin = $this->sendquery("SELECT * FROM pracownicy WHERE PESEL='$this->pesel' AND firstlogin=0");
+        return $dbFirstLogin;
     }
 }
 

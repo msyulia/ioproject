@@ -14,18 +14,19 @@ $password2 = $_POST['pwd2'];
 if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2)){
     echo 'Uzupełnij wszystkie pola!';
 }else{
-    if(Register::sprawdzWBazie($imie,$nazwisko,$pesel)){
-        if(Register::checkFirstRegiser($pesel)){
+    $register = new Register($imie,$nazwisko,$pesel);
+    if($register->sprawdzWBazie()){
+        if($register->checkFirstRegiser()){
             echo 'Jesteś już zarejestrowany!';
             die();
         }
-        if(Register::checkLogin($login)){
+        if($register->checkLogin($login)){
             echo 'Login jest zajęty!';
             die();
         }
-        if(Register::matchPasswords($password1,$password2)){
+        if($register->matchPasswords($password1,$password2)){
 
-            Register::createAccount($login,$password1,$pesel);
+            $register->createAccount($login,$password1);
             header("Location: ../../index.php?sucess");
         }else{
             echo 'Hasła nie są zgodne!';
