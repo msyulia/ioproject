@@ -11,7 +11,7 @@
         public function sendquery($queryString)
         {
             $connect = new dbConnection();
-            $queryRes = mysqli_query($connect->connect(),$queryString);
+            $queryRes = $connect->connect()->query($queryString);
             if($queryRes->num_rows > 0)
             {
                 //Nonempty query result
