@@ -1,4 +1,3 @@
-
 <?php
     //połączenie z bazą danych
     class dbConnection
@@ -9,38 +8,52 @@
         private $dbName;
         
         protected static $connection;
-        public static function sendquery($queryString)
+
+        protected function sendquery($queryString)
         {
             $connect = new dbConnection();
-           
-            return mysqli_query($connect->connect(),$queryString);
-        }
-        protected function connect(){
-            return mysqli_query(self::$connection,$queryString);
-        }
-        protected static function getInfo($columnName)
-        {
-            return $_GET[$columnName];
-        }
-        protected static function postInfo($columnName)
-        {
-            return $_POST[$columnName];
+            $queryRes = $connect->connect()->query($queryString);
+            if($queryRes->num_rows > 0)
+            {
+
+                while($row = $queryRes->fetch_assoc()) {
+                    $data[] = $row;
+                }       
+                return $data;
+            }
+            return false;
         }
 
-         protected function connect(){
+
+        public static function getConnection(){
+            $connect = new dbConnection();
+            return $connect->connect();
+        }
+
+
+        protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
             $this->dbPassword = "";
             $this->dbName = "aplikacja_pracodawcy"; 
-            $connection = mysqli_connect($this->dbHost, $this->dbUser,$this->dbPassword, $this->dbName);
+            // $this->dbHost = "ntmichal.nazwa.pl:3306";
+            // $this->dbUser = "ntmichal_aplikacjapracodawcy";
+            // $this->dbPassword = "Io123456789!";
+            // $this->dbName = "ntmichal_aplikacjapracodawcy"; 
+            
+            //object oriented 
+            $connection = new mysqli($this->dbHost, $this->dbUser,$this->dbPassword, $this->dbName);
             if($connection == false){
                 echo "Connection error <br />";
                 exit;
             }
-            $connection -> query("SET NAMES utf8");
-            $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
+            $connection->query("SET NAMES utf8");
+            $connection->query("SET CHARACTER_SET utf8_unicode_ci");
      
+            self::$connection = $connection;
             return $connection;
-         }
+        }
+        
+
     }
 ?>
