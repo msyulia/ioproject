@@ -8,12 +8,16 @@
         private $dbPassword;
         private $dbName;
         
-        protected static $connection;
-        protected static function sendquery($queryString)
+        public function sendquery($queryString)
         {
             $connect = new dbConnection();
-           
-            return mysqli_query($connect->connect(),$queryString);
+            $queryRes = mysqli_query($connect->connect(),$queryString);
+            if($queryRes->num_rows > 0)
+            {
+                //Nonempty query result
+                return $queryRes;
+            }
+            return false;
         }
         protected static function getInfo($columnName)
         {

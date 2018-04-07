@@ -54,9 +54,8 @@
         public function wystawOcene($login){
             $pobierz_id_pracownika = $this->getPracownikID($login);
             $pobierz_pracodawcow = "SELECT * FROM historiazatrudnienia WHERE pracownikID='$pobierz_id_pracownika' AND czyWystawionaOcena='0'";
-            $result = $this->connect()->query($pobierz_pracodawcow);  
-            $numRows = $result->num_rows;
-            if($numRows>0) {
+            $result = $this->sendquery($pobierz_pracodawcow);  
+            if($result) {
                 while($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }       
