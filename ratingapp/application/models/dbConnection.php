@@ -1,4 +1,3 @@
-
 <?php
     //połączenie z bazą danych
     class dbConnection
@@ -8,6 +7,8 @@
         private $dbPassword;
         private $dbName;
         
+        protected static $connection;
+      
         protected function sendquery($queryString)
         {
             $dbConn = (new dbConnection())->connect();
@@ -35,25 +36,37 @@
         {
             return $_GET[$columnName];
         }
-        protected static function postInfo($columnName)
-        {
-            return $_POST[$columnName];
+
+
+        public static function getConnection(){
+            $connect = new dbConnection();
+            return $connect->connect();
         }
 
-         protected function connect(){
+
+        protected function connect(){
             $this->dbHost = "localhost";
             $this->dbUser = "root";
             $this->dbPassword = "";
             $this->dbName = "aplikacja_pracodawcy"; 
-            $connection = mysqli_connect($this->dbHost, $this->dbUser,$this->dbPassword, $this->dbName);
+            // $this->dbHost = "ntmichal.nazwa.pl:3306";
+            // $this->dbUser = "ntmichal_aplikacjapracodawcy";
+            // $this->dbPassword = "Io123456789!";
+            // $this->dbName = "ntmichal_aplikacjapracodawcy"; 
+            
+            //object oriented 
+            $connection = new mysqli($this->dbHost, $this->dbUser,$this->dbPassword, $this->dbName);
             if($connection == false){
                 echo "Connection error <br />";
                 exit;
             }
-            $connection -> query("SET NAMES utf8");
-            $connection -> query("SET CHARACTER_SET utf8_unicode_ci");
+            $connection->query("SET NAMES utf8");
+            $connection->query("SET CHARACTER_SET utf8_unicode_ci");
      
+            self::$connection = $connection;
             return $connection;
-         }
+        }
+        
+
     }
 ?>
