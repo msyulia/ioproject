@@ -8,14 +8,26 @@
         private $dbPassword;
         private $dbName;
         
-        public function sendquery($queryString)
+        protected function sendquery($queryString)
         {
-            $connect = new dbConnection();
-            $queryRes = $connect->connect()->query($queryString);
+            $dbConn = (new dbConnection())->connect();
+            $queryRes = $dbConn->query($queryString);
+            mysqli_close($dbConn);
+            unset($dbConn);
             if($queryRes->num_rows > 0)
             {
-                //Nonempty query result
-                return $queryRes;
+                if($queryRes->num_rows == 1)
+                {
+                    return $row = $queryRes->fetch_assoc();
+                }
+                else
+                {
+                    while($row = $queryRes->fetch_assoc()) 
+                    {
+                        $data[] = $row;
+                    }   
+                    return $data;    
+                }
             }
             return false;
         }

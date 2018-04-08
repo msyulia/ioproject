@@ -5,9 +5,8 @@
     require 'models/sessions.php';
     require 'models/accessAuthorization.php';
     require 'models/reviewsAndComments.php';
+    require 'models/loginModel.php';
 
     //CONTROLLERS
     require 'controllers/comments.php';
-
-    
 ?>
