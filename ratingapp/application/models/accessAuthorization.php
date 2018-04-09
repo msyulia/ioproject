@@ -61,18 +61,20 @@
                     $data[] = $row;
                 }       
               
-            }
+            
 
-            foreach($data as $item) {
-                echo $this->getPracodawcaName($item['PracodawcaID']); 
-                ?>
-                <form action="./views/addRating.php" method="POST">
-                    <button type="submit" name="pracodawca" value="<?php echo $this->getPracodawcaName($item['PracodawcaID']); ?>">Wystaw ocenę</button>
-                </form>
-                <?php
-                echo '<br/>';
+                foreach($data as $item) {
+                    echo $this->getPracodawcaName($item['PracodawcaID']); 
+                    ?>
+                    <form action="./views/addRating.php" method="POST">
+                        <button type="submit" name="pracodawca" value="<?php echo $this->getPracodawcaName($item['PracodawcaID']); ?>">Wystaw ocenę</button>
+                    </form>
+                    <?php
+                    echo '<br/>';
+                }
+            }else{
+                echo 'Nie ma żadnych ocen do wystawienia!';
             }
-
         }
     }
 
