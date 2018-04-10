@@ -1,15 +1,15 @@
 # ioproject
 
-Uruchomienie aplikacji.
-1.XAMPP
-https://www.apachefriends.org/pl/index.html
-2. Uruchomienie Apache i MySQL
-uruchamiamy xampp controll panel, następnie Appache i MySQL
-2. Dodajemy aplikacje do htdocs . Usunięcie zawartości i wrzucenie aplikacji ratingapp do htdocs.
-xampp controll panel -> explorer -> htdocs
-3.Import bazy danych.
-Uruchamiamy phpMyAdmin, XAMPP control panel -> MySQL -> Admin.
-Tworzymy nową baze -> nowa o nazwie aplikacja_pracodawcy
-Wybieramy bazę danych aplikacja_pracodawcy, importujemy bazę aplikacja_pracodawcy.sql
+Uruchomienie aplikacji.<br />
+1.XAMPP<br />
+https://www.apachefriends.org/pl/index.html<br />
+2. Uruchomienie Apache i MySQL<br />
+uruchamiamy xampp controll panel, następnie Appache i MySQL<br />
+2. Dodajemy aplikacje do htdocs . Usunięcie zawartości i wrzucenie aplikacji ratingapp do htdocs.<br />
+xampp controll panel -> explorer -> htdocs<br />
+3.Import bazy danych.<br />
+Uruchamiamy phpMyAdmin, XAMPP control panel -> MySQL -> Admin.<br />
+Tworzymy nową baze -> nowa o nazwie aplikacja_pracodawcy<br />
+Wybieramy bazę danych aplikacja_pracodawcy, importujemy bazę aplikacja_pracodawcy.sql<br />
 
-4.Uruchomienie aplikacji: XAMPP control panel -> admin (apache), lub localhost w przeglądarce.
+4.Uruchomienie aplikacji: XAMPP control panel -> admin (apache), lub localhost w przeglądarce.<br />
