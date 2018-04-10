@@ -8,20 +8,33 @@
         private $dbName;
         
         protected static $connection;
-
+      
         protected function sendquery($queryString)
         {
-            $connect = new dbConnection();
-            $queryRes = $connect->connect()->query($queryString);
+            $dbConn = (new dbConnection())->connect();
+            $queryRes = $dbConn->query($queryString);
+            mysqli_close($dbConn);
+            unset($dbConn);
             if($queryRes->num_rows > 0)
             {
-
-                while($row = $queryRes->fetch_assoc()) {
-                    $data[] = $row;
-                }       
-                return $data;
+                if($queryRes->num_rows == 1)
+                {
+                    return $row = $queryRes->fetch_assoc();
+                }
+                else
+                {
+                    while($row = $queryRes->fetch_assoc()) 
+                    {
+                        $data[] = $row;
+                    }   
+                    return $data;    
+                }
             }
             return false;
+        }
+        protected static function getInfo($columnName)
+        {
+            return $_GET[$columnName];
         }
 
 

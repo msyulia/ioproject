@@ -23,7 +23,7 @@
                                 <button class="btn-brown-bg" type="submit" name="submit"><a>Logout</a></button>
                             </form>
             <?php
-            }else{
+            }else{ 
             ?>
                 <form action="./application/controllers/login.php" method="POST">
                 <input type="text" name="login" placeholder="login">
