@@ -1,0 +1,41 @@
+/* Style do wszystkich stron */
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+}
+
+/* Style do: index.html */
+
+.container {
+    margin-top: 100px;
+}
+
+/* Style do: login.html */
+
+.singupform {
+    display: table;
+    margin: 20px auto;
+    width: 60%;
+}
+
+.singinform {
+    display: table;
+    margin: 20px auto;
+    margin-top: 100px;
+    width: 60%;
+}
+
+.md-form {
+    padding-bottom: 15px;
+}
+
+.navbar.navbar-dark form .md-form input {
+    width: 700px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    margin-left: 25px;
+}
+
