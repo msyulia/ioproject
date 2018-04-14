@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Wyszukaj</a>
+                        <a class="nav-link" href="#">Top 100</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">O nas</a>
@@ -67,7 +67,7 @@
             <!--Form-->
             <div class="singupform">
                 <!-- Material form register -->
-                <form>
+                <form id="formularz" action="#" method="post" autocomplete="off" onsubmit="return Send()">
                     <p class="h4 text-center mb-4">Rejestracja</p>
 
                     <!-- Material input text -->
@@ -75,6 +75,7 @@
                         <i class="fa fa-user prefix grey-text"></i>
                         <input type="text" id="materialFormRegisterNicknameEx" class="form-control">
                         <label for="materialFormRegisterNicknameEx">Nazwa użytkownika</label>
+                        <p id="wrong-nickname" hidden>Nazwa użytkownika powinna składać się z 4 - 20 liter lub cyfr </p>
                     </div>
 
                     <!-- Material input text -->
@@ -91,10 +92,10 @@
                         <label for="materialFormRegisterSurNameEx">Nazwisko</label>
                     </div>
 
-                    <!-- Material input number -->
+                    <!-- Material input pesel -->
                     <div class="md-form">
                         <i class="fa fa-id-card prefix grey-text"></i>
-                        <input type="number" pattern="^\d{11}$" id="materialFormPeselEx" class="form-control">
+                        <input type="text" id="materialFormPeselEx" class="form-control">
                         <label for="materialFormPeselEx">Numer PESEL</label>
                     </div>
 
@@ -108,8 +109,8 @@
                     <!-- Material input email -->
                     <div class="md-form">
                         <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                        <input type="email" id="materialFormRegisterConfirmEx" class="form-control">
-                        <label for="materialFormRegisterConfirmEx">Potwierdź e-mail</label>
+                        <input type="email" id="materialFormRegisterConfirmEmailEx" class="form-control">
+                        <label for="materialFormRegisterConfirmEmailEx">Potwierdź e-mail</label>
                     </div>
 
                     <!-- Material input password -->
@@ -117,6 +118,7 @@
                         <i class="fa fa-key prefix grey-text"></i>
                         <input type="password" id="materialFormRegisterPasswordEx" class="form-control">
                         <label for="materialFormRegisterPasswordEx">Hasło</label>
+                        <p id="wrong-pswd" hidden>Hasło musi się składać przynajmniej z 8 liter lub cyfr</p>
                     </div>
 
                     <!-- Material input password -->
@@ -166,6 +168,8 @@
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="js/validation.js"></script>
     </body>
 
 </html>
