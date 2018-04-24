@@ -14,17 +14,8 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
-    <!-- Semantic-UI-->
-    <link rel="stylesheet" href="semantic-ui/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="semantic-ui/semantic.min.js"></script>
-    <script>
-        $(function () {
-            $(".search-filtry").toggle();
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
-
-        });
-    </script>
+    <!-- Semantic-UI CSS-->
+    <link href="css/semantic.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -87,73 +78,67 @@
                     <div class="card-body">
                         <div class="row-filter">
                             <p class="card-text">Wynagrodzenia</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" data-id="wynagrodzenia-rating" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Atmosfera</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" data-id="atmosfera-rating" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Benefity</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" data-id="benefity-rating" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Miejsce pracy</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" data-id="miejsce-rating" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
-                            <p class="card-text">Umowa o prace</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <p class="card-text">Możliwości rozwoju</p>
+                            <div class="ui star rating" data-id="mozliwosci-rating" data-rating="3" data-max-rating="5"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
         </div>
 
-        <!--Footer-->
-        <footer class="page-footer font-small mdb-color lighten-3">
+    </div>
 
-            <!--Copyright-->
-            <div class="footer-copyright py-3 text-center">
-                © 2018 Copyright:
-                <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
-            </div>
-            <!--/.Copyright-->
-        </footer>
-        <!--/.Footer-->
+    <!--Footer-->
+    <footer class="page-footer font-small mdb-color lighten-3">
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3 text-center">
+            © 2018 Copyright:
+            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
+        </div>
+        <!--/.Copyright-->
+    </footer>
+    <!--/.Footer-->
 
 
-        <!-- SCRIPTS -->
-        <!-- JQuery -->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script src="js/mdb.min.js"></script>
+    <!-- Semantic core JavaScript -->
+    <script src="js/semantic.min.js"></script>
+    <script>
+        $(function () {
+            $(".search-filtry").toggle();
+            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+
+            $(".ui.rating").rating("setting", "onRate", function (value) {
+                var txt = $(this).data("id") + " wartość: " + value;
+                console.log(txt);
+            });
+        });
+    </script>
 </body>
 
 </html>
