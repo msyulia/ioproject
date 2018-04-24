@@ -97,3 +97,9 @@ body {
     margin-left: 25px;
 }
 
+#wrong-pswd, #wrong-nickname {
+    cursor: text;
+    color: #ff3547;
+    font-size: 12px;
+    margin-left: 40px;
+}
