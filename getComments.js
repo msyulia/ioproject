@@ -6,16 +6,16 @@ class Comment {
         this.salary = oneComment.salary;
         this.opportunities = oneComment.opportunities;
         this.benefits = oneComment.benefits;
-        this.people = oneComment.people;
+        this.workplace = oneComment.workplace;
         this.atmosphere = oneComment.atmosphere;
     }
     avarage() {
-        return ((this.salary + this.opportunities + this.benefits + this.people + this.atmosphere)/5).toFixed(1);
+        return ((this.salary + this.opportunities + this.benefits + this.workplace + this.atmosphere)/5).toFixed(1);
     }
     getCard() {
         var rateSalary = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.salary.toFixed(1)+" wypłata</div>\
+            <div>"+this.salary.toFixed(1)+" wynagrodzenie</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.salary/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
@@ -23,7 +23,7 @@ class Comment {
         ";
         var rateOpportunities = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.opportunities.toFixed(1)+" możliwości</div>\
+            <div>"+this.opportunities.toFixed(1)+" atmosfera</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.opportunities/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
@@ -31,17 +31,17 @@ class Comment {
         ";
         var rateBenefits = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.benefits.toFixed(1)+" benefity</div>\
+            <div>"+this.benefits.toFixed(1)+" miejsce pracy</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.benefits/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
-        var ratePeople = 
+        var rateWorkplace = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.people.toFixed(1)+" ludzie</div>\
+            <div>"+this.workplace.toFixed(1)+" szanse rozwoju</div>\
             <div class=\"progress\">\
-                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.people/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
+                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.workplace/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
@@ -61,17 +61,17 @@ class Comment {
                 </div>\
                 <div class=\"col\">\
                     <div class=\"btn-group\" style=\"float: right\">\
-                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">średnia = "+this.avarage()+"</button>\
+                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">średnia: "+this.avarage()+"</button>\
                         <div class=\"dropdown-menu\">\
                         "+rateSalary+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateOpportunities+"\
+                        "+rateAtmosphere+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+rateBenefits+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+ratePeople+"\
+                        "+rateWorkplace+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateAtmosphere+"\
+                        "+rateOpportunities+"\
                     </div>\
                 </div>\
             </div>\
@@ -91,10 +91,10 @@ function getComments(comments){
 }
 window.onload = function() {
     var arr = new Array(
-        {userName: "Janusz", comment: "kurła kiedyś to było", salary: 0, opportunities: 0, benefits: 0, people: 0, atmosphere: 0}, //tymczasowe kategetire TODO zamienic jes
-        {userName: "Grażyna", comment: "no nie to co teraz", salary: 2, opportunities: 2, benefits: 2, people: 2, atmosphere: 2},
-        {userName: "Sebek", comment: "cho łojciec Kamil skacze!", salary: 4.5, opportunities: 4.5, benefits: 4.5, people: 4.5, atmosphere: 4.5},
-        {userName: "Dzesika", comment: "asdsadsa", salary: 4.5, opportunities: 3.5, benefits: 2, people: 1, atmosphere: 5},
+        {userName: "Janusz", comment: "Nie mam zdania o tym pracodawcy. Porażka.", salary: 1, opportunities: 1, benefits: 1, workplace: 2, atmosphere: 1},
+        {userName: "Grażyna", comment: "Atmosfera nie jest zła, pozostałe rzeczy na minus.", salary: 2, opportunities: 2, benefits: 2, workplace: 2, atmosphere: 3},
+        {userName: "Sebastian", comment: "Dobre wynagrodzenie oraz świetny zespół - praca to czysta przyjemność.", salary: 4, opportunities: 5, benefits: 4, workplace: 4, atmosphere: 5},
+        {userName: "Jessica", comment: "Świetna lokalizacja. Szkoda tylko, że ludzie nie są milsi.", salary: 3, opportunities: 3, benefits: 2, workplace: 4, atmosphere: 3},
     );
     getComments(arr);
 }
