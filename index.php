@@ -21,7 +21,7 @@
     <!-- Semantic-UI-->
     <link rel="stylesheet" href="public/semantic-ui/semantic.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="semantic-ui/semantic.min.js"></script>
+    <script src="public/semantic-ui/semantic.min.js"></script>
     <script>
         $(function () {
             $(".search-filtry").toggle();
