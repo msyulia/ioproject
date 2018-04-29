@@ -23,12 +23,20 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="public/semantic-ui/semantic.min.js"></script>
     <script>
-        $(function () {
-            $(".search-filtry").toggle();
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+        function sendFilters(){
+            // dodanie 5 ukrytych inputów w formularza, celem których jest przesłanie danych o poszczególnych kryteriach
+            if( $(".search-filtry").is(':visible')){
+                var possibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "contractRate"];
+                
+                possibleRates.forEach(function(element, index, array){
+                    var lght = document.getElementById(element).getElementsByClassName("active").length;
+                    document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + element +"' value='" + lght + "'/>"
+                });
+            }
+        }
 
-        });
     </script>
+
 </head>
 
 <body>
@@ -109,8 +117,9 @@
             <div class="md-form mt-0">
 
                 <form action="./views/employer.php" method="GET">
-                    <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <button class="ui primary button">Szukaj</button>
+                    <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search"/>
+                    <div id="toSend"></div>
+                    <button class="ui primary button" onclick="sendFilters();">Szukaj</button>
                  </form>
 
 
@@ -124,39 +133,23 @@
                     <div class="card-body">
                         <div class="row-filter">
                             <p class="card-text">Wynagrodzenia</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" id="salaryRate" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Atmosfera</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" id="atmosphereRate" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Benefity</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating"  id="benefitsRate" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Miejsce pracy</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
-                            <script>
-                                $('.ui.rating')
-                                    .rating();
-                            </script>
+                            <div class="ui star rating" id="workplaceRate" data-rating="3" data-max-rating="5"></div>
                         </div>
                         <div class="row-filter">
                             <p class="card-text">Umowa o prace</p>
-                            <div class="ui star rating" data-rating="3" data-max-rating="5"></div>
+                            <div class="ui star rating" id="contractRate" data-rating="3" data-max-rating="5"></div>
                             <script>
                                 $('.ui.rating')
                                     .rating();
@@ -200,6 +193,12 @@
         <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="public/js/mdb.min.js"></script>
+        <script> 
+        $(function () { 
+            $(".search-filtry").toggle(); 
+            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) }); 
+        }); 
+    </script> 
 </body>
 
 </html>
