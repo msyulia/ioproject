@@ -13,10 +13,9 @@
         $_POST['kat5'],
         $_POST['komentarz']);
         $zmienna->pokazOcena();
-        $zmienna->zapisz();
         $el = $pracodawcaID->getPracodawcaID($_SESSION['pracodawca']);
-        $zmienna->modyfikujHistorie($el);
-
+        $zmienna->zapisz($el);
+        
         unset($_SESSION['pracodawca']);
         header("Location: ../../index.php?rate=succes");
         exit();

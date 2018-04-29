@@ -37,18 +37,31 @@
           echo 'Czwarta kategoria: '.$this->kat5.'<br>';
           echo $this->komentarz.'<br>';
         }
-        public function zapisz(){   // zapisanie w bazie danych
-          $zapytanie = $this->connect()->prepare("INSERT oceny (Pracodawca, Pracownik, Kat1, Kat2, Kat3, Kat4,Kat5, Komentarz) VALUES (?,?,?,?,?,?,?,?)");
-          $zapytanie->bind_param("ssiiiiis",$this->pracodawca,$this->pracownik,$this->kat1,$this->kat2,$this->kat3,$this->kat4,$this->kat5,$this->komentarz);
-          $zapytanie->execute();
-          $zapytanie->close();
+        public function zapisz($id){   // zapisanie w bazie danych
+
+          if(empty($this->pracodawca) || empty($this->pracownik) || 
+            empty($this->kat1) || empty($this->kat2) ||
+            empty($this->kat3) || empty($this->kat4) ||
+            empty($this->kat5) || empty($this->komentarz) ||
+            $this->kat1 > 5 || $this->kat2 > 5 ||
+            $this->kat3 > 5 || $this->kat4 > 5 ||
+            $this->kat5 > 5 || $this->kat1 < 0 ||
+            $this->kat2 < 0 || $this->kat4 < 0 ||
+            $this->kat5 < 0){
+              header("Location: ../../views/oceny.php?error=errno5");
+              exit();
+          }else{
+            $zapytanie = $this->connect()->prepare("INSERT oceny (Pracodawca, Pracownik, Kat1, Kat2, Kat3, Kat4,Kat5, Komentarz) VALUES (?,?,?,?,?,?,?,?)");
+            $zapytanie->bind_param("ssiiiiis",$this->pracodawca,$this->pracownik,$this->kat1,$this->kat2,$this->kat3,$this->kat4,$this->kat5,$this->komentarz);
+            $zapytanie->execute();
+            $zapytanie->close();
+
+            $zapytanie = $this->connect()->prepare("UPDATE historiazatrudnienia  SET czyWystawionaOcena=? WHERE PracodawcaID=?");
+            $zapytanie->bind_param('ii',$el = 1,$id);
+            $zapytanie->execute();
+            $zapytanie->close();
+          }
         }
 
-        public function modyfikujHistorie($id){
-          $zapytanie = $this->connect()->prepare("UPDATE historiazatrudnienia  SET czyWystawionaOcena=? WHERE PracodawcaID=?");
-          $zapytanie->bind_param('ii',$el = 1,$id);
-          $zapytanie->execute();
-          $zapytanie->close();
-        }
     }
 ?>
