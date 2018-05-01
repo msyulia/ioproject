@@ -1,21 +1,24 @@
 
 class Comment {
     constructor(oneComment) {
-        this.userName = oneComment.userName;
-        this.comment = oneComment.comment;
-        this.salary = oneComment.salary;
-        this.opportunities = oneComment.opportunities;
-        this.benefits = oneComment.benefits;
-        this.workplace = oneComment.workplace;
-        this.atmosphere = oneComment.atmosphere;
+
+        this.userName = oneComment.Pracownik;
+        this.comment = oneComment.Komentarz;
+        this.salary = Number(oneComment.Kat1);
+        this.opportunities = Number(oneComment.Kat2);
+        this.benefits = Number(oneComment.Kat3);
+        this.people = Number(oneComment.Kat4);
+        this.atmosphere = Number(oneComment.Kat5);
+
+
     }
     avarage() {
-        return ((this.salary + this.opportunities + this.benefits + this.workplace + this.atmosphere)/5).toFixed(1);
+        return ((this.salary + this.opportunities + this.benefits + this.people + this.atmosphere)/5).toFixed(1);
     }
     getCard() {
         var rateSalary = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.salary.toFixed(1)+" wynagrodzenie</div>\
+            <div>"+this.salary.toFixed(1)+" wypłata</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.salary/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
@@ -23,7 +26,7 @@ class Comment {
         ";
         var rateOpportunities = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.opportunities.toFixed(1)+" atmosfera</div>\
+            <div>"+this.opportunities.toFixed(1)+" możliwości</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.opportunities/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
@@ -31,17 +34,17 @@ class Comment {
         ";
         var rateBenefits = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.benefits.toFixed(1)+" miejsce pracy</div>\
+            <div>"+this.benefits.toFixed(1)+" benefity</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.benefits/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
-        var rateWorkplace = 
+        var ratePeople = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.workplace.toFixed(1)+" szanse rozwoju</div>\
+            <div>"+this.people.toFixed(1)+" ludzie</div>\
             <div class=\"progress\">\
-                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.workplace/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
+                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.people/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
@@ -61,17 +64,17 @@ class Comment {
                 </div>\
                 <div class=\"col\">\
                     <div class=\"btn-group\" style=\"float: right\">\
-                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">średnia: "+this.avarage()+"</button>\
+                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">średnia = "+this.avarage()+"</button>\
                         <div class=\"dropdown-menu\">\
                         "+rateSalary+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateAtmosphere+"\
+                        "+rateOpportunities+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+rateBenefits+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateWorkplace+"\
+                        "+ratePeople+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateOpportunities+"\
+                        "+rateAtmosphere+"\
                     </div>\
                 </div>\
             </div>\
@@ -88,13 +91,4 @@ function getComments(comments){
         commentsOut += c.getCard();
     });
     document.getElementById("commentsContainer").innerHTML = commentsOut;
-}
-window.onload = function() {
-    var arr = new Array(
-        {userName: "Janusz", comment: "Nie mam zdania o tym pracodawcy. Porażka.", salary: 1, opportunities: 1, benefits: 1, workplace: 2, atmosphere: 1},
-        {userName: "Grażyna", comment: "Atmosfera nie jest zła, pozostałe rzeczy na minus.", salary: 2, opportunities: 2, benefits: 2, workplace: 2, atmosphere: 3},
-        {userName: "Sebastian", comment: "Dobre wynagrodzenie oraz świetny zespół - praca to czysta przyjemność.", salary: 4, opportunities: 5, benefits: 4, workplace: 4, atmosphere: 5},
-        {userName: "Jessica", comment: "Świetna lokalizacja. Szkoda tylko, że ludzie nie są milsi.", salary: 3, opportunities: 3, benefits: 2, workplace: 4, atmosphere: 3},
-    );
-    getComments(arr);
 }
