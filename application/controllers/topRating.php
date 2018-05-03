@@ -1,15 +1,13 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="public/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="public/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="public/css/style.css" rel="stylesheet">
-    <!-- Semantic-UI-->
-    <link rel="stylesheet" href="public/semantic-ui/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="public/semantic-ui/semantic.min.js"></script>   
+<!-- Bootstrap core CSS -->
+<link href="../public/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="../public/css/mdb.min.css" rel="stylesheet">
+<!-- Your custom styles (optional) -->
+<link href="../public/css/style.css" rel="stylesheet">
+<!-- Semantic-UI-->
+<link href="../public/css/semantic.min.css" rel="stylesheet">        
 <?php
 
 class TopEmployers extends Employers {
@@ -83,12 +81,15 @@ class TopEmployers extends Employers {
     }
 }
 ?>
- <!-- SCRIPTS -->
+  <!-- SCRIPTS -->
         <!-- JQuery -->
-        <script type="text/javascript" src="public/js/jquery-3.2.1.min.js"></script>
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="public/js/popper.min.js"></script>
+        <script src="../public/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+        <script src="../public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="public/js/mdb.min.js"></script>
+        <script src="../public/js/mdb.min.js"></script>
+        <!-- Semantic JavaScript -->
+        <script src="../public/js/semantic.min.js"></script>
+<!-- SCRIPTS -->
