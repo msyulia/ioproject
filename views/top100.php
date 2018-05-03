@@ -81,7 +81,7 @@
         </div>
     </nav>
 	<div class="container">
-        <h1>Top 100 pracodawców</h1>
+        <h1 class="text-center">Top 100 pracodawców</h1>
 <?php
 
     $pracodawcy = new TopEmployers(); 
@@ -95,13 +95,13 @@
     <footer class="page-footer font-small mdb-color lighten-3 pt-1 mt-1">
 
         <!--Footer Links-->
-        <div class="container text-center text-md-left">
+        <!-- <div class="container text-center text-md-left">
             <div class="row">
 
                 <!--Dodać tu coś-->
             
             </div>
-        </div>
+        </div> -->
         <!--/.Footer Links-->
         <!--Copyright-->
         <div class="footer-copyright py-3 text-center">

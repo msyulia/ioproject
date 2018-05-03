@@ -1,3 +1,15 @@
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="public/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="public/css/style.css" rel="stylesheet">
+    <!-- Semantic-UI-->
+    <link rel="stylesheet" href="public/semantic-ui/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="public/semantic-ui/semantic.min.js"></script>   
 <?php
 
 class TopEmployers extends Employers {
@@ -48,31 +60,35 @@ class TopEmployers extends Employers {
       }
 
       array_multisort($value,SORT_DESC,$average );
-      echo '<table>';
-      echo '<tr>';
-      echo '<td>Nazwa</td>';
-      echo '<td>Średnia ocen</td>';
-      echo '<td></td>';
-      echo '</tr>';
+      echo '<table align="center" class="table table-hover">';
+      echo '<thead>';
+      echo '<th><h5 style="padding-left:200px">Nazwa</h5></th>';
+      echo '<th><h5>Średnia ocen</h5></th>';
+      echo '<th></th>';
+      echo '</thead>';
 
       foreach($average as $firm) {
-          echo '<tr>';
-          echo '<td>'.$firm['firm'].'</td>';
+          echo '<tbody>';
+          echo '<td style="padding-left:200px">'.$firm['firm'].'</td>';
           if ($firm['value']==0) {
             echo '<td>Brak ocen</td>';
           }else echo '<td>'.number_format($firm['value'],2).'</td>';
-          echo '<td><a href="employer.php?id='.$firm['id'].'">Szczegóły</a></td>';
-          echo '</tr>';
+          echo '<td><a href="employer.php?id='.$firm['id'].'"><button type="button" style="margin-right:-70px" class="btn btn-primary btn-md">Szczegóły</button></a></td>';
+          echo '</tbody>';
       } 
-      echo '</table>';
+      echo '</table>';      
 }
-
-
-
-
-
     public function printEmployers(){
         $datas = $this->getEmployers();
     }
 }
 ?>
+ <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="public/js/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="public/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="public/js/mdb.min.js"></script>
