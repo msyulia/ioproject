@@ -15,10 +15,10 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="public/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="public/css/style.css" rel="stylesheet">
     <!-- Semantic-UI-->
     <link href="public/css/semantic.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="public/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -165,6 +165,7 @@
         <script>
         $(function () {
             $(".search-filtry").toggle();
+            $("#checkedFiltry").prop( "checked", false );
             $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
  
             $(".ui.rating").rating("setting", "onRate", function (value) {
