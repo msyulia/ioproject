@@ -16,6 +16,7 @@ html {
     box-sizing: inherit;
   }
 body {
+    height: 100%;
     position: relative;
     margin: 0;
     padding-bottom: 6rem;
