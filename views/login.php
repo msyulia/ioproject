@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="text-center mt-4">
-                    <button class="btn btn-default" type="submit" name="submit">Zarejestruj</button>
+                        <button class="btn btn-primary" type="submit" name="submit">Zarejestruj</button>
                     </div>
                 </form>
                 <?php 
@@ -175,38 +175,29 @@
         </div>
 
 
-        <!--Footer-->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-1 mt-1">
-
-        <!--Footer Links-->
-        <div class="container text-center text-md-left">
-            <div class="row">
-
-                <!--Dodać tu coś-->
-
-            </div>
-        </div>
-        <!--/.Footer Links-->
-        <!--Copyright-->
-        <div class="footer-copyright py-3 text-center">
-            © 2018 Copyright:
-            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <!--/.Footer-->
+    <!--Footer--> 
+    <footer class="page-footer font-small mdb-color lighten-3"> 
+ 
+        <!--Copyright--> 
+        <div class="footer-copyright py-3 text-center"> 
+            © 2018 Copyright: 
+            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+        </div> 
+        <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
 
         <!-- SCRIPTS -->
         <!-- JQuery -->
-        <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../public/js/popper.min.js"></script>
+        <script src="../public/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
+        <script src="../public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../public/js/mdb.min.js"></script>
+        <script src="../public/js/mdb.min.js"></script>
         <!-- Custom JavaScript -->
-        <script type="text/javascript" src="../public/js/validation.js"></script>
+        <script src="../public/js/validation.js"></script>
     </body>
 
 </html>
