@@ -2,7 +2,7 @@
     require "../application/application.php";
     Sessions::startSession();
     if(Sessions::isLogged()){
-        if(isset($_POST['pracodawca'])){       
+
         ?>
         Wystawiasz ocenę dla <?php echo $_POST['pracodawca'];
         $_SESSION['pracodawca'] = $_POST['pracodawca'];
@@ -17,11 +17,8 @@
             <button type="submit" name="submit">Dodaj</button>
         </form>
         <?php
-        }else{
-            header("Location: ../index.php");
-        }
     }else{
-        header("Location: ../index.php");
+        echo 'Nie jesteś zalogowany!';
     }
 ?>
 

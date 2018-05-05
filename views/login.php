@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="text-center mt-4">
-                    <button class="btn btn-primary" type="submit" name="submit">Zarejestruj</button>
+                        <button class="btn btn-primary" type="submit">Zarejestruj</button>
                     </div>
                 </form>
                 <?php 
