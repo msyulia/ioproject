@@ -48,24 +48,29 @@ class TopEmployers extends Employers {
       }
 
       array_multisort($value,SORT_DESC,$average );
-      echo '<table align="center" style="width:60%" class="table table-hover">';
-      echo '<thead>';
-      echo '<th><h5 style="padding-left:50px">Nazwa</h5></th>';
-      echo '<th><h5>Średnia ocen</h5></th>';
-      echo '<th></th>';
-      echo '</thead>';
+      echo '<table>';
+      echo '<tr>';
+      echo '<td>Nazwa</td>';
+      echo '<td>Średnia ocen</td>';
+      echo '<td></td>';
+      echo '</tr>';
 
       foreach($average as $firm) {
-          echo '<tbody>';
-          echo '<td style="padding-left:50px">'.$firm['firm'].'</td>';
+          echo '<tr>';
+          echo '<td>'.$firm['firm'].'</td>';
           if ($firm['value']==0) {
             echo '<td>Brak ocen</td>';
           }else echo '<td>'.number_format($firm['value'],2).'</td>';
-          echo '<td><a href="employer.php?id='.$firm['id'].'"><button type="button" style="margin-right:-50px" class="btn btn-primary btn-md">Szczegóły</button></a></td>';
-          echo '</tbody>';
+          echo '<td><a href="employer.php?id='.$firm['id'].'">Szczegóły</a></td>';
+          echo '</tr>';
       } 
-      echo '</table>';      
+      echo '</table>';
 }
+
+
+
+
+
     public function printEmployers(){
         $datas = $this->getEmployers();
     }
