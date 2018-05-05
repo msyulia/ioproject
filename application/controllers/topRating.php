@@ -1,6 +1,4 @@
-     
 <?php
-
 class TopEmployers extends Employers {
 
     public function getShowALL() {

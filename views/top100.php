@@ -3,7 +3,6 @@
     Sessions::startSession();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 
