@@ -96,25 +96,25 @@
             $kat5 = $this->endMark($nameEmployer,'Kat5');
 
             echo '
-            <table>
-                <tr>
+            <table align="center" style="width:60%" class="table table-hover">
+                <tr class="text-center">
                     <th>
-                        Kategoria 1
+                        Wynagrodzenie
                     </th>
                     <th>
-                        Kategoria 2
+                        Atmosfera
                     </th>
                     <th>
-                        Kategoria 3
+                        Benefity
                     </th>
                     <th>
-                        Kategoria 4
+                        Miejsce pracy
                     </th>
                     <th>
-                        Kategoria 5
+                        Możliwośći rozwoju
                     </th>
                 </tr>
-                <tr>
+                <tr class="text-center">
                     <td>'.$kat1.'</td>
                     <td>'.$kat2.'</td>
                     <td>'.$kat3.'</td>
