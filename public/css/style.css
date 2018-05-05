@@ -7,7 +7,6 @@
 }
 
 html {
-    height: 100%;
     box-sizing: border-box;
   }
   
@@ -17,10 +16,11 @@ html {
     box-sizing: inherit;
   }
 body {
+    height: 100%;
     position: relative;
     margin: 0;
     padding-bottom: 6rem;
-    min-height: 100%;
+    display: flex;
   }
 
   footer {
@@ -75,13 +75,11 @@ body {
     display: table;
     margin: 20px auto;
     width: 60%;
-    margin-bottom: 100px;
 }
 
 .singinform {
     display: table;
     margin: 20px auto;
-    margin-top: 100px;
     width: 60%;
 }
 
