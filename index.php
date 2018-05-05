@@ -102,7 +102,14 @@
                     echo '<div class="alert alert-success">
                     <strong>Wylogowano!</strong>
                   </div>';
-                }
+                }               
+            }
+            if(isset($_GET['register'])){
+                if($_GET['register'] == "success"){
+                    echo '<div class="alert alert-success">
+                    <strong>Pomyślnie zarejestrowano!</strong>
+                  </div>';
+                }       
             }
             ?>
       
