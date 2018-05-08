@@ -31,7 +31,7 @@
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
     
         <a class="navbar-brand" href="../index.php">
-        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

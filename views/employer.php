@@ -3,7 +3,6 @@
     Sessions::startSession();
 ?>
 
-<!DOCTYPE html>
 <html lang="pl">
 
 <head>
@@ -29,7 +28,7 @@
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
         <a class="navbar-brand" href="../index.php">
-        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -85,7 +84,6 @@
     <!--/.Navbar -->
 
     <div class="container">
-        <h4 class="text-center">Opis firmy</h4>
         <?php 
             $temp = new searchEngine();
             if(isset($_GET['id'])){
@@ -98,8 +96,19 @@
             $idEmp = $empDesc['ID'];
             }
             $empDesc = $temp->search($empName);
-            
-            echo '<h6 class="text-center">' .$empDesc['nazwa_firmy']." ".$empDesc['opis'].'</h6>';
+
+            echo 
+            '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+                <div class="view overlay">
+                    <img class="card-img-top" src="../public/img/no-user-image.png" alt="Profile picture">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title"><strong>'.$empDesc['nazwa_firmy'].'</strong></h4>
+                    <h5 class="blue-text pb-2"><strong>Profil</strong></h5>
+                    <p class="card-text">'.$empDesc['opis'].'</p>
+                </div>
+            </div>';
+
             $temp->formatEmployer($empName);
             
         ?>

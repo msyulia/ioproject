@@ -96,33 +96,28 @@
             $kat5 = $this->endMark($nameEmployer,'Kat5');
 
             echo '
-            <table align="center" style="width:60%" class="table table-hover">
-                <tr class="text-center">
-                    <th>
-                        Wynagrodzenie
-                    </th>
-                    <th>
-                        Atmosfera
-                    </th>
-                    <th>
-                        Benefity
-                    </th>
-                    <th>
-                        Miejsce pracy
-                    </th>
-                    <th>
-                        Możliwośći rozwoju
-                    </th>
-                </tr>
-                <tr class="text-center">
-                    <td>'.$kat1.'</td>
-                    <td>'.$kat2.'</td>
-                    <td>'.$kat3.'</td>
-                    <td>'.$kat4.'</td>
-                    <td>'.$kat5.'</td>
-                </tr>
-            </table>
-            ';
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Wynagrodzenie
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat1.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Atmosfera
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat2.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Benefity
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat3.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Miejsce pracy
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat4.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Możliwości rozwoju
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat5.'</span>
+                </li>
+            </ul>';
            
 
         }

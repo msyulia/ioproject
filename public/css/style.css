@@ -24,15 +24,20 @@ body {
   }
 
   footer {
-    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
+    position: fixed;
+    bottom: 0;
+    transition: bottom 0.2s ease-in-out;
+    width: 100%;
+    z-index: 9999;
     /*padding: 1rem;*/
 }
 
 .logo-pracodawcy {
     height: 2rem;
+    padding-right: 5px;
 }
 
 /* Style do: index.html */
@@ -111,4 +116,16 @@ table.table td, table.table th {
 
 .navbar.navbar-dark form .md-form input {
     width: 400px;
+}
+
+/* Profil pracodawcy - employer */
+
+.list-group {
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#commentsContainer {
+    margin-bottom: 100px;
 }
