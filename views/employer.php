@@ -17,6 +17,8 @@
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="../public/css/mdb.min.css" rel="stylesheet">
+    <!-- Semantic-UI-->
+    <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
@@ -27,7 +29,7 @@
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
         <a class="navbar-brand" href="../index.php">
-            <i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,7 +85,7 @@
     <!--/.Navbar -->
 
     <div class="container">
-        <h5>Opis firmy</h5>
+        <h4 class="text-center">Opis firmy</h4>
         <?php 
             $temp = new searchEngine();
             if(isset($_GET['id'])){
@@ -97,40 +99,42 @@
             }
             $empDesc = $temp->search($empName);
             
-            echo $empDesc['nazwa_firmy']." ".$empDesc['opis'];
+            echo '<h6 class="text-center">' .$empDesc['nazwa_firmy']." ".$empDesc['opis'].'</h6>';
             $temp->formatEmployer($empName);
             
         ?>
-        <h4>Komentarze</h4>
+        <h4 class="text-center">Komentarze</h4>
         <div id="commentsContainer">
 
         </div>
 
     </div>
 
-    <!--Footer-->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-1 mt-1">
-
-        <!--Footer Links-->
-        <div class="container text-center text-md-left">
-            <div class="row">
-
-                <!--Dodać tu coś-->
-            
-            </div>
-        </div>
-        <!--/.Footer Links-->
-        <!--Copyright-->
-        <div class="footer-copyright py-3 text-center">
-            © 2018 Copyright:
-            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <!--/.Footer-->
+    <!--Footer--> 
+    <footer class="page-footer font-small mdb-color lighten-3"> 
+ 
+    <!--Copyright--> 
+        <div class="footer-copyright py-3 text-center"> 
+            © 2018 Copyright: 
+            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+        </div> 
+    <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
 
 
     <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script src="public/js/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script src="public/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="public/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script src="public/js/mdb.min.js"></script>
+        <!-- Semantic JavaScript -->
+        <script src="public/js/semantic.min.js"></script>
+        <!-- Gwiazdki -->
     <!-- JQuery -->
     <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -139,7 +143,7 @@
     <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../public/js/mdb.min.js"></script>
-
+    
     <script type="text/javascript" src="getComments.js"></script>
                 
     <?php 
