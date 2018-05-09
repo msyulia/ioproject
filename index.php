@@ -16,27 +16,10 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="public/css/mdb.min.css" rel="stylesheet">
+    <!-- Semantic-UI-->
+    <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="public/css/style.css" rel="stylesheet">
-    <!-- Semantic-UI-->
-    <link rel="stylesheet" href="public/semantic-ui/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="public/semantic-ui/semantic.min.js"></script>
-    <script>
-        function sendFilters(){
-            // dodanie 5 ukrytych inputów w formularza, celem których jest przesłanie danych o poszczególnych kryteriach
-            if( $(".search-filtry").is(':visible')){
-                var possibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "contractRate"];
-                
-                possibleRates.forEach(function(element, index, array){
-                    var lght = document.getElementById(element).getElementsByClassName("active").length;
-                    document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + element +"' value='" + lght + "'/>"
-                });
-            }
-        }
-
-    </script>
-
 </head>
 
 <body>
