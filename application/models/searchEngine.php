@@ -29,6 +29,10 @@
 
         private function getRating($nameEmployer){
             $getRates = $this->sendquery("SELECT * FROM oceny WHERE Pracodawca='$nameEmployer'");
+            $getCount = $this->sendquery("SELECT COUNT(*) FROM oceny WHERE Pracodawca='$nameEmployer'");
+            if($getCount['COUNT(*)'] == 1){
+                return array($getRates);
+            }
             return $getRates;
         }
         
@@ -40,10 +44,21 @@
         private function getCommentsAndRatings($variable){
             if(is_numeric($variable)){
                 $getBoth = $this->sendquery("SELECT Komentarz,Pracownik,Kat1,Kat2,Kat3,Kat4,Kat5 FROM oceny WHERE Pracownik='$variable'");
+                $getCount = $this->sendquery("SELECT COUNT(*) FROM oceny WHERE Pracownik='$variable'");
+                if($getCount['COUNT(*)'] == 1){
+                    return array($getBoth);
+                }
+                return $getBoth;
             }else{
                 $getBoth = $this->sendquery("SELECT Komentarz,Pracownik,Kat1,Kat2,Kat3,Kat4,Kat5 FROM oceny WHERE Pracodawca='$variable'");
+                $getCount = $this->sendquery("SELECT COUNT(*) FROM oceny WHERE Pracodawca='$variable'");
+                if($getCount['COUNT(*)'] == 1){
+                    return array($getBoth);
+                }
+                return $getBoth;
             }
-            return $getBoth;
+
+
         }
         private function endMark($nameEmployer,$katString){
             $localStorage = $this->getRating($nameEmployer);
@@ -51,6 +66,7 @@
             if(!empty($localStorage)){
                 foreach($localStorage as $item){
                     $sum = $sum + $item[$katString];
+                    
                 }
                 return number_format($sum/count($localStorage),2);
             }
