@@ -17,7 +17,7 @@
     <!-- Material Design Bootstrap -->
     <link href="../public/css/mdb.min.css" rel="stylesheet">
     <!-- Semantic-UI-->
-    <link href="public/css/semantic.min.css" rel="stylesheet">
+    <link href="../public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
@@ -134,26 +134,17 @@
 
     <!-- SCRIPTS -->
         <!-- JQuery -->
-        <script src="public/js/jquery-3.2.1.min.js"></script>
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script src="public/js/popper.min.js"></script>
+        <script src="../public/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script src="public/js/bootstrap.min.js"></script>
+        <script src="../public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script src="public/js/mdb.min.js"></script>
+        <script src="../public/js/mdb.min.js"></script>
         <!-- Semantic JavaScript -->
-        <script src="public/js/semantic.min.js"></script>
-        <!-- Gwiazdki -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../public/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../public/js/mdb.min.js"></script>
-    
-    <script type="text/javascript" src="getComments.js"></script>
+        <script src="../public/js/semantic.min.js"></script>
+
+        <script src="getComments.js"></script>
                 
     <?php 
             $getComments = new searchEngine();
