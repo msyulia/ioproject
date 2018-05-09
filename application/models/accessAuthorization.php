@@ -88,7 +88,11 @@
                     echo '<br/>';
                 }
             }else{
-                echo 'Nie ma żadnych ocen do wystawienia!';
+                echo '<div class="card success-color text-center z-depth-2" style="margin-top: -20px;">
+                <div class="card-body">
+                    <p class="white-text mb-0">Nie ma żadnych ocen do wystawienia!</p>
+                </div>
+            </div>';
             }
         }
     }
