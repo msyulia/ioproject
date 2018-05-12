@@ -13,14 +13,16 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Logowanie</title>
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Bootstrap core CSS -->
-        <link href="../public/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="../public/css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-    <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
+        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../public/css/mdb.min.css" rel="stylesheet">
+    <!-- Semantic-UI-->
+    <link href="../public/css/semantic.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="../public/css/style.css" rel="stylesheet">
     </head>
 
     <body>
