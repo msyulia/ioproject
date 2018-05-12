@@ -18,7 +18,8 @@
     <!-- Semantic-UI-->
     <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="public/css/style.css" rel="stylesheet">
+    <link href="public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="public/css/mobile-style.css" />
 </head>
 
 <body>
@@ -27,7 +28,8 @@
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
 
         <a class="navbar-brand" href="index.php">
-            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">
+            Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

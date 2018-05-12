@@ -27,27 +27,32 @@
 
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
-
         <a class="navbar-brand" href="../index.php">
-            <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="top100.php">Top 100</a>
-                </li>
-            </ul>
+
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form class="form-inline">
+                        <div class="md-form mt-0">
+                            <form action="../../application/controllers/search.php" method="GET">
+                                <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
+                            </form>
+                        </div>
+                    </form>
+                </li>
+                <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
 
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
+                        <i class="fa fa-user"></i> <?php  echo Sessions::getLogin();?> </a>
                         <!-- wstawka php sprawdza czy zalogowany -->
    
                     <!--Jeśli user jest zalogowany -->
@@ -65,13 +70,14 @@
                     <i class="fa fa-user"></i> Profil </a>
                     <!--Jeśli user się nie zalogował -->
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="views/login.php">Zaloguj się</a>
+                        <a class="dropdown-item" href="login.php">Zaloguj się</a>
                     </div>
                     <?php
                     }
                     ?>
 
                 </li>
+            </ul>
             </ul>
         </div>
     </nav>
@@ -128,26 +134,17 @@
 
     <!-- SCRIPTS -->
         <!-- JQuery -->
-        <script src="public/js/jquery-3.2.1.min.js"></script>
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script src="public/js/popper.min.js"></script>
+        <script src="../public/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script src="public/js/bootstrap.min.js"></script>
+        <script src="../public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script src="public/js/mdb.min.js"></script>
+        <script src="../public/js/mdb.min.js"></script>
         <!-- Semantic JavaScript -->
-        <script src="public/js/semantic.min.js"></script>
-        <!-- Gwiazdki -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../public/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../public/js/mdb.min.js"></script>
-    
-    <script type="text/javascript" src="getComments.js"></script>
+        <script src="../public/js/semantic.min.js"></script>
+
+        <script src="getComments.js"></script>
                 
     <?php 
             $getComments = new searchEngine();
