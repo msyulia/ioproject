@@ -22,7 +22,7 @@
                                             k2>=".$_GET['atmosphereRate']." AND 
                                             k3>=".$_GET['benefitsRate']." AND 
                                             k4>=".$_GET['workplaceRate']." AND 
-                                            k5>=".$_GET['contractRate']
+                                            k5>=".$_GET['possibilitiesRate']
                                     );
             return $matches;
         }

@@ -19,20 +19,6 @@
     <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="public/css/style.css" rel="stylesheet">
-  
-    <script>
-      function sendFilters(){
-            // dodanie 5 ukrytych inputów w formularza, celem których jest przesłanie danych o poszczególnych kryteriach
-            if( $(".search-filtry").is(':visible')){
-                var possibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "contractRate"];
-                
-                possibleRates.forEach(function(element, index, array){
-                    var lght = document.getElementById(element).getElementsByClassName("active").length;
-                    document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + element +"' value='" + lght + "'/>"
-                });
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -114,13 +100,13 @@
 
                 <form action="./views/employer.php" method="GET">
                     <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <button class="ui primary button">Szukaj</button>
+                    <div id="toSend"></div>
+                    <button class="ui primary button" id="searchButton">Szukaj</button>
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="checkedFiltry" name="public">
                         <label class="grey-text">Pokaż filtry</label>
                     </div>
-                    <div id="toSend"></div>
-                    <button class="ui primary button" onclick="sendFilters();">Szukaj</button>
+                    
                  </form>
             </div>
             <div class="search-filtry">
@@ -179,15 +165,23 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
+        $("#searchButton").click(function(){
+            if( $("#checkedFiltry").is(':checked')){
+                var nameOfPossibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "possibilitiesRate"];
+                var rates = $('.ui.star.rating').rating('get rating'); 
+                for (var i = 0; i < rates.length; i++) { 
+                    document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
+                }
+            }
+        });
         $(function () {
             $(".search-filtry").toggle();
             $("#checkedFiltry").prop( "checked", false );
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
- 
+            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked);});
             $(".ui.rating").rating("setting", "onRate", function (value) {
                 var txt = $(this).data("id") + " wartość: " + value;
-                console.log(txt);
             });
+            
         });
     </script>
     <!-- SCRIPTS -->
