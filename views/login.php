@@ -137,7 +137,7 @@
                     <!-- Material input email -->
                     <div class="md-form">
                         <i class="fa fa-envelope prefix grey-text"></i>
-                        <input type="email" id="materialFormRegisterEmailEx" class="form-control">
+                        <input name="email" type="email" id="materialFormRegisterEmailEx" class="form-control">
                         <label for="materialFormRegisterEmailEx">E-mail</label>
                     </div>
 

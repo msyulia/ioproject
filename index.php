@@ -15,8 +15,6 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="public/css/mdb.min.css" rel="stylesheet">
-    <!-- Semantic-UI-->
-    <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="public/css/mobile-style.css" />
@@ -165,16 +163,16 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
-        $(function () {
-            $(".search-filtry").toggle();
-            $("#checkedFiltry").prop( "checked", false );
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
- 
-            $(".ui.rating").rating("setting", "onRate", function (value) {
-                var txt = $(this).data("id") + " wartość: " + value;
-                console.log(txt);
+            $(function () {
+                $(".search-filtry").toggle();
+                $("#checkedFiltry").prop( "checked", false );
+                $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+    
+                $(".ui.rating").rating("setting", "onRate", function (value) {
+                    var txt = $(this).data("id") + " wartość: " + value;
+                    console.log(txt);
+                });
             });
-        });
     </script>
     <!-- SCRIPTS -->
 </body>
