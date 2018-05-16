@@ -99,6 +99,7 @@ body {
 .singupform {
     display: table;
     margin: 20px auto;
+    margin-bottom: 100px;
     width: 90%;
 }
 

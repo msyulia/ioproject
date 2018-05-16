@@ -85,7 +85,7 @@ class employee extends dbConnection{
             text-align: center;
             margin: 0 auto;
         ">
-        <table style="margin: 20px;">
+        <table style="margin: 20px 0; width: 100%;">
         <thead>
         <th><p class="h6">Nazwa firmy</p></th>
         <th><p class="h6">Czas rozpoczęcia</p></th>

@@ -1,6 +1,6 @@
 <?PHP
 require "../application.php";
-
+Sessions::startSession();
 
 
 if(isset($_POST['submit'])){
@@ -12,16 +12,20 @@ if(isset($_POST['submit'])){
     $password2 = $_POST['pwd2'];
 
     if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2)){
-        echo 'Uzupełnij wszystkie pola!';
+        $_SESSION['noRegisterData'] = true;
+        header("Location: ../../views/login.php");
+        die();
     }else{
         $register = new Register($imie,$nazwisko,$pesel);
         if($register->sprawdzWBazie()){
             if($register->checkFirstRegiser()){
-                echo 'Jesteś już zarejestrowany!';
+                $_SESSION['isAlreadyRegistered'] = true;
+                header("Location: ../../views/login.php");
                 die();
             }
             if($register->checkLogin($login)){
-                echo 'Login jest zajęty!';
+                $_SESSION['isLoginOccupied'] = true;
+                header("Location: ../../views/login.php");
                 die();
             }
             if($register->matchPasswords($password1,$password2)){
@@ -29,13 +33,15 @@ if(isset($_POST['submit'])){
                 $register->createAccount($login,$password1);
                 header("Location: ../../index.php?register=success");
             }else{
-                echo 'Hasła nie są zgodne!';
+                $_SESSION['isPasswordsCorrect'] = true;
+                header("Location: ../../views/login.php");
                 die();
             }
 
 
         }else{
-            echo 'Brak wpsiu w bazie danych!<br/>Sprawdź poprawnośc wprowadzonych danych';
+            $_SESSION['noRecordInDatabase'] = true;
+            header("Location: ../../views/login.php");
             die();
         } 
     }

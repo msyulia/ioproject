@@ -48,7 +48,7 @@ class TopEmployers extends Employers {
       }
 
       array_multisort($value,SORT_DESC,$average );
-      echo '<table align="center" style="width:90%" class="table table-hover">';
+      echo '<table align="center" class="table table-hover">';
       echo '<thead>';
       echo '<th><p class="h5">Nazwa</p></th>';
       echo '<th><p class="h5">Średnia ocen</p></th>';
