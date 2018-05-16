@@ -12,15 +12,15 @@ class employee extends dbConnection{
         FROM historiazatrudnienia 
         INNER JOIN pracownicy ON historiazatrudnienia.PracownikID = pracownicy.ID 
         INNER JOIN pracodawcy ON historiazatrudnienia.PracodawcaID = pracodawcy.ID 
-        WHERE historiazatrudnienia.PracownikID = 3 
+        WHERE historiazatrudnienia.PracownikID = $id 
         ");
-
+        
         return $getEmployeeData;
 
         
     }
 
-    public function printEmployeeData($id = 3){
+    public function printEmployeeData($id){
         $getEmployeeData = $this->getEmployeeData($id);
         echo '<br/><h3>Twoje dane</h3><br/>';
         foreach($getEmployeeData as $data){

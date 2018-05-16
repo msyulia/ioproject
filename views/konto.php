@@ -13,14 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Strona główna</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="../public/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="../public/css/style.css" rel="stylesheet">
+
 </head>
 </head>
 <body>
@@ -32,7 +25,8 @@
     ?>
 
     <?php
-    $employee->printEmployeeData();
+    echo Sessions::getID();
+    $employee->printEmployeeData(Sessions::getID());
     ?>
     <div id="commentsContainer"></div>
 
@@ -56,7 +50,7 @@
             $getComments = new searchEngine();
             echo '
             <script>         
-            getComments('.json_encode($getComments->convertToJSON(3,"employee")).');
+            getComments('.json_encode($getComments->convertToJSON(16,"employee")).');
             </script>
             ';?>
 </body>

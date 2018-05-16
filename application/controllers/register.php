@@ -10,8 +10,8 @@ if(isset($_POST['submit'])){
     $pesel = $_POST['pesel'];
     $password1 = $_POST['pwd1'];
     $password2 = $_POST['pwd2'];
-
-    if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2)){
+    $email = $_POST['email'];
+    if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2) || empty($email)){
         echo 'Uzupełnij wszystkie pola!';
     }else{
         $register = new Register($imie,$nazwisko,$pesel);
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
             }
             if($register->matchPasswords($password1,$password2)){
 
-                $register->createAccount($login,$password1);
+                $register->createAccount($login,$password1,$email);
                 header("Location: ../../index.php?register=success");
             }else{
                 echo 'Hasła nie są zgodne!';
