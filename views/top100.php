@@ -21,15 +21,17 @@
     <!-- Semantic-UI-->
     <link href="../public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="../public/css/style.css" rel="stylesheet">
+    <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
 </head>
 
 <body>
 
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
+    
         <a class="navbar-brand" href="../index.php">
-            <i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,14 +85,22 @@
         </div>
     </nav>
 	<div class="container">
-        <h1 class="text-center">Top 100 pracodawców</h1>
     
-
+        <span class="badge cyan"
+        >
+        <p class="h4">Top 100 pracodawców</p>
+        </span>
+        <div class="card" 
+        style="
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 100px;
+        ">
     <?php
         $pracodawcy = new TopEmployers(); 
         $pracodawcy->  calcAverage();    
     ?>
-    
+    </div>
     </div>
 	<!--Footer--> 
     <footer class="page-footer font-small mdb-color lighten-3"> 
