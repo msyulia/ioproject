@@ -88,6 +88,7 @@
             $temp = new searchEngine();
             if(isset($_GET['id'])){
             $empName = $temp->searchById($_GET['id']);
+            $empDesc = $temp->search($empName);
             $idEmp = $_GET['id'];
             }
             if(isset($_GET['searchEmployer'])){
@@ -95,8 +96,8 @@
             $empDesc = $temp->search($empName);
             $idEmp = $empDesc['ID'];
             }
-            $empDesc = $temp->search($empName);
 
+            if (!empty($empName) && !empty($idEmp)) {
             echo 
             '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
                 <div class="view overlay" style="margin: 0 auto;">
@@ -110,13 +111,23 @@
             </div>';
 
             $temp->formatEmployer($empName);
-            
         ?>
         <h4 class="text-center">Komentarze</h4>
         <div id="commentsContainer">
 
         </div>
+        <?php
+    } else {
+        echo 
+        '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+            <div class="card-body text-center">
+                <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy</strong></h5>
+                <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
+            </div>
+        </div>';
 
+    }
+    ?>
     </div>
 
     <!--Footer--> 

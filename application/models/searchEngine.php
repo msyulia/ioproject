@@ -4,7 +4,7 @@
 
         public function search($nameEmployer){
             if(empty($nameEmployer)){
-                echo 'Nie podałeś nazwy pracodawcy!';
+                echo '';
             }else{
                 $searchEmployer = $this->sendquery("SELECT * FROM pracodawcy WHERE nazwa_firmy='$nameEmployer'");            
                 return $searchEmployer;
