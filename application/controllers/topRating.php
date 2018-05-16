@@ -50,9 +50,9 @@ class TopEmployers extends Employers {
       array_multisort($value,SORT_DESC,$average );
       echo '<table align="center" style="width:90%" class="table table-hover">';
       echo '<thead>';
-      echo '<th><h5">Nazwa</h5></th>';
-      echo '<th><h5>Średnia ocen</h5></th>';
-      echo '<th></th>';
+      echo '<th><p class="h5">Nazwa</p></th>';
+      echo '<th><p class="h5">Średnia ocen</p></th>';
+      echo '<th><p class="h5">Zobacz szczegóły</p></th>';
       echo '</thead>';
 
       foreach($average as $firm) {

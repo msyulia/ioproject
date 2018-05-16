@@ -85,14 +85,22 @@
         </div>
     </nav>
 	<div class="container">
-        <h1 class="text-center">Top 100 pracodawców</h1>
     
-
+        <span class="badge cyan"
+        >
+        <p class="h4">Top 100 pracodawców</p>
+        </span>
+        <div class="card" 
+        style="
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 100px;
+        ">
     <?php
         $pracodawcy = new TopEmployers(); 
         $pracodawcy->  calcAverage();    
     ?>
-    
+    </div>
     </div>
 	<!--Footer--> 
     <footer class="page-footer font-small mdb-color lighten-3"> 

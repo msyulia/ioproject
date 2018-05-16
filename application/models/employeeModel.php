@@ -22,33 +22,84 @@ class employee extends dbConnection{
 
     public function printEmployeeData($id = 3){
         $getEmployeeData = $this->getEmployeeData($id);
-        echo '<table align="center" style="width:90%"class="table table-hover"><thead>
-        <th style="padding-left:50px">Imie</th>
-        <th style="padding-left:50px">Nazwisko</th>
-        <th style="padding-left:50px">PESEL</th>
-        <th style="padding-left:50px">Login</th>
-        <th style="padding-left:50px">Adres e-mail</th>
-        </thead><h3>Twoje dane</h3><tbody><td style="padding-left:50px">';        
-        foreach($getEmployeeData as $data){
-            echo $data['Imie'].'<br/></td><td style="padding-left:50px">';
-            echo $data['Nazwisko'].'<br/></td><td style="padding-left:50px">';
-            echo $data['PESEL'].'<br/></td><td style="padding-left:50px">';
-            echo $data['login'].'<br/></td><td style="padding-left:50px">';   
-            echo $data['email'].'<br/></td></tbody></table>'; 
-            break;    
-        }
-        echo '<h3>Historia zatrudnienia</h3><table align="center" style="width:50%" class="table table-hover"><thead>
-        <th>Nazwa firmy</th>
-        <th>Czas rozpoczęcia</th>
-        <th>Czas zakończenia</th></thead><tbody>';
-        foreach($getEmployeeData as $data){
+        $userData = reset($getEmployeeData);
+        echo 
+        '
+        <span class="badge cyan"
+            style="display: table;
+            margin: 0 auto;"
+        >
+            Twoje dane
+        </span>
+        <div class="card" 
+        style="
+            width: 70%;
+            text-align: center;
+            margin: 0 auto;
+        ">
+        <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <div class="row-filter">
+            <p class="h6">Imię</p>
+            <p>'.$userData['Imie'].'</p>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row-filter">
+            <p class="h6">Nazwisko</p>
+            <p>'.$userData['Nazwisko'].'</p>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row-filter">
+            <p class="h6">PESEL</p>
+            <p>'.$userData['PESEL'].'</p>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row-filter">
+            <p class="h6">Login</p>
+            <p>'.$userData['login'].'</p>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row-filter">
+            <p class="h6">Adres e-mail</p>
+            <p>'.$userData['email'].'</p>
+        </div>
+    </li>';
+        
+        echo '
+    </ul>
+    </div>'; 
+        echo '
+        <br>
+        <span class="badge cyan"
+            style="display: table;
+            margin: 0 auto;"
+        >
+            Historia zatrudnienia
+        </span>
+        <div class="card" 
+        style="
+            text-align: center;
+            margin: 0 auto;
+        ">
+        <table style="margin: 20px;">
+        <thead>
+        <th><p class="h6">Nazwa firmy</p></th>
+        <th><p class="h6">Czas rozpoczęcia</p></th>
+        <th><p class="h6">Czas zakończenia</p></th></thead><tbody>';
+        foreach($getEmployeeData as $data) {
             echo '<td><a href="../views/employer.php?id='.$data['PracodawcaID'].'"><button type="button" class="btn btn-primary btn-md">'
             .$data['nazwa_firmy'].'</button></a></td><td>'
             .$data['dataZatrudniena']."</td><td>"
             .$data['dataZwolnienia'].'</td></tbody>';
         }
-
-        echo '</table><h3>Wystawione przez ciebie oceny</h3>';
+        echo '
+        </table>
+        </div>
+        <h3 class="text-center">Wystawione przez Ciebie komentarze</h3>';
         
     }
 

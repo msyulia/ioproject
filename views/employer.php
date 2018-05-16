@@ -99,8 +99,8 @@
 
             echo 
             '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
-                <div class="view overlay">
-                    <img class="card-img-top" src="../public/img/no-user-image.png" alt="Profile picture">
+                <div class="view overlay" style="margin: 0 auto;">
+                    <img class="img-thumbnail" src="../public/img/no-user-image.png" alt="Profile picture">
                 </div>
                 <div class="card-body text-center">
                     <h4 class="card-title"><strong>'.$empDesc['nazwa_firmy'].'</strong></h4>
