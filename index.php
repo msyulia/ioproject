@@ -16,11 +16,8 @@
     <!-- Material Design Bootstrap -->
     <link href="public/css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="public/css/style.css" rel="stylesheet">
-    <!-- Semantic-UI-->
-    <link rel="stylesheet" href="public/css/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="public/semantic-ui/semantic.min.js"></script>
+    <link href="public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="public/css/mobile-style.css" />
 </head>
 
 <body>
@@ -29,7 +26,8 @@
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
 
         <a class="navbar-brand" href="index.php">
-            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">
+            Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,7 +45,7 @@
 
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> Profil<?php  echo Sessions::getLogin();?> </a>
+                        <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
                         <!-- wstawka php sprawdza czy zalogowany -->
    
                     <!--Jeśli user jest zalogowany -->
