@@ -84,8 +84,7 @@
     ?>
 
     <?php
-    // echo Sessions::getID();
-    $employee->printEmployeeData(Sessions::getID());
+    $employee->printEmployeeData();
     ?>
     <div id="commentsContainer"></div>
 
@@ -120,7 +119,7 @@
             $getComments = new searchEngine();
             echo '
             <script>         
-            getComments('.json_encode($getComments->convertToJSON(Sessions::getID(),"employee")).');
+            getComments('.json_encode($getComments->convertToJSON(3,"employee")).');
             </script>
             ';?>
 </body>

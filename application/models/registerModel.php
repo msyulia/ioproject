@@ -26,9 +26,9 @@ class Register extends dbConnection {
         return $password1 == $password2 ? 1 : 0;
     }
 
-    public function createAccount($login, $password,$email){
-        $cr_account = $this->connect()->prepare("UPDATE pracownicy SET login=?,password=?,firstlogin=?,email=? WHERE PESEL=?");
-        $cr_account->bind_param('ssiss',$login,password_hash($password, PASSWORD_DEFAULT),$i = 0,$email,$this->pesel);
+    public function createAccount($login, $password){
+        $cr_account = $this->connect()->prepare("UPDATE pracownicy SET login=?,password=?,firstlogin=? WHERE PESEL=?");
+        $cr_account->bind_param('ssis',$login,password_hash($password, PASSWORD_DEFAULT),$i = 0,$this->pesel);
         $cr_account->execute();
         $cr_account->close();
 
