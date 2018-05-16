@@ -1,5 +1,4 @@
 /* Style do wszystkich stron */
-@import url('https://fonts.googleapis.com/css?family=Roboto&subset=latin-ext');
 .navbar {
     position: fixed;
     width: 100%;
@@ -17,7 +16,6 @@ html {
     box-sizing: inherit;
   }
 body {
-    font-family: 'Roboto', sans-serif;
     height: 100%;
     position: relative;
     margin: 0;
@@ -26,22 +24,16 @@ body {
   }
 
   footer {
+    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
-    position: fixed;
-    bottom: 0;
-    transition: bottom 0.2s ease-in-out;
-    width: 100%;
-    z-index: 9999;
     /*padding: 1rem;*/
 }
 
 .logo-pracodawcy {
-    height: 2rem;
-    padding-right: 5px;
+    width: 9%;
 }
-
 /* Style do: index.html */
 
 .container {
@@ -91,9 +83,13 @@ body {
     width: 60%;
 }
 
-/*.md-form {
+.md-form {
     padding-bottom: 15px;
-}*/
+}
+
+.navbar.navbar-dark form .md-form input {
+    width: 700px;
+}
 
 .navbar-nav .nav-item .nav-link {
     margin-left: 25px;
@@ -104,30 +100,4 @@ body {
     color: #ff3547;
     font-size: 12px;
     margin-left: 40px;
-}
-
-/* Style do top100 */
-
-.btn.btn-md {
-    font-size: .7rem;
-}
-
-table.table td, table.table th {
-    text-align: center;
-}
-
-.navbar.navbar-dark form .md-form input {
-    width: 400px;
-}
-
-/* Profil pracodawcy - employer */
-
-.list-group {
-    width: 80%;
-    margin: 0 auto;
-    padding: 15px;
-}
-
-#commentsContainer {
-    margin-bottom: 100px;
 }

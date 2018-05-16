@@ -18,9 +18,8 @@
         <link href="../public/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="../public/css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-    <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
+        <!-- Custom styles -->
+        <link href="../public/css/style.css" rel="stylesheet">
     </head>
 
     <body>

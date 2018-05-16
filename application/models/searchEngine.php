@@ -4,7 +4,7 @@
 
         public function search($nameEmployer){
             if(empty($nameEmployer)){
-                echo '';
+                echo 'Nie podałeś nazwy pracodawcy!';
             }else{
                 $searchEmployer = $this->sendquery("SELECT * FROM pracodawcy WHERE nazwa_firmy='$nameEmployer'");            
                 return $searchEmployer;
@@ -96,28 +96,33 @@
             $kat5 = $this->endMark($nameEmployer,'Kat5');
 
             echo '
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Wynagrodzenie
-                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat1.'</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Atmosfera
-                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat2.'</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Benefity
-                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat3.'</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Miejsce pracy
-                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat4.'</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Możliwości rozwoju
-                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat5.'</span>
-                </li>
-            </ul>';
+            <table>
+                <tr>
+                    <th>
+                        Kategoria 1
+                    </th>
+                    <th>
+                        Kategoria 2
+                    </th>
+                    <th>
+                        Kategoria 3
+                    </th>
+                    <th>
+                        Kategoria 4
+                    </th>
+                    <th>
+                        Kategoria 5
+                    </th>
+                </tr>
+                <tr>
+                    <td>'.$kat1.'</td>
+                    <td>'.$kat2.'</td>
+                    <td>'.$kat3.'</td>
+                    <td>'.$kat4.'</td>
+                    <td>'.$kat5.'</td>
+                </tr>
+            </table>
+            ';
            
 
         }

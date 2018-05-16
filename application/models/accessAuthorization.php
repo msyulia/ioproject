@@ -67,32 +67,27 @@
                     $empName = $this->getPracodawcaName($item['PracodawcaID']); 
                     $description = $this->sendquery("SELECT opis FROM pracodawcy WHERE nazwa_firmy='$empName'");
                     $value = new searchEngine();
-                    echo 
-            '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
-                <div class="card-body text-center">
-                    <h4 class="card-title"><strong>'.$empName.'</strong></h4>
-                    <h5 class="blue-text pb-2"><strong>Profil</strong></h5>
-                    <p class="card-text">'.$description['opis'].'</p>
-                </div>
-            </div>';
+                    echo '
+                    <table>
+                        <tr>
+                            <th>Nazwa pracodawcy</th><th>Opis</th>
+                        </tr>
+                        <tr>
+                            <td>'.$empName.'</td><td>'.$description['opis'].'</td>
+                        </tr>
+                    </table>
+                    ';
                     $value->formatEmployer($empName);
 
                     ?>
                     <form action="addRating.php" method="POST">
-                        
-                        <button type="submit" name="pracodawca" class="btn btn-primary" 
-            style="margin: 0 auto; display: table;"
-            value="<?php echo $this->getPracodawcaName($item['PracodawcaID']); ?>">Wystaw ocenę</button>
+                        <button type="submit" name="pracodawca" value="<?php echo $this->getPracodawcaName($item['PracodawcaID']); ?>">Wystaw ocenę</button>
                     </form>
                     <?php
                     echo '<br/>';
                 }
             }else{
-                echo '<div class="card success-color text-center z-depth-2" style="margin-top: -20px;">
-                <div class="card-body">
-                    <p class="white-text mb-0">Nie ma żadnych ocen do wystawienia!</p>
-                </div>
-            </div>';
+                echo 'Nie ma żadnych ocen do wystawienia!';
             }
         }
     }
