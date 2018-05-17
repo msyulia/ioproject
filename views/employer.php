@@ -107,11 +107,11 @@
                         foreach($matches as &$row){
                             // tworzę odnośnik do pracodawcy, dopóki nie będzie to na stronie,
                             // każdy musi zmienić sobie port do localhosta ew. path
-                            foreach($row as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
+                            foreach($row as &$v){ echo "<a href='employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
                             unset($v);
                         }
                     } else {
-                        foreach($matches as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
+                        foreach($matches as &$v){ echo "<a href='employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
                     }
                     unset($row);
                 } else {
