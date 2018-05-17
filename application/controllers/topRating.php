@@ -48,20 +48,24 @@ class TopEmployers extends Employers {
       }
 
       array_multisort($value,SORT_DESC,$average );
+
       echo '<table align="center" class="table table-hover">';
       echo '<thead>';
       echo '<th><p class="h5">Nazwa</p></th>';
       echo '<th><p class="h5">Średnia ocen</p></th>';
       echo '<th><p class="h5">Zobacz szczegóły</p></th>';
+
       echo '</thead>';
 
       foreach($average as $firm) {
           echo '<tbody>';
+
           echo '<td>'.$firm['firm'].'</td>';
           if ($firm['value']==0) {
             echo '<td>Brak ocen</td>';
           }else echo '<td>'.number_format($firm['value'],2).'</td>';
           echo '<td><a href="employer.php?id='.$firm['id'].'"><button type="button" class="btn btn-primary btn-md">Szczegóły</button></a></td>';
+
           echo '</tbody>';
       } 
       echo '</table>';      
