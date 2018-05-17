@@ -10,7 +10,6 @@ if(isset($_POST['submit'])){
     {
         $_SESSION['noLoginData'] = true;
         header("Location: ../../views/login.php");
-
     }
     else
     {

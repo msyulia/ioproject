@@ -86,7 +86,6 @@
     <div class="container">
         <?php 
             $temp = new searchEngine();
-
             if(isset($_GET['id'])){
             $empName = $temp->searchById($_GET['id']);
             $empDesc = $temp->search($empName);
@@ -96,39 +95,6 @@
             $empName = $_GET['searchEmployer'];
             $empDesc = $temp->search($empName);
             $idEmp = $empDesc['ID'];
-
-            if(isset($_GET['searchEmployer']) && !empty($_GET['searchEmployer'])){
-                // wpisano nazwę pracodawcy, filtry są ignorowane
-                echo "<h5>Opis firmy</h5>";
-                $empName = $_GET['searchEmployer'];
-                $empDesc = $temp->search($empName);
-                $idEmp = $empDesc['ID'];
-                echo $empDesc['nazwa_firmy']." ".$empDesc['opis']."<br/><h4>Komentarze</h4>";
-                $temp->formatEmployer($empName);
-            } elseif((!isset($_GET['searchEmployer']) || empty($_GET['searchEmployer'])) && (!isset($_GET['salaryRate']) || empty($_GET['salaryRate']))) {
-                // przypadek, gdy nie podano nazwy pracodawcy ani nie otworzono paska z gwiazdkami
-                echo '<h1>Nie podałeś nazwy pracodawcy!<h1>';
-            } else {
-                // brak podanej nazwy pracodawcy, otworzone filtry
-                echo "<h3>Firmy spełaniające podane kryteria: </h3><br/>";
-
-                // zwracana jest tablica dla 1 elementu, lub tablica tablic dla więcej niż 1 znalezionego rekordu z podanymi kryteriami
-                $matches = $temp->searchByRating(); 
-                if(isset($matches) && $matches != null){
-                    if(count($matches) >= 2 ){
-                        foreach($matches as &$row){
-                            // tworzę odnośnik do pracodawcy, dopóki nie będzie to na stronie,
-                            // każdy musi zmienić sobie port do localhosta ew. path
-                            foreach($row as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
-                            unset($v);
-                        }
-                    } else {
-                        foreach($matches as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
-                    }
-                    unset($row);
-                } else {
-                    echo '<h4>Nie znaleziono pracodawców spełniających podane kryteria.<h4>';
-                }
             }
 
             if (!empty($empName) && !empty($idEmp)) {
@@ -162,8 +128,6 @@
 
     }
     ?>
-        <br/><br/> <br/><br/>
-
     </div>
 
     <!--Footer--> 
