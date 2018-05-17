@@ -62,7 +62,6 @@ class Login extends dbConnection
                         Sessions::setImie($dbRes['Imie']);
                         Sessions::setNazwisko($dbRes['Nazwisko']);
                         Sessions::setID($dbRes['ID']);
-                        echo $dbRes['ID'];
                         $this->redirect("../../index.php?login=success");    //Zmienić na odpowiednią stronę   
                     }
                     else
