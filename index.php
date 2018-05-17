@@ -18,7 +18,8 @@
     <!-- Semantic-UI-->
     <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="public/css/style.css" rel="stylesheet">
+    <link href="public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="public/css/mobile-style.css" />
 </head>
 
 <body>
@@ -27,7 +28,8 @@
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
 
         <a class="navbar-brand" href="index.php">
-            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+            <img src="public/img/logo.png" class="logo-pracodawcy" alt="logo">
+            Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,7 +47,7 @@
 
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> Profil<?php  echo Sessions::getLogin();?> </a>
+                        <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
                         <!-- wstawka php sprawdza czy zalogowany -->
    
                     <!--Jeśli user jest zalogowany -->
@@ -100,13 +102,11 @@
 
                 <form action="./views/employer.php" method="GET">
                     <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <div id="toSend"></div>
-                    <button class="ui primary button" id="searchButton">Szukaj</button>
+                    <button class="ui primary button">Szukaj</button>
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="checkedFiltry" name="public">
                         <label class="grey-text">Pokaż filtry</label>
                     </div>
-                    
                  </form>
             </div>
             <div class="search-filtry">
@@ -165,24 +165,16 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
-        $("#searchButton").click(function(){
-            if( $("#checkedFiltry").is(':checked')){
-                var nameOfPossibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "possibilitiesRate"];
-                var rates = $('.ui.star.rating').rating('get rating'); 
-                for (var i = 0; i < rates.length; i++) { 
-                    document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
-                }
-            }
-        });
-        $(function () {
-            $(".search-filtry").toggle();
-            $("#checkedFiltry").prop( "checked", false );
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked);});
-            $(".ui.rating").rating("setting", "onRate", function (value) {
-                var txt = $(this).data("id") + " wartość: " + value;
+            $(function () {
+                $(".search-filtry").toggle();
+                $("#checkedFiltry").prop( "checked", false );
+                $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+    
+                $(".ui.rating").rating("setting", "onRate", function (value) {
+                    var txt = $(this).data("id") + " wartość: " + value;
+                    console.log(txt);
+                });
             });
-            
-        });
     </script>
     <!-- SCRIPTS -->
 </body>

@@ -3,7 +3,6 @@
     Sessions::startSession();
 ?>
 
-<!DOCTYPE html>
 <html lang="pl">
 
 <head>
@@ -17,8 +16,11 @@
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="../public/css/mdb.min.css" rel="stylesheet">
+    <!-- Semantic-UI-->
+    <link href="../public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="../public/css/style.css" rel="stylesheet">
+    <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
 </head>
 
 <body>
@@ -26,7 +28,7 @@
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
         <a class="navbar-brand" href="../index.php">
-            <i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -82,94 +84,86 @@
     <!--/.Navbar -->
 
     <div class="container">
-        
         <?php 
             $temp = new searchEngine();
-            if(isset($_GET['searchEmployer']) && !empty($_GET['searchEmployer'])){
-                // wpisano nazwę pracodawcy, filtry są ignorowane
-                echo "<h5>Opis firmy</h5>";
-                $empName = $_GET['searchEmployer'];
-                $empDesc = $temp->search($empName);
-                $idEmp = $empDesc['ID'];
-                echo $empDesc['nazwa_firmy']." ".$empDesc['opis']."<br/><h4>Komentarze</h4>";
-                $temp->formatEmployer($empName);
-            } elseif((!isset($_GET['searchEmployer']) || empty($_GET['searchEmployer'])) && (!isset($_GET['salaryRate']) || empty($_GET['salaryRate']))) {
-                // przypadek, gdy nie podano nazwy pracodawcy ani nie otworzono paska z gwiazdkami
-                echo '<h1>Nie podałeś nazwy pracodawcy!<h1>';
-            } else {
-                // brak podanej nazwy pracodawcy, otworzone filtry
-                echo "<h3>Firmy spełaniające podane kryteria: </h3><br/>";
-
-                // zwracana jest tablica dla 1 elementu, lub tablica tablic dla więcej niż 1 znalezionego rekordu z podanymi kryteriami
-                $matches = $temp->searchByRating(); 
-                if(isset($matches) && $matches != null){
-                    if(count($matches) >= 2 ){
-                        foreach($matches as &$row){
-                            // tworzę odnośnik do pracodawcy, dopóki nie będzie to na stronie,
-                            // każdy musi zmienić sobie port do localhosta ew. path
-                            foreach($row as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
-                            unset($v);
-                        }
-                    } else {
-                        foreach($matches as &$v){ echo "<a href='http://localhost:83/ioproject/views/employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
-                    }
-                    unset($row);
-                } else {
-                    echo '<h4>Nie znaleziono pracodawców spełniających podane kryteria.<h4>';
-                }
+            if(isset($_GET['id'])){
+            $empName = $temp->searchById($_GET['id']);
+            $empDesc = $temp->search($empName);
+            $idEmp = $_GET['id'];
             }
+            if(isset($_GET['searchEmployer'])){
+            $empName = $_GET['searchEmployer'];
+            $empDesc = $temp->search($empName);
+            $idEmp = $empDesc['ID'];
+            }
+
+            if (!empty($empName) && !empty($idEmp)) {
+            echo 
+            '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+                <div class="view overlay" style="margin: 0 auto;">
+                    <img class="img-thumbnail" src="../public/img/no-user-image.png" alt="Profile picture">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title"><strong>'.$empDesc['nazwa_firmy'].'</strong></h4>
+                    <h5 class="blue-text pb-2"><strong>Profil</strong></h5>
+                    <p class="card-text">'.$empDesc['opis'].'</p>
+                </div>
+            </div>';
+
+            $temp->formatEmployer($empName);
         ?>
+        <h4 class="text-center">Komentarze</h4>
         <div id="commentsContainer">
 
         </div>
+        <?php
+    } else {
+        echo 
+        '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+            <div class="card-body text-center">
+                <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy</strong></h5>
+                <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
+            </div>
+        </div>';
 
-
-        <br/><br/> <br/><br/>
+    }
+    ?>
     </div>
 
-    <!--Footer-->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-1 mt-1">
-
-        <!--Footer Links-->
-        <div class="container text-center text-md-left">
-            <div class="row">
-
-                <!--Dodać tu coś-->
-            
-            </div>
-        </div>
-        <!--/.Footer Links-->
-        <!--Copyright-->
-        <div class="footer-copyright py-3 text-center">
-            © 2018 Copyright:
-            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <!--/.Footer-->
+    <!--Footer--> 
+    <footer class="page-footer font-small mdb-color lighten-3"> 
+ 
+    <!--Copyright--> 
+        <div class="footer-copyright py-3 text-center"> 
+            © 2018 Copyright: 
+            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+        </div> 
+    <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
 
 
     <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../public/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../public/js/mdb.min.js"></script>
+        <!-- JQuery -->
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script src="../public/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="../public/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script src="../public/js/mdb.min.js"></script>
+        <!-- Semantic JavaScript -->
+        <script src="../public/js/semantic.min.js"></script>
 
-    <script type="text/javascript" src="getComments.js"></script>
+        <script src="getComments.js"></script>
                 
     <?php 
-        if(isset($idEmp)){
             $getComments = new searchEngine();
             echo '
             <script>         
             getComments('.json_encode($getComments->convertToJSON($idEmp,"employer")).');
             </script>
             ';
-        }
    
     ?>
 </body>
