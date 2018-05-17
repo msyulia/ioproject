@@ -4,27 +4,12 @@
 
         public function search($nameEmployer){
             if(empty($nameEmployer)){
-                echo 'Nie podałeś nazwy pracodawcy!';
+                echo '';
             }else{
                 $searchEmployer = $this->sendquery("SELECT * FROM pracodawcy WHERE nazwa_firmy='$nameEmployer'");            
-                return $searchEmployer;                  
+                return $searchEmployer;
+                                    
             }
-        }
-
-        public function searchByRating(){
-            // Zwrócenie nazw pracodawców, których średnia ocena jest >= od zaznaczonej przez usera
-            $matches = $this->sendquery("SELECT Pracodawca 
-                                        FROM (SELECT Pracodawca, AVG(Kat1) as k1, AVG(Kat2) as k2,
-                                                    AVG(Kat3) as k3, AVG(Kat4) as k4, AVG(Kat5) as k5
-                                                    from oceny group by Pracodawca) as tmp
-                                        WHERE
-                                            k1>=".$_GET['salaryRate']." AND 
-                                            k2>=".$_GET['atmosphereRate']." AND 
-                                            k3>=".$_GET['benefitsRate']." AND 
-                                            k4>=".$_GET['workplaceRate']." AND 
-                                            k5>=".$_GET['possibilitiesRate']
-                                    );
-            return $matches;
         }
 
         private function getRating($nameEmployer){
@@ -111,33 +96,28 @@
             $kat5 = $this->endMark($nameEmployer,'Kat5');
 
             echo '
-            <table>
-                <tr>
-                    <th>
-                        Kategoria 1
-                    </th>
-                    <th>
-                        Kategoria 2
-                    </th>
-                    <th>
-                        Kategoria 3
-                    </th>
-                    <th>
-                        Kategoria 4
-                    </th>
-                    <th>
-                        Kategoria 5
-                    </th>
-                </tr>
-                <tr>
-                    <td>'.$kat1.'</td>
-                    <td>'.$kat2.'</td>
-                    <td>'.$kat3.'</td>
-                    <td>'.$kat4.'</td>
-                    <td>'.$kat5.'</td>
-                </tr>
-            </table>
-            ';
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Wynagrodzenie
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat1.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Atmosfera
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat2.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Benefity
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat3.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Miejsce pracy
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat4.'</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Możliwości rozwoju
+                    <span class="badge badge-primary badge-pill"><i class="fa fa-star prefix yellow-text"></i>'.$kat5.'</span>
+                </li>
+            </ul>';
            
 
         }
