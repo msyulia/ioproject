@@ -1,5 +1,6 @@
 <?php
 require "../application.php";
+Sessions::startSession();
 
 if(isset($_POST['submit'])){
     $fLogin = $_POST['login'];
@@ -7,7 +8,8 @@ if(isset($_POST['submit'])){
     
     if(empty($fLogin) || empty($fPwd))
     {
-        echo 'Uzupełnij wszystkie pola';
+        $_SESSION['noLoginData'] = true;
+        header("Location: ../../views/login.php");
     }
     else
     {
