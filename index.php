@@ -102,7 +102,8 @@
 
                 <form action="./views/employer.php" method="GET">
                     <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <button class="ui primary button">Szukaj</button>
+                    <div id="toSend"></div>
+                    <button class="ui primary button" id="searchButton">Szukaj</button>
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="checkedFiltry" name="public">
                         <label class="grey-text">Pokaż filtry</label>
@@ -165,6 +166,15 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
+            $("#searchButton").click(function(){
+                if( $("#checkedFiltry").is(':checked')){
+                    var nameOfPossibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "possibilitiesRate"];
+                    var rates = $('.ui.star.rating').rating('get rating'); 
+                    for (var i = 0; i < rates.length; i++) { 
+                        document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
+                    }
+                }
+            });
             $(function () {
                 $(".search-filtry").toggle();
                 $("#checkedFiltry").prop( "checked", false );
