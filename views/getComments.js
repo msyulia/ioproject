@@ -5,30 +5,32 @@ class Comment {
         this.userName = oneComment.Pracownik;
         this.comment = oneComment.Komentarz;
         this.salary = Number(oneComment.Kat1);
-        this.opportunities = Number(oneComment.Kat2);
+        this.atmosphere = Number(oneComment.Kat2);
         this.benefits = Number(oneComment.Kat3);
         this.people = Number(oneComment.Kat4);
-        this.atmosphere = Number(oneComment.Kat5);
+        this.possibilities
+         = Number(oneComment.Kat5);
 
 
     }
     avarage() {
-        return ((this.salary + this.opportunities + this.benefits + this.people + this.atmosphere)/5).toFixed(1);
+        return ((this.salary + this.atmosphere + this.benefits + this.people + this.possibilities
+        )/5).toFixed(1);
     }
     getCard() {
         var rateSalary = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.salary.toFixed(1)+" wypłata</div>\
+            <div>"+this.salary.toFixed(1)+" wynagrodzenie</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.salary/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
-        var rateOpportunities = 
+        var rateatmosphere = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.opportunities.toFixed(1)+" możliwości</div>\
+            <div>"+this.atmosphere.toFixed(1)+" atmosfera</div>\
             <div class=\"progress\">\
-                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.opportunities/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
+                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.atmosphere/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
@@ -42,17 +44,20 @@ class Comment {
         ";
         var ratePeople = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.people.toFixed(1)+" ludzie</div>\
+            <div>"+this.people.toFixed(1)+" miejsce pracy</div>\
             <div class=\"progress\">\
                 <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.people/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
-        var rateAtmosphere = 
+        var ratepossibilities
+         = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.atmosphere.toFixed(1)+" atmosfera</div>\
+            <div>"+this.possibilities
+            .toFixed(1)+" możliwości rozwoju</div>\
             <div class=\"progress\">\
-                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.atmosphere/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
+                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.possibilities
+                /5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
@@ -60,21 +65,22 @@ class Comment {
         "<div class=\"card card-body\" style=\"margin-top: 10px\"> \
             <div class=\"row\">\
                 <div class=\"col\">\
-                    <h4 class=\"card-title\">"+this.userName+"</h4>\
+                <i class=\"fa fa-user prefix green-text\"></i>\
                 </div>\
                 <div class=\"col\">\
                     <div class=\"btn-group\" style=\"float: right\">\
-                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">średnia = "+this.avarage()+"</button>\
+                        <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fa fa-star prefix yellow-text\"></i> "+this.avarage()+"</button>\
                         <div class=\"dropdown-menu\">\
                         "+rateSalary+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateOpportunities+"\
+                        "+rateatmosphere+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+rateBenefits+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+ratePeople+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateAtmosphere+"\
+                        "+ratepossibilities
+                        +"\
                     </div>\
                 </div>\
             </div>\

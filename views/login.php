@@ -1,8 +1,6 @@
 <?php 
-
     require "../application/application.php";
     Sessions::startSession();
-
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -18,8 +16,9 @@
         <link href="../public/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="../public/css/mdb.min.css" rel="stylesheet">
-        <!-- Custom styles -->
-        <link href="../public/css/style.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+    <link href="../public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="../public/css/mobile-style.css" />
     </head>
 
     <body>
@@ -34,14 +33,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="top100.php">Top 100</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">O nas</a>
-                    </li>
                 </ul>
             </div>
         </nav>
         <!--/.Navbar -->
-        <div class="container">
+        <div class="container" style="margin-bottom: 100px">
             <div class="singinform">
             <?php 
             if(isset($_GET['form'])){
@@ -49,7 +45,13 @@
                     echo '<div class="alert alert-danger">
                     <strong>Błędny login lub hasło!</strong>
                     </div>';
-                }             
+                }
+            }
+            if(isset($_SESSION['noLoginData'])) {
+               echo '<div class="alert alert-danger">
+                <strong>Uzupełnij wszystkie pola!</strong>
+                </div>';
+                unset($_SESSION['noLoginData']);
             }
             ?>
                 <!-- Material form login -->
@@ -100,6 +102,35 @@
             ?>
             <!--Form-->
             <div class="singupform">
+                <?php
+                    if(isset($_SESSION['noRegisterData'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Uzupełnij wszystkie pola!</strong>
+                            </div>';
+                        unset($_SESSION['noRegisterData']);
+                    } else if(isset($_SESSION['isAlreadyRegistered'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Jesteś już zalogowany</strong>
+                            </div>';
+                        unset($_SESSION['isAlreadyRegistered']);
+                    } else if(isset($_SESSION['isLoginOccupied'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Login jest już zajęty!</strong>
+                            </div>';
+                        unset($_SESSION['isLoginOccupied']);
+                    } else if(isset($_SESSION['isPasswordsCorrect'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Hasła nie są zgodne!</strong>
+                            </div>';
+                        unset($_SESSION['isPasswordsCorrect']);
+                    } else if(isset($_SESSION['noRecordInDatabase'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Brak wpisu w bazie danych!</strong>
+                            <strong>Sprawdź poprawność wprowadzonych danych</strong>
+                            </div>';
+                        unset($_SESSION['noRecordInDatabase']);
+                    }
+                ?>
                 <!-- Material form register -->
                 <form id="formularz" action="../application/controllers/register.php" method="post" autocomplete="off" onsubmit="return Send()">
                     <p class="h4 text-center mb-4">Rejestracja</p>
@@ -136,7 +167,7 @@
                     <!-- Material input email -->
                     <div class="md-form">
                         <i class="fa fa-envelope prefix grey-text"></i>
-                        <input type="email" id="materialFormRegisterEmailEx" class="form-control">
+                        <input name="email" type="email" id="materialFormRegisterEmailEx" class="form-control">
                         <label for="materialFormRegisterEmailEx">E-mail</label>
                     </div>
 
@@ -163,7 +194,7 @@
                     </div>
 
                     <div class="text-center mt-4">
-                        <button class="btn btn-primary" type="submit">Zarejestruj</button>
+                        <button class="btn btn-primary" type="submit" name="submit">Zarejestruj</button>
                     </div>
                 </form>
                 <?php 
@@ -175,38 +206,29 @@
         </div>
 
 
-        <!--Footer-->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-1 mt-1">
-
-        <!--Footer Links-->
-        <div class="container text-center text-md-left">
-            <div class="row">
-
-                <!--Dodać tu coś-->
-
-            </div>
-        </div>
-        <!--/.Footer Links-->
-        <!--Copyright-->
-        <div class="footer-copyright py-3 text-center">
-            © 2018 Copyright:
-            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a>
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <!--/.Footer-->
+    <!--Footer--> 
+    <footer class="page-footer font-small mdb-color lighten-3"> 
+ 
+        <!--Copyright--> 
+        <div class="footer-copyright py-3 text-center"> 
+            © 2018 Copyright: 
+            <a href="https://github.com/KowalikJakub/ioproject"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+        </div> 
+        <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
 
         <!-- SCRIPTS -->
         <!-- JQuery -->
-        <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
+        <script src="../public/js/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../public/js/popper.min.js"></script>
+        <script src="../public/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
+        <script src="../public/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../public/js/mdb.min.js"></script>
+        <script src="../public/js/mdb.min.js"></script>
         <!-- Custom JavaScript -->
-        <script type="text/javascript" src="../public/js/validation.js"></script>
+        <script src="../public/js/validation.js"></script>
     </body>
 
 </html>
