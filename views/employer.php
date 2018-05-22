@@ -49,6 +49,7 @@
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
+
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i> <?php  echo Sessions::getLogin();?> </a>
@@ -95,6 +96,7 @@
             $empDesc = $temp->search($empName);
             $idEmp = $empDesc['ID'];
             }
+
             if (!empty($empName) && !empty($idEmp)) {
             echo 
             '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
@@ -107,6 +109,7 @@
                     <p class="card-text">'.$empDesc['opis'].'</p>
                 </div>
             </div>';
+
             $temp->formatEmployer($empName);
         ?>
         <h4 class="text-center">Komentarze</h4>
@@ -122,6 +125,7 @@
                 <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
             </div>
         </div>';
+
     }
     ?>
     </div>

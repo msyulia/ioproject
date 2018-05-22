@@ -44,6 +44,7 @@
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
+
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
@@ -83,7 +84,7 @@
     ?>
 
     <?php
-    $employee->printEmployeeData(Sessions::getID());
+    $employee->printEmployeeData();
     ?>
     <div id="commentsContainer"></div>
 
@@ -118,7 +119,7 @@
             $getComments = new searchEngine();
             echo '
             <script>         
-            getComments('.json_encode($getComments->convertToJSON(Sessions::getID(),"employee")).');
+            getComments('.json_encode($getComments->convertToJSON(3,"employee")).');
             </script>
             ';?>
 </body>

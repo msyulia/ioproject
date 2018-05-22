@@ -44,6 +44,7 @@
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
+
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
@@ -164,16 +165,16 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
-            $(function () {
-                $(".search-filtry").toggle();
-                $("#checkedFiltry").prop( "checked", false );
-                $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
-    
-                $(".ui.rating").rating("setting", "onRate", function (value) {
-                    var txt = $(this).data("id") + " wartość: " + value;
-                    console.log(txt);
-                });
+        $(function () {
+            $(".search-filtry").toggle();
+            $("#checkedFiltry").prop( "checked", false );
+            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+ 
+            $(".ui.rating").rating("setting", "onRate", function (value) {
+                var txt = $(this).data("id") + " wartość: " + value;
+                console.log(txt);
             });
+        });
     </script>
     <!-- SCRIPTS -->
 </body>

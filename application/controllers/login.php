@@ -1,6 +1,7 @@
 <?php
 require "../application.php";
 Sessions::startSession();
+
 if(isset($_POST['submit'])){
     $fLogin = $_POST['login'];
     $fPwd =  $_POST['password'];

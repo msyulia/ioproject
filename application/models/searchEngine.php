@@ -1,5 +1,7 @@
 <?php 
+
     class searchEngine extends dbConnection{
+
         public function search($nameEmployer){
             if(empty($nameEmployer)){
                 echo '';
@@ -9,6 +11,7 @@
                                     
             }
         }
+
         private function getRating($nameEmployer){
             $getRates = $this->sendquery("SELECT * FROM oceny WHERE Pracodawca='$nameEmployer'");
             $getCount = $this->sendquery("SELECT COUNT(*) FROM oceny WHERE Pracodawca='$nameEmployer'");
@@ -22,6 +25,7 @@
             $getComments = $this->sendquery("SELECT Komentarz,Pracownik FROM oceny WHERE Pracodawca='$nameEmployer'");
             return $getComments;
         }
+
         private function getCommentsAndRatings($variable){
             if(is_numeric($variable)){
                 $getBoth = $this->sendquery("SELECT Komentarz,Pracownik,Kat1,Kat2,Kat3,Kat4,Kat5 FROM oceny WHERE Pracownik='$variable'");
@@ -38,6 +42,8 @@
                 }
                 return $getBoth;
             }
+
+
         }
         private function endMark($nameEmployer,$katString){
             $localStorage = $this->getRating($nameEmployer);
@@ -58,13 +64,18 @@
                 echo '<li>'.$comment['Komentarz'].' Wystawil: '.$comment['Pracownik'].'</li>';
             }
             echo '</ul>';
+
         }
+
         //jezeli zero szukam id pracownika
         //jezeli 1 szukam id pracodawcy
         public function searchById($id){
+
                 $getId =  $this->sendquery("SELECT nazwa_firmy FROM pracodawcy WHERE ID='$id'");   
                 return $getId['nazwa_firmy'];
+
         }
+
         public function convertToJSON($id, $string){
             if($string == "employee"){
                 $array = $this->getCommentsAndRatings($id);
@@ -74,12 +85,16 @@
             }
             return $array;
         }
+
+
+
         public function formatEmployer($nameEmployer){
             $kat1 = $this->endMark($nameEmployer,'Kat1');
             $kat2 = $this->endMark($nameEmployer,'Kat2');
             $kat3 = $this->endMark($nameEmployer,'Kat3');
             $kat4 = $this->endMark($nameEmployer,'Kat4');
             $kat5 = $this->endMark($nameEmployer,'Kat5');
+
             echo '
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -104,6 +119,8 @@
                 </li>
             </ul>';
            
+
         }
+
     }
 ?>
