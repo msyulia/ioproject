@@ -8,9 +8,7 @@
         // public function Authorization(){
         //     Sessions::startSession();
         // $login=Sessions::getLogin();
-
         //czy był zatrudniony w danej firmie sprawdzenie
-
         // $imie zamienić na $login potem
         public function getPracownikID($login) {
             $pobierz_pracownik_id = "SELECT id FROM pracownicy WHERE login='$login'";
@@ -37,7 +35,6 @@
                 return false;
             }   
         }
-
         public function getPracodawcaID($nazwa_firmy){
             $pobierz_id_firmy = "SELECT ID FROM pracodawcy WHERE nazwa_firmy='$nazwa_firmy'";
             $result = $this->connect()->query($pobierz_id_firmy);  
@@ -50,7 +47,6 @@
                 return false;
             } 
         }
-
         public function wystawOcene($login){
             $pobierz_id_pracownika = $this->getPracownikID($login);
             $pobierz_pracodawcow = "SELECT * FROM historiazatrudnienia WHERE pracownikID='$pobierz_id_pracownika' AND czyWystawionaOcena='0'";
@@ -62,7 +58,6 @@
                 }       
               
             
-
                 foreach($data as $item) {
                     $empName = $this->getPracodawcaName($item['PracodawcaID']); 
                     $description = $this->sendquery("SELECT opis FROM pracodawcy WHERE nazwa_firmy='$empName'");
@@ -76,7 +71,6 @@
                 </div>
             </div>';
                     $value->formatEmployer($empName);
-
                     ?>
                     <form action="addRating.php" method="POST">
                         
@@ -96,5 +90,4 @@
             }
         }
     }
-
 ?>

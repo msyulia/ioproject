@@ -50,7 +50,6 @@
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
-
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i> <?php  echo Sessions::getLogin();?> </a>
@@ -211,4 +210,3 @@
 </body>
 
 </html>
-

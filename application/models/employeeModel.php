@@ -1,9 +1,6 @@
+
 <?php
-
-
 class employee extends dbConnection{
-
-
     protected function getEmployeeData($id){
       
         $getEmployeeData = $this->sendquery("
@@ -12,15 +9,13 @@ class employee extends dbConnection{
         FROM historiazatrudnienia 
         INNER JOIN pracownicy ON historiazatrudnienia.PracownikID = pracownicy.ID 
         INNER JOIN pracodawcy ON historiazatrudnienia.PracodawcaID = pracodawcy.ID 
-        WHERE historiazatrudnienia.PracownikID = 3 
+        WHERE historiazatrudnienia.PracownikID = $id 
         ");
-
+        
         return $getEmployeeData;
-
         
     }
-
-    public function printEmployeeData($id = 3){
+    public function printEmployeeData($id){
         $getEmployeeData = $this->getEmployeeData($id);
         $userData = reset($getEmployeeData);
         echo 
@@ -102,6 +97,5 @@ class employee extends dbConnection{
         <h3 class="text-center">Wystawione przez Ciebie komentarze</h3>';
         
     }
-
 }
 ?>

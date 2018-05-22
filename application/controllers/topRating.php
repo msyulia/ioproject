@@ -1,13 +1,10 @@
 <?php
-
 class TopEmployers extends Employers {
-
     public function getShowALL() {
         echo '<table>';
         echo '<tr>';
         echo '<th>Firma: </th>';
         echo '</tr>';
-
         $datas = $this->getALL();
         foreach($datas as $data) {
             echo '<tr>';
@@ -15,19 +12,15 @@ class TopEmployers extends Employers {
             echo '<td>'.$data['nazwa_firmy'].'</td>';
             echo '</tr>';
         }
-
         echo '</table>';
     }
-
     //obliczanie średniej ocen pracodawców i ich wyświetlenie
     public function calcAverage() {
       $ratings = $this->getRating();
       $employers = $this->getALL();
-
       $sum =0;
       $quantity=0;
       $average[] =0;
-
       for ($i=0; $i < count($employers) ; $i++) {
         $quantity=0;
         $sum =0;
@@ -39,14 +32,11 @@ class TopEmployers extends Employers {
           if ($quantity==0) {
             $average[$i]= ['id' => $employers[$i]['ID'],'firm' => $employers[$i]['nazwa_firmy'],'value'=> 0];
           } else $average[$i] =  ['id' => $employers[$i]['ID'], 'firm' => $employers[$i]['nazwa_firmy'],'value'=> $sum/$quantity];
-
         }
       }
-
       foreach ($average as $key => $line) {
         $value [$key] = $line['value'];
       }
-
       array_multisort($value,SORT_DESC,$average );
       echo '<table align="center" class="table table-hover">';
       echo '<thead>';
@@ -54,7 +44,6 @@ class TopEmployers extends Employers {
       echo '<th><p class="h5">Średnia ocen</p></th>';
       echo '<th><p class="h5">Zobacz szczegóły</p></th>';
       echo '</thead>';
-
       foreach($average as $firm) {
           echo '<tbody>';
           echo '<td>'.$firm['firm'].'</td>';
