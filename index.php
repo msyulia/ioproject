@@ -165,16 +165,16 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
-        $(function () {
-            $(".search-filtry").toggle();
-            $("#checkedFiltry").prop( "checked", false );
-            $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
- 
-            $(".ui.rating").rating("setting", "onRate", function (value) {
-                var txt = $(this).data("id") + " wartość: " + value;
-                console.log(txt);
+            $(function () {
+                $(".search-filtry").toggle();
+                $("#checkedFiltry").prop( "checked", false );
+                $("#checkedFiltry").click(function () { $(".search-filtry").toggle(this.checked) });
+    
+                $(".ui.rating").rating("setting", "onRate", function (value) {
+                    var txt = $(this).data("id") + " wartość: " + value;
+                    console.log(txt);
+                });
             });
-        });
     </script>
     <!-- SCRIPTS -->
 </body>
