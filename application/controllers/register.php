@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
     $password2 = $_POST['pwd2'];
     $email = $_POST['email'];
 
-    if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2) || empty($email){
+    if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2) || empty($email)){
         $_SESSION['noRegisterData'] = true;
         header("Location: ../../views/login.php");
         die();
