@@ -1,9 +1,18 @@
 <?php
 
-//wystawiwanie ocen i komentarza => zapis do bazy danych
-//+ sprawdzenie czy user moze wystaić ocenę
+/**
+ * Klasa odpowiadająca za wystawianie ocen, komentarzy i ich zapis do bazy danych
+ * 
+ * @param var $pracodawca nazwa pracodawcy
+ * @param var $pracownik nazwa pracownika
+ * @param var $kat1 pierwsza kategoria
+ * @param var $kat2 druga kategoria
+ * @param var $kat3 trzecia kategoria
+ * @param var $kat4 czwarta kategoria
+ * @param var $kat5 piata kategoria
+ * @param var $komentarz komentarz
+ */
     class reviewsAndComments extends dbConnection{
-        //Właściwości
        // public $id;
         public $pracodawca;
         public $pracownik;
@@ -13,7 +22,19 @@
         public $kat4;
         public $kat5;
         public $komentarz;
-        // Konstruktor
+        
+        /**
+         * Konstruktor tworzący obiekty z podanych danych
+         *  
+         * @param var $pracodawca nazwa pracodawcy
+         * @param var $pracownik nazwa pracownika
+         * @param var $kat1 pierwsza kategoria
+         * @param var $kat2 druga kategoria
+         * @param var $kat3 trzecia kategoria
+         * @param var $kat4 czwarta kategoria
+         * @param var $kat5 piata kategoria
+         * @param var $komentarz komentarz
+         */
         public function __construct($pracodawca, $pracownik, $kat1, $kat2, $kat3, $kat4, $kat5, $komentarz) {
           //$this->id = $id;
           $this->pracodawca = $pracodawca;
@@ -25,8 +46,11 @@
           $this->kat5 = $kat5;
           $this->komentarz = $komentarz;
         }
-        // Metody
-        public function pokazOcena(){   // podejrzenie wartości obiektu (do testów)
+        
+        /**
+         * Funkcja wyświetlająca informacje na temat pracownika, pracodawcy, wszystkich kategorii i komentarzy
+         */
+        public function pokazOcena(){
           //echo $this->id .'<br>';
           echo $this->pracodawca.'<br>';
           echo $this->pracownik.'<br>';
@@ -37,7 +61,12 @@
           echo 'Czwarta kategoria: '.$this->kat5.'<br>';
           echo $this->komentarz.'<br>';
         }
-        public function zapisz($id){   // zapisanie w bazie danych
+
+        /**
+         * Funkcja zapisująca informacje na temat pracownika, pracodawcy, wszystkich kategorii i komentarzy w bazie danych
+         * Jest to również funkcja zmieniająca wcześniej zapisane informacje w bazie danych na temat pracownika, pracodawcy, wszystkich kategorii i komentarzy
+         */
+        public function zapisz($id){
 
           if(empty($this->pracodawca) || empty($this->pracownik) || 
             empty($this->kat1) || empty($this->kat2) ||

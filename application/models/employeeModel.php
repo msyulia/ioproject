@@ -1,9 +1,17 @@
 <?php
 
-
+    /**
+     * Klasa odpowiadająca za przetwarzanie ocen i komentarzy pracownika
+     */
 class employee extends dbConnection{
 
-
+    /**
+     * Funkcja służaca do pobierania komentarzy z bazy danych
+     * 
+     * @param var $id id pracownika
+     * 
+     * @return var $getEmployeeData pobrane informacje na temat pracownika
+     */ 
     protected function getEmployeeData($id){
       
         $getEmployeeData = $this->sendquery("
@@ -14,12 +22,14 @@ class employee extends dbConnection{
         INNER JOIN pracodawcy ON historiazatrudnienia.PracodawcaID = pracodawcy.ID 
         WHERE historiazatrudnienia.PracownikID = $id 
         ");
-        
         return $getEmployeeData;
-
-        
     }
 
+    /**
+     * Funkcja służaca do wyswietlania informacji na temat pracownika
+     * 
+     * @param var $id id pracownika
+     */ 
     public function printEmployeeData($id){
         $getEmployeeData = $this->getEmployeeData($id);
         $userData = reset($getEmployeeData);
@@ -100,8 +110,6 @@ class employee extends dbConnection{
         </table>
         </div>
         <h3 class="text-center">Wystawione przez Ciebie komentarze</h3>';
-        
     }
-
 }
 ?>

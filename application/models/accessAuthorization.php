@@ -1,17 +1,17 @@
 <?php
-    //autoryzacja przed nie autoryzowanym dostępem do podstron przez osób/użytkowników 
-    //autoryzacja przed nie autoryzowanym dostępem do podstron przez osób/użytkowników 
+    
+    /**
+     * Klasa służąca do autoryzacji przed nie autoryzowanym dostępem do podstron przez osób/użytkowników 
+     * */
     class accessAuthorization extends dbConnection{
-	
-        // protected function Authorization(){
         
-        // public function Authorization(){
-        //     Sessions::startSession();
-        // $login=Sessions::getLogin();
-
-        //czy był zatrudniony w danej firmie sprawdzenie
-
-        // $imie zamienić na $login potem
+        /**
+         * Funkcja uzyskująca id pracownika
+         * 
+         * @param var $login login pracownika
+         * 
+         * @return var id pracownika lub wartość false w razie nie znalezienia w bazie danych
+         */
         public function getPracownikID($login) {
             $pobierz_pracownik_id = "SELECT id FROM pracownicy WHERE login='$login'";
             $result = $this->connect()->query($pobierz_pracownik_id);  
@@ -25,6 +25,13 @@
             }          
         }
        
+        /**
+         * Funkcja uzyskująca nazwe firmy pracodawcy
+         * 
+         * @param var $id_pracodawcy id pracodawcy
+         * 
+         * @return var nazwa firmy lub wartość false w razie nie znalezienia w bazie danych
+         */
         public function getPracodawcaName($id_pracodawcy){
             $pobierz_pracownik_id = "SELECT nazwa_firmy FROM pracodawcy WHERE ID='$id_pracodawcy'";
             $result = $this->connect()->query($pobierz_pracownik_id);  
@@ -38,6 +45,13 @@
             }   
         }
 
+        /**
+         * Funkcja uzyskująca id firmy pracodawcy
+         * 
+         * @param var $nazwa_firmy nazwa firmy pracodawcy
+         * 
+         * @return var id firmy pracodawcy lub wartość false w razie nie znalezienia w bazie danych
+         */
         public function getPracodawcaID($nazwa_firmy){
             $pobierz_id_firmy = "SELECT ID FROM pracodawcy WHERE nazwa_firmy='$nazwa_firmy'";
             $result = $this->connect()->query($pobierz_id_firmy);  
@@ -51,6 +65,11 @@
             } 
         }
 
+        /**
+         * Funkcja wysyłająca ocenę pracodawcy do bazy danych, obsługuje wyjątek wysyłania ponownej oceny
+         * 
+         * @param var $login login pracownika
+         */
         public function wystawOcene($login){
             $pobierz_id_pracownika = $this->getPracownikID($login);
             $pobierz_pracodawcow = "SELECT * FROM historiazatrudnienia WHERE pracownikID='$pobierz_id_pracownika' AND czyWystawionaOcena='0'";
@@ -59,10 +78,7 @@
             if($numRows>0) {
                 while($row = $result->fetch_assoc()) {
                     $data[] = $row;
-                }       
-              
-            
-
+                }
                 foreach($data as $item) {
                     $empName = $this->getPracodawcaName($item['PracodawcaID']); 
                     $description = $this->sendquery("SELECT opis FROM pracodawcy WHERE nazwa_firmy='$empName'");

@@ -1,7 +1,14 @@
 <?php 
-
+    /**
+     * Klasa obsługująca funkcje wyszukujące
+     */
     class searchEngine extends dbConnection{
-
+        
+        /**
+         * Funkcja wysyłająca zapytanie do bazy danych o wprowadzonego pracodawcę, obsługuje wyjatek pustego pola
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         */
         public function search($nameEmployer){
             if(empty($nameEmployer)){
                 echo '';
@@ -12,6 +19,13 @@
             }
         }
 
+        /**
+         * Funkcja pobierająca oceny wprowadzonego pracodawcy
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         * 
+         * @return var oceny pracodawcy
+         */
         private function getRating($nameEmployer){
             $getRates = $this->sendquery("SELECT * FROM oceny WHERE Pracodawca='$nameEmployer'");
             $getCount = $this->sendquery("SELECT COUNT(*) FROM oceny WHERE Pracodawca='$nameEmployer'");
@@ -20,12 +34,26 @@
             }
             return $getRates;
         }
-        
+                
+        /**
+         * Funkcja pobierająca komantarze na temat wprowadzonego pracodawcy
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         * 
+         * @return var komentarze na temat pracodawcy
+         */
         private function getComments($nameEmployer){
             $getComments = $this->sendquery("SELECT Komentarz,Pracownik FROM oceny WHERE Pracodawca='$nameEmployer'");
             return $getComments;
         }
-
+        
+        /**
+         * Funkcja pobierająca komantarze i oceny na temat wprowadzonego pracodawcy
+         * 
+         * @param string $variable szukany obiekt
+         * 
+         * @return var komentarze oraz oceny dotyczace obiektu lub wystawione przez obiekt
+         */
         private function getCommentsAndRatings($variable){
             if(is_numeric($variable)){
                 $getBoth = $this->sendquery("SELECT Komentarz,Pracownik,Kat1,Kat2,Kat3,Kat4,Kat5 FROM oceny WHERE Pracownik='$variable'");
@@ -42,9 +70,15 @@
                 }
                 return $getBoth;
             }
-
-
         }
+        
+        /**
+         * Funkcja wyliczajaca średnią ocen wprowadzonego pracodawcy
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         * 
+         * @return var średnią ocen pracodawcy
+         */
         private function endMark($nameEmployer,$katString){
             $localStorage = $this->getRating($nameEmployer);
             $sum = 0;
@@ -57,6 +91,12 @@
             }
             return "Brak ocen!";
         }
+        
+        /**
+         * Funkcja wyświetlająca komentarze pracodawcy
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         */
         public function formatComments($nameEmployer){
             $Comments = $this->getComments($nameEmployer);
             echo '<ul>';
@@ -67,8 +107,13 @@
 
         }
 
-        //jezeli zero szukam id pracownika
-        //jezeli 1 szukam id pracodawcy
+        /**
+         * Funkcja zwracająca informacje jakiego obiektu szukamy
+         * 
+         * @param string $id id obiektu
+         * 
+         * @return var jeżeli zwraca 0 to szukamy pracownika, jeśli 1 to pracodawcy
+         */
         public function searchById($id){
 
                 $getId =  $this->sendquery("SELECT nazwa_firmy FROM pracodawcy WHERE ID='$id'");   
@@ -76,6 +121,12 @@
 
         }
 
+        /**
+         * Funkcja konwertujaca komentarze obiektu do JavaScript Object Notation
+         * 
+         * @param string $id id obiektu
+         * @param string $string informacja czy jest to pracodawca czy pracownik
+         */
         public function convertToJSON($id, $string){
             if($string == "employee"){
                 $array = $this->getCommentsAndRatings($id);
@@ -86,8 +137,11 @@
             return $array;
         }
 
-
-
+        /**
+         * Funkcja wyświetlająca poszczególne oceny wprowadzonego pracodawcy
+         * 
+         * @param string $nameEmployer nazwa pracodawcy
+         */
         public function formatEmployer($nameEmployer){
             $kat1 = $this->endMark($nameEmployer,'Kat1');
             $kat2 = $this->endMark($nameEmployer,'Kat2');

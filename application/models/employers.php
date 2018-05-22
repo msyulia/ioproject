@@ -1,8 +1,15 @@
 <?php
 
-  // wyciąganie firm
+    /**
+     * Klasa odpowiadająca za przetwarzanie ocen i komentarzy o pracodawcach
+     */
   class Employers extends dbConnection{
 
+    /**
+     * Funkcja służaca do pobierania komentarzy z bazy danych
+     * 
+     * @return var $data pobrane komentarze
+     */ 
     protected function getALL() {
       $sql = "SELECT * FROM pracodawcy";
       $result = $this->connect()->query($sql);
@@ -15,6 +22,11 @@
       }
     }
 
+    /**
+     * Funkcja służaca do pobierania ocen z bazy danych
+     * 
+     * @return var $data pobrane oceny
+     */ 
     protected function getRating() {
       $sql = "SELECT * FROM oceny";
       $result = $this->connect()->query($sql);
