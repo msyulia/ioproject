@@ -1,8 +1,8 @@
 <?php
-
-    session_start();
-    session_unset();
-    session_destroy();
+    require "../application.php";
+    
+    Sessions::startSession();
+    Sessions::stopSession();
     header("Location: ../../index.php");
     exit();
 

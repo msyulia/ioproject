@@ -83,6 +83,7 @@
     ?>
 
     <?php
+
     $employee->printEmployeeData(Sessions::getID());
     ?>
     <div id="commentsContainer"></div>

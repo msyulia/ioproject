@@ -15,6 +15,7 @@ class employee extends dbConnection{
         return $getEmployeeData;
         
     }
+
     public function printEmployeeData($id){
         $getEmployeeData = $this->getEmployeeData($id);
         $userData = reset($getEmployeeData);

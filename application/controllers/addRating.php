@@ -12,7 +12,6 @@
         $_POST['kat4'],
         $_POST['kat5'],
         $_POST['komentarz']);
-        $zmienna->pokazOcena();
         $el = $pracodawcaID->getPracodawcaID($_SESSION['pracodawca']);
         $zmienna->zapisz($el);
         
