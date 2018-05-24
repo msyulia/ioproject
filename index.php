@@ -44,7 +44,6 @@
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
-
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
@@ -83,13 +82,17 @@
             <!-- modale x jakis dodać żeby dało się zamknąć to albo żeby znikało-->
             <!-- najlepiej jak by wpadł jakiś skrypt javascript -->
             <!--  -->
-            <?php 
+            <?php
+			/** Sprawdzenie czy zmienna login jest utworzona */
             if(isset($_GET['login'])){
+				/** Jeśli jest i jej wartość to "success" - wyświetlenie informacji
+				* o pomyślnym zalogowaniu */
                 if($_GET['login'] == "success"){
                     echo '<div class="alert alert-success">
                     <strong>Pomyślnie zalogowano!</strong>
                   </div>';
                 }
+				/** Jeśli jej wartośc to "logout" - wyświetlenie informacji o wylogowaniu */
                 if($_GET['login'] == "logout"){
                     echo '<div class="alert alert-success">
                     <strong>Wylogowano!</strong>
@@ -102,7 +105,8 @@
 
                 <form action="./views/employer.php" method="GET">
                     <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <button class="ui primary button">Szukaj</button>
+                    <div id="toSend"></div>
+                    <button class="ui primary button" id="searchButton">Szukaj</button>
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="checkedFiltry" name="public">
                         <label class="grey-text">Pokaż filtry</label>
@@ -165,6 +169,15 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
+            $("#searchButton").click(function(){
+                if( $("#checkedFiltry").is(':checked')){
+                    var nameOfPossibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "possibilitiesRate"];
+                    var rates = $('.ui.star.rating').rating('get rating'); 
+                    for (var i = 0; i < rates.length; i++) { 
+                        document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
+                    }
+                }
+            });
             $(function () {
                 $(".search-filtry").toggle();
                 $("#checkedFiltry").prop( "checked", false );
