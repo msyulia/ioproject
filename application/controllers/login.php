@@ -1,7 +1,7 @@
 <?php
 require "../application.php";
 Sessions::startSession();
-
+/** Sprawdzenie czy zmienne login i hasło są utworzone. */
 if(isset($_POST['submit'])){
     $fLogin = $_POST['login'];
     $fPwd =  $_POST['password'];
