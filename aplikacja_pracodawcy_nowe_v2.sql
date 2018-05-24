@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 22 Maj 2018, 11:35
--- Wersja serwera: 10.1.9-MariaDB
+-- Czas generowania: 24 Maj 2018, 08:54
+-- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -60,7 +60,7 @@ INSERT INTO `historiazatrudnienia` (`ID`, `PracownikID`, `PracodawcaID`, `dataZa
 
 CREATE TABLE `oceny` (
   `ID` int(10) NOT NULL,
-  `Pracodawca` varchar(255) COLLATE utf8_polish_ci DEFAULT NULL,
+  `Pracodawca` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `Pracownik` int(11) DEFAULT NULL,
   `Kat1` int(10) DEFAULT NULL,
   `Kat2` int(10) DEFAULT NULL,
@@ -126,8 +126,8 @@ CREATE TABLE `pracownicy` (
 INSERT INTO `pracownicy` (`ID`, `PESEL`, `Imie`, `Nazwisko`, `login`, `password`, `firstlogin`, `email`) VALUES
 (15, '93010500510', 'Jan', 'Nowak', 'JNowak', '$2y$10$Pt6f.xoCMPbZArZeIlhZm.ID2F7BwauUegDKXuwrzlVVQCaknZN42', 0, ''),
 (16, '98060593800', 'Jenny', 'Doe', 'JDoe', '$2y$10$sQ/qRzC10yOOWbU2DjDKE.oSx6ZzFat7guBqGDdI7ELNkYbpIdIWG', 0, 'jdoe@gmail.com'),
-(17, '91062568317', 'Mariusz', 'Kowalski', '', '', 1, ''),
-(18, '89110175019', 'Anna', 'Kowalska', '', '', 1, '');
+(17, '91062568317', 'Mariusz', 'Kowalski', 'Mariusz', '$2y$10$ec4kLpju61drv3ylgrvYgeSsiMZHFzsyMVIsWZwF/w31/glSzXZb2', 0, 'email@gmail.com'),
+(18, '89110175019', 'Anna', 'Kowalska', 'Anna', '$2y$10$.koTolKfdp8/H0N3UnLsquPR4pAJ/x00f3m6CLurU9WjvOZMQdTZ6', 0, 'aKowalska@gmail.com');
 
 --
 -- Indeksy dla zrzutów tabel
