@@ -102,8 +102,8 @@
 
                 <form action="./views/employer.php" method="GET">
                     <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                    <button class="ui primary button" id="searchButton">Szukaj</button>
                     <div id="toSend"></div>
+                    <button class="ui primary button" id="searchButton">Szukaj</button>
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="checkedFiltry" name="public">
                         <label class="grey-text">Pokaż filtry</label>
