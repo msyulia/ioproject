@@ -41,6 +41,15 @@ class Register extends dbConnection {
         $dbFirstLogin = $this->sendquery("SELECT * FROM pracownicy WHERE PESEL='$this->pesel' AND firstlogin=0");
         return $dbFirstLogin;
     }
+    public function checkPESEL(){
+        $dbCheckPesel = $this->sendquery("SELECT COUNT(*) FROM pracownicy WHERE PESEL='$this->pesel'");
+       if($dbCheckPesel['COUNT(*)'] == 1){
+           return 1;
+       }
+       else{
+           return 0;
+       }
+    }
 }
 
 ?>

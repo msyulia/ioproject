@@ -113,7 +113,7 @@
                         unset($_SESSION['noRegisterData']);
                     } else if(isset($_SESSION['isAlreadyRegistered'])) {
                         echo '<div class="alert alert-danger">
-                            <strong>Jesteś już zalogowany</strong>
+                            <strong>Jesteś już zarejestrowany!</strong>
                             </div>';
                         unset($_SESSION['isAlreadyRegistered']);
                     } else if(isset($_SESSION['isLoginOccupied'])) {
@@ -132,7 +132,21 @@
                             <strong>Sprawdź poprawność wprowadzonych danych</strong>
                             </div>';
                         unset($_SESSION['noRecordInDatabase']);
+                    } else if(isset($_SESSION['isPESELOccupied'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Brak numeru pesel w bazie danych!</strong>
+                            </div>';
+                        unset($_SESSION['isPESELOccupied']);
+                    } else if(isset($_SESSION['badInputData'])) {
+                        echo '<div class="alert alert-danger">
+                            <strong>Imię i nazwisko nie są zgodne z numerem PESEL!</strong>
+                            </div>';
+                        unset($_SESSION['badInputData']);
                     }
+                    //poniżej dopisuję obsługę wyjątków takich jak: 
+                    //PESEL w bazie posiadajacy aktywne konto
+
+                    
                 ?>
                 <!-- Material form register -->
                 <form id="formularz" action="../application/controllers/register.php" method="post" autocomplete="off" onsubmit="return Send()">

@@ -118,14 +118,31 @@
         </div>
         <?php
     } else {
-        echo 
-        '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
-            <div class="card-body text-center">
-                <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy</strong></h5>
-                <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
-            </div>
-        </div>';
+        if(isset($_GET['salaryRate'])){
+            $matches = $temp->searchByRating(); 
+            if(isset($matches) && $matches != null){
 
+                echo "<h4>Wyniki:</h4>";
+
+                if(count($matches) >= 2 ){
+                    foreach($matches as &$row){
+                        foreach($row as &$v){ echo "<a href='employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }
+                        unset($v);
+                    }
+                } else { foreach($matches as &$v){ echo "<a href='employer.php?searchEmployer=".$v."'>".$v."</a><br/>"; }}
+                unset($row);
+            } else {
+                echo 'Nie znaleziono pracodawców spełniających podane kryteria.';
+            }
+        } else {
+            echo 
+            '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+                <div class="card-body text-center">
+                    <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy</strong></h5>
+                    <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
+                </div>
+            </div>';
+        }
     }
     ?>
     </div>

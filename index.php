@@ -165,6 +165,15 @@
         <script src="public/js/semantic.min.js"></script>
         <!-- Gwiazdki -->
         <script>
+            $("#searchButton").click(function(){
+                if( $("#checkedFiltry").is(':checked')){
+                    var nameOfPossibleRates = ["salaryRate", "atmosphereRate", "benefitsRate", "workplaceRate", "possibilitiesRate"];
+                    var rates = $('.ui.star.rating').rating('get rating'); 
+                    for (var i = 0; i < rates.length; i++) { 
+                        document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
+                    }
+                }
+            });
             $(function () {
                 $(".search-filtry").toggle();
                 $("#checkedFiltry").prop( "checked", false );
