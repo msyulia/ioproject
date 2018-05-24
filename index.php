@@ -1,4 +1,5 @@
 <?php 
+    /***Fixed shit */
     require "./application/application.php";
     Sessions::startSession();
 ?>
