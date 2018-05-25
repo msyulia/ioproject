@@ -20,6 +20,27 @@
         }
 
         /**
+         * Funkcja wysyłająca zapytanie do bazy danych o pracodawce uwzględniając filtry
+         * 
+         * @param string $matches nazwy pracodawców
+         */
+        public function searchByRating(){
+            $matches = $this->sendquery("SELECT Pracodawca 
+                                        FROM (SELECT Pracodawca, AVG(Kat1) as k1, AVG(Kat2) as k2,
+                                                    AVG(Kat3) as k3, AVG(Kat4) as k4, AVG(Kat5) as k5
+                                                    from oceny group by Pracodawca) as tmp
+                                        WHERE
+                                            k1>=".$_GET['salaryRate']." AND 
+                                            k2>=".$_GET['atmosphereRate']." AND 
+                                            k3>=".$_GET['benefitsRate']." AND 
+                                            k4>=".$_GET['workplaceRate']." AND 
+                                            k5>=".$_GET['possibilitiesRate']
+                                            
+                                    );
+            return $matches;
+        }
+
+        /**
          * Funkcja pobierająca oceny wprowadzonego pracodawcy
          * 
          * @param string $nameEmployer nazwa pracodawcy
