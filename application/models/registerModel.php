@@ -50,6 +50,11 @@ class Register extends dbConnection {
            return 0;
        }
     }
+    public function checkEmail($email){
+        $dbEmail= $this->sendquery("SELECT * FROM pracownicy WHERE email='$email'");
+        return $dbEmail;
+    }
+
 }
 
 ?>
