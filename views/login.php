@@ -142,9 +142,18 @@
                             <strong>Imię i nazwisko nie są zgodne z numerem PESEL!</strong>
                             </div>';
                         unset($_SESSION['badInputData']);
+                    } else if(isset($_SESSION['registerSuccess'])){
+                        echo '<div class="alert alert-success">
+                        <strong>Zarejestrowano pomyślnie! Możesz się teraz zalogować.</strong>
+                        </div>';
+                        unset($_SESSION['registerSuccess']);
+                    } else if(isset($_SESSION['emailIsOccupied'])){
+                        echo '<div class="alert alert-danger">
+                        <strong>Adres email zajęty.</strong>
+                        </div>';
+                        unset($_SESSION['emailIsOccupied']);
                     }
-                    //poniżej dopisuję obsługę wyjątków takich jak: 
-                    //PESEL w bazie posiadajacy aktywne konto
+
 
                     
                 ?>
