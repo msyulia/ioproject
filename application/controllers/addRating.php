@@ -11,7 +11,7 @@
         $_POST['kat3'],
         $_POST['kat4'],
         $_POST['kat5'],
-        $_POST['komentarz']);
+        htmlspecialchars($_POST['komentarz']));
         $el = $pracodawcaID->getPracodawcaID($_SESSION['pracodawca']);
         $zmienna->zapisz($el);
         
