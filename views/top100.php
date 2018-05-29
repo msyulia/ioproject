@@ -26,36 +26,39 @@
 </head>
 
 <body>
-
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
-    
+
         <a class="navbar-brand" href="../index.php">
-        <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">Baza ocen pracodawców</a>
+            <img src="../public/img/logo.png" class="logo-pracodawcy" alt="logo">
+            Baza ocen pracodawców</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="top100.php">Top 100</a>
+                </li>
                 <li class="nav-item">
                     <form class="form-inline">
                         <div class="md-form mt-0">
-                            <form action="../../application/controllers/search.php" method="GET">
-                                <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
+                            <form action="employer.php" method="GET">
+                                <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców" aria-label="Search" style="padding-bottom: 0">
                             </form>
                         </div>
                     </form>
                 </li>
-                <ul class="navbar-nav ml-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <?php
                         if(Sessions::isLogged()){
 
                     ?>
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> <?php  echo Sessions::getLogin();?> </a>
+                        <i class="fa fa-user"></i><?php  echo Sessions::getLogin();?> </a>
                         <!-- wstawka php sprawdza czy zalogowany -->
    
                     <!--Jeśli user jest zalogowany -->
@@ -81,9 +84,9 @@
 
                 </li>
             </ul>
-            </ul>
         </div>
     </nav>
+   
 	<div class="container">
     
         <span class="badge cyan"
