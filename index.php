@@ -84,17 +84,16 @@
             <!-- najlepiej jak by wpadł jakiś skrypt javascript -->
             <!--  -->
             <?php 
-            if(isset($_GET['login'])){
-                if($_GET['login'] == "success"){
-                    echo '<div class="alert alert-success">
-                    <strong>Pomyślnie zalogowano!</strong>
-                  </div>';
-                }
-                if($_GET['login'] == "logout"){
-                    echo '<div class="alert alert-success">
-                    <strong>Wylogowano!</strong>
-                  </div>';
-                }
+            if(isset($_SESSION['loginSuccess'])) {
+                echo '<div class="alert alert-success">
+                <strong>Pomyślnie zalogowano!</strong>
+              </div>';
+                unset($_SESSION['loginSuccess']);
+            }else if(isset($_SESSION['loginLogout'])) {
+                echo '<div class="alert alert-success">
+                <strong>Wylogowano!</strong>
+              </div>';
+                unset($_SESSION['loginLogout']);
             }
             ?>
       
