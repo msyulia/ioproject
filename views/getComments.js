@@ -1,22 +1,31 @@
-
+/**
+ * Klasa reprezentująca jeden komentarz
+ * @class
+ * @param {Object} commentElements Obiekt o liczbowych polach Pracownik,Komentarz,Kat1,Kat2,Kat3,Kat4,Kat5
+ */
 class Comment {
-    constructor(oneComment) {
+    constructor(commentElements) {
 
-        this.userName = oneComment.Pracownik;
-        this.comment = oneComment.Komentarz;
-        this.salary = Number(oneComment.Kat1);
-        this.atmosphere = Number(oneComment.Kat2);
-        this.benefits = Number(oneComment.Kat3);
-        this.people = Number(oneComment.Kat4);
-        this.possibilities
-         = Number(oneComment.Kat5);
-
-
+        this.userName = commentElements.Pracownik;
+        this.comment = commentElements.Komentarz;
+        this.salary = Number(commentElements.Kat1);
+        this.atmosphere = Number(commentElements.Kat2);
+        this.benefits = Number(commentElements.Kat3);
+        this.people = Number(commentElements.Kat4);
+        this.possibilities = Number(commentElements.Kat5);
     }
+    /**
+     * Oblicza średnią ze wszystkich ocen
+     * @returns {string} Średnią zaokrągloną do jednego miejsca po przecinku.
+     */
     avarage() {
         return ((this.salary + this.atmosphere + this.benefits + this.people + this.possibilities
         )/5).toFixed(1);
     }
+    /**
+     * Funkcja reprezentuje finalny wygląd jednego komentarza
+     * @returns {string} Kod html bloku jednego komentarza
+     */
     getCard() {
         var rateSalary = 
         "<div class=\"dropdown-item\">\
@@ -26,7 +35,7 @@ class Comment {
             </div>\
         </div>\
         ";
-        var rateatmosphere = 
+        var rateAtmosphere = 
         "<div class=\"dropdown-item\">\
             <div>"+this.atmosphere.toFixed(1)+" atmosfera</div>\
             <div class=\"progress\">\
@@ -50,14 +59,11 @@ class Comment {
             </div>\
         </div>\
         ";
-        var ratepossibilities
-         = 
+        var ratePossibilities = 
         "<div class=\"dropdown-item\">\
-            <div>"+this.possibilities
-            .toFixed(1)+" możliwości rozwoju</div>\
+            <div>"+this.possibilities.toFixed(1)+" możliwości rozwoju</div>\
             <div class=\"progress\">\
-                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.possibilities
-                /5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
+                <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+this.possibilities/5*100+"%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\
             </div>\
         </div>\
         ";
@@ -73,13 +79,13 @@ class Comment {
                         <div class=\"dropdown-menu\">\
                         "+rateSalary+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+rateatmosphere+"\
+                        "+rateAtmosphere+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+rateBenefits+"\
                         <div class=\"dropdown-divider\"></div>\
                         "+ratePeople+"\
                         <div class=\"dropdown-divider\"></div>\
-                        "+ratepossibilities
+                        "+ratePossibilities
                         +"\
                     </div>\
                 </div>\
@@ -90,6 +96,10 @@ class Comment {
         return commentsOut;
     }
 }
+/**
+ * Funkcja przypisuje kod html każdego z komentarzy do środka elementu o Id commentContainer
+ * @param  {Object} comments Tablica obiektów o liczbowych polach Pracownik,Komentarz,Kat1,Kat2,Kat3,Kat4,Kat5
+ */
 function getComments(comments){
     commentsOut = "";
     comments.forEach(element => {
