@@ -63,18 +63,6 @@ if(isset($_POST['submit'])){
                     }
                 }
             }
-            //
-
-
-
-
-
-
-        // }else{
-        //     $_SESSION['noRecordInDatabase'] = true;
-        //     header("Location: ../../views/login.php");
-        //     die();
-        // } 
     }
 }else{
    header("Location: ../../views/login.php");
