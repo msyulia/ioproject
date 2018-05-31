@@ -2,6 +2,7 @@
     require "../application.php";
 
     if(isset($_POST['submit'])){
+
             Sessions::startSession();
             $pracodawcaID = new accessAuthorization();
             $zmienna = new reviewsAndComments($_SESSION['pracodawca'],
@@ -24,7 +25,6 @@
                 $_SESSION['addedReview'] = true;
                 header("Location: ../../views/oceny.php");
             }
-
 
     }else{
         header("Location: ../../index.php?rate=error");
