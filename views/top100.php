@@ -40,11 +40,9 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form class="form-inline">
+                    <form class="form-inline" action="../views/employer.php" method="GET">
                         <div class="md-form mt-0">
-                            <form action="../../application/controllers/search.php" method="GET">
                                 <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców..." aria-label="Search">
-                            </form>
                         </div>
                     </form>
                 </li>
