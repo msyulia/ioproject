@@ -42,11 +42,9 @@
             <a class="nav-link" href="top100.php">Top 100</a>
         </li>
         <li class="nav-item">
-            <form class="form-inline">
+            <form class="form-inline" action="employer.php" method="GET"> 
                 <div class="md-form mt-0">
-                    <form action="employer.php" method="GET">
-                        <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców" aria-label="Search" style="padding-bottom: 0">
-                    </form>
+                    <input name="searchEmployer" class="form-control mr-sm-2" type="text" placeholder="Wyszukaj pracodawców" aria-label="Search" style="padding-bottom: 0">
                 </div>
             </form>
         </li>

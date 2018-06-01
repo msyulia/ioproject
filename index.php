@@ -91,6 +91,7 @@
             }
 
         ?>
+        <img src="public/img/logo-p.png" class="p-logo" alt="Portal do oceny pracodawców">
         <div class="search-container">
             <!-- tutaj modal albo coś ale ostylować to -->
             <!-- modale x jakis dodać żeby dało się zamknąć to albo żeby znikało-->
@@ -123,7 +124,7 @@
                     </div>
                  </form>
             </div>
-            <div class="search-filtry">
+            <div class="search-filtry" style="margin-bottom: 100px">
                 <div class="card">
                     <div class="card-body">
                         <div class="row-filter">
