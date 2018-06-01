@@ -94,7 +94,7 @@
             $idEmp = $_GET['id'];
             }
             if(isset($_GET['searchEmployer'])){
-            $empName = $_GET['searchEmployer'];
+            $empName = preg_replace('!\s+!', ' ', $_GET['searchEmployer']);
             $empDesc = $temp->search($empName);
             $idEmp = $empDesc['ID'];
             }

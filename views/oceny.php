@@ -87,8 +87,18 @@
 
     <div class="container">
 
+        <?php if(isset($_SESSION['addedReview'])) {
+                echo '<div class="alert alert-success">
+                        <strong>Ocena wystawiona pomyślnie!</strong>
+                        </div>';
+                unset($_SESSION['addedReview']);
+            }
+            
+        ?>
+
         <div class="card" style="margin-bottom: 100px;">
             <br>
+
         <?php
         if(Sessions::isLogged()){
             $wystawOcene = new accessAuthorization();

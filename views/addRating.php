@@ -2,7 +2,7 @@
     require "../application/application.php";
     Sessions::startSession();
     if(Sessions::isLogged()){
-        if(isset($_POST['pracodawca'])){       
+        if(isset($_POST['pracodawca']) || isset($_SESSION['pracodawca'])){       
         ?>
 <html lang="pl">
 
@@ -86,9 +86,22 @@
 </nav>
     <!--/.Navbar -->
 <div class="container">
+    <?php if(isset($_SESSION['fillAllAreas'])) {
+                echo '<div class="alert alert-danger">
+                        <strong>Uzupełnij wszystkie pola!</strong>
+                        </div>';
+                unset($_SESSION['fillAllAreas']);
+            }
+            
+        ?>
     <span class="badge cyan">Wystawiasz ocenę dla 
-    <?php echo $_POST['pracodawca'];
-        $_SESSION['pracodawca'] = $_POST['pracodawca'];
+    <?php 
+        if(isset($_POST['pracodawca'])){
+            echo $_POST['pracodawca'];
+            $_SESSION['pracodawca'] = $_POST['pracodawca'];
+        }else{
+            echo $_SESSION['pracodawca'];
+        }
     ?>
     </span>
         <form action="../application/controllers/addRating.php" method="POST" style="margin-bottom: 100px; font-size: 0.8rem;">
@@ -98,64 +111,67 @@
             <input type="number" placeholder="ocena 4" id="kat4" name="kat4" hidden>
             <input type="number" placeholder="ocena 5" id="kat5" name="kat5" hidden>
         <div class="card">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="row-filter">
-                <p class="card-text">Wynagrodzenia</p>
-                <div class="ui star rating" data-id="kat1" data-rating="0" data-max-rating="5"></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row-filter">
+                            <p class="card-text">Wynagrodzenia</p>
+                            <div class="ui star rating" data-id="kat1" data-rating="0" data-max-rating="5"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row-filter">
+                            <p class="card-text">Atmosfera</p>
+                            <div class="ui star rating" data-id="kat2" data-rating="0" data-max-rating="5"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row-filter">
+                            <p class="card-text">Benefity</p>
+                            <div class="ui star rating" data-id="kat3" data-rating="0" data-max-rating="5"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row-filter">
+                            <p class="card-text">Miejsce pracy</p>
+                            <div class="ui star rating" data-id="kat4" data-rating="0" data-max-rating="5"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row-filter">
+                            <p class="card-text">Możliwości rozwoju</p>
+                            <div class="ui star rating" data-id="kat5" data-rating="0" data-max-rating="5"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        
+                        <div class="form-group shadow-textarea">
+                            <label for="exampleFormControlTextarea6" style="padding: 15px 0;">Twoja opinia</label>
+                            <textarea name="komentarz" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Napisz coś o swoim pracodawcy..."></textarea>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-primary" 
+                        style="
+                            width: 100%;
+                            width: -moz-available;    
+                            width: -webkit-fill-available;
+                            width: fill-available;"
+                        >Dodaj</button>
+                        
+                    </li>
+                </ul>
             </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row-filter">
-                <p class="card-text">Atmosfera</p>
-                <div class="ui star rating" data-id="kat2" data-rating="0" data-max-rating="5"></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row-filter">
-                <p class="card-text">Benefity</p>
-                <div class="ui star rating" data-id="kat3" data-rating="0" data-max-rating="5"></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row-filter">
-                <p class="card-text">Miejsce pracy</p>
-                <div class="ui star rating" data-id="kat4" data-rating="0" data-max-rating="5"></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row-filter">
-                <p class="card-text">Możliwości rozwoju</p>
-                <div class="ui star rating" data-id="kat5" data-rating="0" data-max-rating="5"></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            
-            <div class="form-group shadow-textarea">
-                <label for="exampleFormControlTextarea6" style="padding: 15px 0;">Twoja opinia</label>
-                <textarea name="komentarz" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Napisz coś o swoim pracodawcy..."></textarea>
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary" 
-            style="
-                width: 100%;
-                width: -moz-available;    
-                width: -webkit-fill-available;
-                width: fill-available;"
-            >Dodaj</button>
-            
-        </li>
-    </ul>
-</div>
-            
+                        
             
         </form>
         <?php
         }else{
-            header("Location: ../index.php");
-        }
-    }else{
+            //jeśli pracodawca nie wiadomy
         header("Location: ../index.php");
+        }    
+    }else{
+        //jeśli nie zalogowany
+       header("Location: ../index.php");
     }
+
 ?>
     </div>
 
