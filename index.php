@@ -78,12 +78,17 @@
 
 
     <div class="container">
+        <img src="public/img/logo-p.png" class="p-logo" alt="Portal do oceny pracodawców">
         <?php
             if(isset( $_SESSION['noEmployerFound']) &&  $_SESSION['noEmployerFound'] == true) {
                 unset($_SESSION['noEmployerFound']);
-                echo '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+                echo '<div class="card card-cascade" id="noFound-card" style="width: 50%; margin: 0 auto;">
                 <div class="card-body text-center">
-                    <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy spełniającego podane kryteria</strong></h5>
+                    <h5 class="red-text pb-2"><strong>Nie znaleziono pracodawcy spełniającego podane kryteria</strong></h5>
+                    <button type="button" class="close" aria-label="Close" 
+                        style="position: absolute; right: 0; top: 0; margin: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
                 </div>
                 </div>';
@@ -91,7 +96,6 @@
             }
 
         ?>
-        <img src="public/img/logo-p.png" class="p-logo" alt="Portal do oceny pracodawców">
         <div class="search-container">
             <!-- tutaj modal albo coś ale ostylować to -->
             <!-- modale x jakis dodać żeby dało się zamknąć to albo żeby znikało-->
@@ -149,7 +153,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -188,6 +191,11 @@
                     }
                 }
             });
+
+            $(".close").click(function(){
+                $("#noFound-card").fadeToggle( "fast");
+            });
+
             $(function () {
                 $(".search-filtry").toggle();
                 $("#checkedFiltry").prop( "checked", false );

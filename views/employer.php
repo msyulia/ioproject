@@ -151,12 +151,12 @@
                 echo '</div></div>';
             } else {
                 $_SESSION['noEmployerFound'] = true;
-                header("Location: ../../index.php");
+                header("Location: ../index.php");
                 exit();
             }
         } else {
             $_SESSION['noEmployerFound'] = true;
-            header("Location: ../../index.php");
+            header("Location: ../index.php");
             exit();
         }
     }
@@ -191,12 +191,12 @@
         <script src="getComments.js"></script>
                 
     <?php 
-            $getComments = new searchEngine();
-            echo '
-            <script>         
-            getComments('.json_encode($getComments->convertToJSON($idEmp,"employer")).');
-            </script>
-            ';
+        $getComments = new searchEngine();
+        echo '
+        <script>         
+        getComments('.json_encode($getComments->convertToJSON($idEmp,"employer")).');
+        </script>
+        ';
    
     ?>
 </body>
