@@ -44,8 +44,14 @@ body {
 
 /* Style do: index.html */
 
+.p-logo {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+}
+
 .container {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .ui.rating {

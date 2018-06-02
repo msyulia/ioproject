@@ -78,6 +78,20 @@
 
 
     <div class="container">
+        <?php
+            if(isset( $_SESSION['noEmployerFound']) &&  $_SESSION['noEmployerFound'] == true) {
+                unset($_SESSION['noEmployerFound']);
+                echo '<div class="card card-cascade" style="width: 50%; margin: 0 auto;">
+                <div class="card-body text-center">
+                    <h5 class="blue-text pb-2"><strong>Nie znaleziono pracodawcy spełniającego podane kryteria</strong></h5>
+                    <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
+                </div>
+                </div>';
+
+            }
+
+        ?>
+        <img src="public/img/logo-p.png" class="p-logo" alt="Portal do oceny pracodawców">
         <div class="search-container">
             <!-- tutaj modal albo coś ale ostylować to -->
             <!-- modale x jakis dodać żeby dało się zamknąć to albo żeby znikało-->
@@ -109,7 +123,7 @@
                     </div>
                  </form>
             </div>
-            <div class="search-filtry">
+            <div class="search-filtry" style="margin-bottom: 100px">
                 <div class="card">
                     <div class="card-body">
                         <div class="row-filter">
