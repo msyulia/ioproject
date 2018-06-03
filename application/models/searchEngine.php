@@ -142,10 +142,11 @@
         public function getDataChart($nameEmployer){
 
                 $dataChart = $this->sendquery("SELECT 
-                Pracodawca, month(data_wystawienia) AS data_wystawienia_miesiac, 
-                AVG((Kat1+Kat2+Kat3+Kat4+Kat5)/5) AS srednia_miesiac            
-                FROM `oceny`         
-                WHERE Pracodawca='$nameEmployer' GROUP BY MONTH(data_wystawienia)");            
+                        Pracodawca, month(data_wystawienia) AS data_wystawienia_miesiac, 
+                        SUM(Kat1+Kat2+Kat3+Kat4+Kat5)/(5*COUNT(month(data_wystawienia))) AS srednia_miesiac
+                        FROM `oceny` 
+                        WHERE Pracodawca='$nameEmployer'  GROUP BY MONTH(data_wystawienia)");  
+
 
                 return json_encode($dataChart);
                                          
