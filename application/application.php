@@ -1,27 +1,13 @@
 <?php
 
-
-
-
-
-    //MODELS
-    require 'models/dbConnection.php';
-    // require 'models/employerComments.php';
-    require 'models/sessions.php';
-    require 'models/accessAuthorization.php';
-    require 'models/reviewsAndComments.php';
-
-
-    require 'models/searchEngine.php';
-    require 'models/registerModel.php';
-
-    require 'models/loginModel.php';
-
-    require 'models/employers.php';
-
-    require 'models/employeeModel.php';
-
-    //CONTROLLERS
-    // require 'controllers/comments.php';
+    require 'controllers/dbConnection.php';
+    require 'controllers/sessions.php';
+    require 'controllers/accessAuthorization.php';
+    require 'controllers/reviewsAndComments.php';
+    require 'controllers/searchEngine.php';
+    require 'controllers/registerController.php';
+    require 'controllers/loginController.php';
+    require 'controllers/employers.php';
+    require 'controllers/employeeController.php';
     require 'controllers/topRating.php';
 ?>
