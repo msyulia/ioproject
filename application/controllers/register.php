@@ -18,7 +18,8 @@ if(isset($_POST['submit'])){
     }else{
         $register = new Register($imie,$nazwisko,$pesel);
         //if($register->sprawdzWBazie()){
-            /** Sprawdzanie czy pesel jest prawidłowy. */
+            //sprawdz PESEL
+			/** Sprawdzanie czy pesel jest prawidłowy. */
             if(!$register->checkPESEL()){
                 $_SESSION['isPESELOccupied'] = true;
                 header("Location: ../../views/login.php");
@@ -36,31 +37,33 @@ if(isset($_POST['submit'])){
                         header("Location: ../../views/login.php");
                         die();
                     }else{
-                        if($register->sprawdzWBazie()){
-							/** Sprawdzanie czy obydwa hasła są takie same. */
-                            if($register->matchPasswords($password1,$password2)){
-								/** Tworzenie konta. */
-                                $register->createAccount($login,$password1,$email);
-                                header("Location: ../../index.php?register=success");
+						/** Sprawdzanie czy adres email nie jest zajęty. */
+                        if($register->checkEmail($email)){
+                            $_SESSION['emailIsOccupied'] = true;
+                            header("Location: ../../views/login.php");
+                            die();
+                        }else{
+                            if($register->sprawdzWBazie()){
+								/** Sprawdzanie czy obydwa hasła są takie same. */
+                                if($register->matchPasswords($password1,$password2)){
+									/** Tworzenie konta. */
+                                    $register->createAccount($login,$password1,$email);
+                                    $_SESSION['registerSuccess'] = true;
+                                    header("Location: ../../views/login.php");
+                                }else{
+                                    $_SESSION['isPasswordsCorrect'] = true;
+                                    header("Location: ../../views/login.php");
+                                    die();
+                                }
                             }else{
-                                $_SESSION['isPasswordsCorrect'] = true;
+                                $_SESSION['badInputData'] = true;                        
                                 header("Location: ../../views/login.php");
                                 die();
                             }
-                        }else{
-                            $_SESSION['badInputData'] = true;                        
-                            header("Location: ../../views/login.php");
-                            die();
                         }
                     }
                 }
             }
-            //
-        // }else{
-        //     $_SESSION['noRecordInDatabase'] = true;
-        //     header("Location: ../../views/login.php");
-        //     die();
-        // } 
     }
 }else{
    header("Location: ../../views/login.php");

@@ -1,5 +1,4 @@
 <?php
-
 /** Klasa TopEmployers jako rozszerzenie klasy Employers zawiera metody
 * służące do wyświetlania firm, a także do obliczania średniej oceny
 * pracodawców i wyświetlania ich rankingu.
@@ -26,8 +25,8 @@ class TopEmployers extends Employers {
         }
         echo '</table>';
     }
-    
-	/** Funkcja calcAverage oblicza średnią ocenę pracodawcy na podstawie ocen z 
+	
+    /** Funkcja calcAverage oblicza średnią ocenę pracodawcy na podstawie ocen z 
 	* czterech kategorii. Jeśli dany pracodawca nie widnieje w bazie danych przechowującej
 	* oceny pracodawców to średnia ocena wynosi 0 (wyświetlane jako "brak oceny"). Następnie
 	* pracodawcy są sortowani względem średniej oceny (malejąco) i ostatecznie lista uporządkowanych
@@ -59,6 +58,7 @@ class TopEmployers extends Employers {
       foreach ($average as $key => $line) {
         $value [$key] = $line['value'];
       }
+	  
 	  /** Sortowanie tablicy $value zawierającej ocenę malejąco, pracodawcy w
 	  * tablicy $average są ustawiani w kolejności odpowiadającej posortowanej
 	  * tablicy $value.
@@ -80,7 +80,7 @@ class TopEmployers extends Employers {
           echo '</tbody>';
       } 
       echo '</table>';      
-}	
+}
 	/** Funkcja wyświetlająca pracodawców. */
     public function printEmployers(){
         $datas = $this->getEmployers();
