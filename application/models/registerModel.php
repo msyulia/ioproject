@@ -91,6 +91,18 @@ class Register extends dbConnection {
            return 0;
        }
     }
+
+    /**
+     * Funkcja sprawdzająca czy wystepuje podany email w bazie danych
+     * 
+     * @param var $email szukany email
+     * 
+     * @return var $dbEmail znaleziony mail lub informacja i jego braku
+     */
+    public function checkEmail($email){
+        $dbEmail= $this->sendquery("SELECT * FROM pracownicy WHERE email='$email'");
+        return $dbEmail;
+    }
 }
 
 ?>
