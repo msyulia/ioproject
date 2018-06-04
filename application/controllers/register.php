@@ -10,43 +10,62 @@ if(isset($_POST['submit'])){
     $password2 = $_POST['pwd2'];
     $email = $_POST['email'];
 	
-	/** Sprawdzanie czy wszystkie pola są wypełnione. */
+	/**
+	* Sprawdzanie czy wszystkie pola są wypełnione. 
+	*/
+	
     if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2) || empty($email)){
         $_SESSION['noRegisterData'] = true;
         header("Location: ../../views/login.php");
         die();
     }else{
         $register = new Register($imie,$nazwisko,$pesel);
-        //if($register->sprawdzWBazie()){
-            //sprawdz PESEL
-			/** Sprawdzanie czy pesel jest prawidłowy. */
+		
+        /**
+		* Sprawdzanie czy pesel jest prawidłowy.
+		*/
             if(!$register->checkPESEL()){
                 $_SESSION['isPESELOccupied'] = true;
                 header("Location: ../../views/login.php");
                 die();
             }else{
-				/** Sprawdzanie czy użytkownik jest już zarejestrowany. */
                 if($register->checkFirstRegiser()){
                     $_SESSION['isAlreadyRegistered'] = true;
                     header("Location: ../../views/login.php");
                     die();
                 }else{
-					/** Sprawdzanie czy login nie jest zajęty. */
                     if($register->checkLogin($login)){
                         $_SESSION['isLoginOccupied'] = true;
                         header("Location: ../../views/login.php");
                         die();
                     }else{
-						/** Sprawdzanie czy adres email nie jest zajęty. */
+					
+					/**
+					* Sprawdzanie czy użytkownik jest już zarejestrowany.
+					*/
+					
                         if($register->checkEmail($email)){
                             $_SESSION['emailIsOccupied'] = true;
                             header("Location: ../../views/login.php");
                             die();
                         }else{
+						
+						/**
+						* Sprawdzanie czy adres email nie jest zajęty.
+						*/
+						
                             if($register->sprawdzWBazie()){
-								/** Sprawdzanie czy obydwa hasła są takie same. */
+							
+							/**
+							* Sprawdzanie czy obydwa hasła są takie same.
+							*/
+							
                                 if($register->matchPasswords($password1,$password2)){
-									/** Tworzenie konta. */
+								
+								/**
+								* Tworzenie konta
+								*/
+								
                                     $register->createAccount($login,$password1,$email);
                                     $_SESSION['registerSuccess'] = true;
                                     header("Location: ../../views/login.php");

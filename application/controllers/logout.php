@@ -1,8 +1,9 @@
+
 <?php
     require "../application.php";
     
-	/** Zatrzymanie sesji - usunięcie z serwera danych na temat połączenia
-	* z użytkownikiem.
+	/** 
+	* Zatrzymanie sesji - usunięcie z serwera danych na temat połączenia z użytkownikiem.
 	*/
     Sessions::startSession();
     Sessions::stopSession();
