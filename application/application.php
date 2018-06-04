@@ -1,6 +1,5 @@
 <?php
 
-    //MODELS
     require 'controllers/dbConnection.php';
     require 'controllers/sessions.php';
     require 'controllers/accessAuthorization.php';
