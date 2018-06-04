@@ -77,27 +77,43 @@
 
 
     <div class="container">
+        <img src="public/img/logo-p.png" class="p-logo" alt="Portal do oceny pracodawców">
+        <?php
+			/** Sprawdzenie czy znaleziono danego pracodawcę - jeśli nie to wyświetlane jest powiadomienie
+			* o tym.
+			*/
+            if(isset( $_SESSION['noEmployerFound']) &&  $_SESSION['noEmployerFound'] == true) {
+                unset($_SESSION['noEmployerFound']);
+                echo '<div class="card card-cascade" id="noFound-card" style="width: 50%; margin: 0 auto;">
+                <div class="card-body text-center">
+                    <h5 class="red-text pb-2"><strong>Nie znaleziono pracodawcy spełniającego podane kryteria</strong></h5>
+                    <button type="button" class="close" aria-label="Close" 
+                        style="position: absolute; right: 0; top: 0; margin: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p class="card-text">Być może twój pracodawca nie figuruje jeszcze w naszej bazie danych</p>
+                </div>
+                </div>';
+            }
+        ?>
         <div class="search-container">
             <!-- tutaj modal albo coś ale ostylować to -->
             <!-- modale x jakis dodać żeby dało się zamknąć to albo żeby znikało-->
             <!-- najlepiej jak by wpadł jakiś skrypt javascript -->
             <!--  -->
             <?php
-			/** Sprawdzenie czy zmienna login jest utworzona */
-            if(isset($_GET['login'])){
-				/** Jeśli jest i jej wartość to "success" - wyświetlenie informacji
-				* o pomyślnym zalogowaniu */
-                if($_GET['login'] == "success"){
-                    echo '<div class="alert alert-success">
-                    <strong>Pomyślnie zalogowano!</strong>
-                  </div>';
-                }
-				/** Jeśli jej wartośc to "logout" - wyświetlenie informacji o wylogowaniu */
-                if($_GET['login'] == "logout"){
-                    echo '<div class="alert alert-success">
-                    <strong>Wylogowano!</strong>
-                  </div>';
-                }
+			/** Po zalogowaniu wyświetla się komunikat o pomyślnym zalogowaniu. */
+            if(isset($_SESSION['loginSuccess'])) {
+                echo '<div class="alert alert-success">
+                <strong>Pomyślnie zalogowano!</strong>
+              </div>';
+                unset($_SESSION['loginSuccess']);
+			/** Po wylogowaniu wyświetla się komunikat o pomyślnym wylogowaniu. */
+            }else if(isset($_SESSION['loginLogout'])) {
+                echo '<div class="alert alert-success">
+                <strong>Wylogowano!</strong>
+              </div>';
+                unset($_SESSION['loginLogout']);
             }
             ?>
       
@@ -113,7 +129,7 @@
                     </div>
                  </form>
             </div>
-            <div class="search-filtry">
+            <div class="search-filtry" style="margin-bottom: 100px">
                 <div class="card">
                     <div class="card-body">
                         <div class="row-filter">
@@ -139,7 +155,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -177,6 +192,9 @@
                         document.getElementById("toSend").innerHTML+="<input type='hidden' name='" + nameOfPossibleRates[i] +"' value='" + rates[i] + "'/>"
                     }
                 }
+            });
+            $(".close").click(function(){
+                $("#noFound-card").fadeToggle( "fast");
             });
             $(function () {
                 $(".search-filtry").toggle();
