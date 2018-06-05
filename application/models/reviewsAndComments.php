@@ -65,7 +65,7 @@
         /**
          * Funkcja sprawdzająca zawartości pól pobierających dane od użytkownika
          */
-        public function checkEmptyFielsd(){
+        public function checkEmptyFields(){
 
           if(empty($this->pracodawca) || empty($this->pracownik) || 
             empty($this->kat1) || empty($this->kat2) ||
