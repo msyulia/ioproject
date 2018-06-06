@@ -91,7 +91,10 @@ body {
 }
 
 .row-filter .card-text {
+    display: ruby-text;
     width: min-content;
+    width: -moz-min-content;
+    width: -webkit-min-content;
     margin: 0;
     float: left;
     display: contents;
