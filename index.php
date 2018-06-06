@@ -19,7 +19,7 @@
     <link href="public/css/semantic.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="public/css/style.css" media="only screen and (min-width: 481px)" rel="stylesheet">
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="public/css/mobile-style.css" />
+    <link rel="stylesheet" media="only screen and (max-width: 480px)" href="public/css/mobile-style.css" />
 </head>
 
 <body>
