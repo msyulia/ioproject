@@ -4,8 +4,7 @@
 
         public function search($nameEmployer){
             if(empty($nameEmployer)){
-
-                echo '';
+                return;
             }else{
                 $searchEmployer = $this->sendquery("SELECT * FROM pracodawcy WHERE nazwa_firmy='$nameEmployer'");            
                 return $searchEmployer;
@@ -14,18 +13,27 @@
         }
 
         public function searchByRating(){
+            $kat1=$_GET['salaryRate'];
+            $kat2=$_GET['atmosphereRate'];
+            $kat3=$_GET['benefitsRate'];
+            $kat4=$_GET['workplaceRate'];
+            $kat5=$_GET['possibilitiesRate'];
             $matches = $this->sendquery("SELECT Pracodawca 
-                                        FROM (SELECT Pracodawca, AVG(Kat1) as k1, AVG(Kat2) as k2,
-                                                    AVG(Kat3) as k3, AVG(Kat4) as k4, AVG(Kat5) as k5
-                                                    from oceny group by Pracodawca) as tmp
+                                        FROM 
+                                        (SELECT Pracodawca, 
+                                        AVG(Kat1) as k1, 
+                                        AVG(Kat2) as k2,
+                                        AVG(Kat3) as k3, 
+                                        AVG(Kat4) as k4, 
+                                        AVG(Kat5) as k5
+                                        from oceny group by Pracodawca) as tmp
+                             
                                         WHERE
-                                            k1>=".$_GET['salaryRate']." AND 
-                                            k2>=".$_GET['atmosphereRate']." AND 
-                                            k3>=".$_GET['benefitsRate']." AND 
-                                            k4>=".$_GET['workplaceRate']." AND 
-                                            k5>=".$_GET['possibilitiesRate']
-                                            
-                                    );
+                                            k1>='$kat1' AND 
+                                            k2>='$kat2' AND 
+                                            k3>='$kat3' AND 
+                                            k4>='$kat4' AND 
+                                            k5>='$kat5' ");
             return $matches;
         }
 
