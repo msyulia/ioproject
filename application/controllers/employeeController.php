@@ -5,17 +5,31 @@ class employee extends dbConnection{
 
 
     protected function getEmployeeData($id){
-      
-        $getEmployeeData = $this->sendquery("
-        SELECT  PracodawcaID, nazwa_firmy, Imie, Nazwisko, 
-                PESEL, login, email, dataZatrudniena, dataZwolnienia
+
+
+        $getEmployeeData = $this->sendquery("SELECT 
+        null AS Suma,
+        PracodawcaID, 
+        nazwa_firmy, 
+        Imie, 
+        Nazwisko, 
+        PESEL, 
+        login, 
+        email, 
+        dataZatrudniena, 
+        dataZwolnienia 
         FROM historiazatrudnienia 
         INNER JOIN pracownicy ON historiazatrudnienia.PracownikID = pracownicy.ID 
         INNER JOIN pracodawcy ON historiazatrudnienia.PracodawcaID = pracodawcy.ID 
         WHERE historiazatrudnienia.PracownikID = $id 
-        ");
-        
-        return $getEmployeeData;
+        UNION ALL 
+        SELECT Count(PracodawcaID),null,null,null,null,null,null,null,null,null 
+        FROM historiazatrudnienia WHERE historiazatrudnienia.PracownikID = $id ");
+
+
+
+            return $getEmployeeData;
+
 
         
     }
@@ -90,6 +104,7 @@ class employee extends dbConnection{
         <th><p class="h6">Nazwa firmy</p></th>
         <th><p class="h6">Czas rozpoczęcia</p></th>
         <th><p class="h6">Czas zakończenia</p></th></thead><tbody>';
+        array_pop($getEmployeeData);
         foreach($getEmployeeData as $data) {
             echo '<td><a href="../views/employer.php?id='.$data['PracodawcaID'].'"><button type="button" class="btn btn-primary btn-md">'
             .$data['nazwa_firmy'].'</button></a></td><td>'
