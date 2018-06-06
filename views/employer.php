@@ -85,6 +85,7 @@
 </nav>
     <!--/.Navbar -->
 
+
     <div class="container">
         <?php 
             $temp = new searchEngine();
@@ -119,8 +120,8 @@
 
         </div>
         <?php
-    } else {
-        if(isset($_GET['salaryRate'])){
+            } else {
+            if(isset($_GET['salaryRate'])){
             $matches = $temp->searchByRating(); 
             if(isset($matches) && $matches != null){
 
@@ -138,25 +139,36 @@
                 if(count($matches) >= 2 ){
                     foreach($matches as &$row){
                         foreach($row as &$v){ 
-                            echo "<a href='employer.php?searchEmployer=".$v."' class='list-group-item waves-effect'>".$v."</a>";
+                            echo '<a href="employer.php?searchEmployer='.$v.'" class="list-group-item waves-effect">'.$v.'</a>';
                         }
                         unset($v);
                     }
                 } else { 
                     foreach($matches as &$v){ 
-                        echo "<a href='employer.php?searchEmployer=".$v."' class='list-group-item waves-effect'>".$v."</a>"; 
+                        echo '<a href="employer.php?searchEmployer='.$v.'" class="list-group-item waves-effect">'.$v.'</a>'; 
                     }
                 }
                 unset($row);
                 echo '</div></div>';
             } else {
                 $_SESSION['noEmployerFound'] = true;
-                header("Location: ../index.php");
+               
+                    ?>
+                         <script type="text/javascript">
+                            window.location.href = '../index.php';
+                         </script>
+                    <?php
+
                 exit();
             }
         } else {
             $_SESSION['noEmployerFound'] = true;
-            header("Location: ../index.php");
+                    ?>
+                        <script type="text/javascript">
+                        window.location.href = '../index.php';
+                        </script>
+                    <?php
+                
             exit();
         }
     }
