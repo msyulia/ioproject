@@ -1,6 +1,5 @@
 # ioproject
 
-<h4>Alert</h4><h5> Branch wymaga aktualizacji bazy danych. </h5>
 Uruchomienie aplikacji.
 1.XAMPP <br/>
 https://www.apachefriends.org/pl/index.html<br/>
