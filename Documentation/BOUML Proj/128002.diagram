@@ -1,0 +1,84 @@
+format 218
+
+classcanvas 128002 class_ref 128130 // dbConnection
+  classdiagramsettings member_max_width 0 end
+  xyz 356 229 2000
+end
+classcanvas 128130 class_ref 128002 // accessAuthorization
+  classdiagramsettings member_max_width 0 end
+  xyz 15 201 2006
+end
+classcanvas 128386 class_ref 128258 // employee
+  classdiagramsettings member_max_width 0 end
+  xyz 344 85 2006
+end
+classcanvas 128642 class_ref 128386 // Employers
+  classdiagramsettings member_max_width 0 end
+  xyz 192 313 2006
+end
+classcanvas 128898 class_ref 128514 // Login
+  classdiagramsettings member_max_width 0 end
+  xyz 554 343 2006
+end
+classcanvas 129154 class_ref 128642 // Register
+  classdiagramsettings member_max_width 0 end
+  xyz 693 224 2006
+end
+classcanvas 129410 class_ref 128770 // reviewsAndComments
+  classdiagramsettings member_max_width 0 end
+  xyz 515 14 2012
+end
+classcanvas 129666 class_ref 128898 // searchEngine
+  classdiagramsettings member_max_width 0 end
+  xyz 159 4 2018
+end
+classcanvas 129922 class_ref 129026 // Sessions
+  classdiagramsettings member_max_width 0 end
+  xyz 17 341 2011
+end
+classcanvas 130050 class_ref 129154 // TopEmployers
+  classdiagramsettings member_max_width 0 end
+  xyz 181 467 2012
+end
+relationcanvas 128258 relation_ref 128002 // <generalisation>
+  from ref 128130 z 2007 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128514 relation_ref 128130 // <generalisation>
+  from ref 128386 z 2007 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 128258 // <generalisation>
+  from ref 128642 z 2007 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129026 relation_ref 128386 // <generalisation>
+  from ref 128898 z 2007 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129282 relation_ref 128514 // <generalisation>
+  from ref 129154 z 2007 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129538 relation_ref 128642 // <generalisation>
+  from ref 129410 z 2013 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129794 relation_ref 128770 // <generalisation>
+  from ref 129666 z 2019 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130178 relation_ref 128898 // <generalisation>
+  decenter_end 463
+  from ref 130050 z 2013 to ref 128642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

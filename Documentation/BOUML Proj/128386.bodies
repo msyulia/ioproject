@@ -1,0 +1,23 @@
+class Employers
+!!!129282.php!!!	getALL()
+
+      $sql = "SELECT * FROM pracodawcy";
+      $result = $this->connect()->query($sql);
+      $numRows = $result->num_rows;
+      if($numRows>0) {
+          while($row = $result->fetch_assoc()) {
+              $data[] = $row;
+          }
+          return $data;
+      }
+!!!129410.php!!!	getRating()
+
+      $sql = "SELECT * FROM oceny";
+      $result = $this->connect()->query($sql);
+      $numRows = $result->num_rows;
+      if($numRows>0) {
+          while($row = $result->fetch_assoc()) {
+              $data[] = $row;
+          }
+          return $data;
+      }
