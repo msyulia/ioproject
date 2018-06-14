@@ -1,0 +1,49 @@
+class reviewsAndComments
+!!!131714.php!!!	__construct(in pracodawca : , in pracownik : , in kat1 : , in kat2 : , in kat3 : , in kat4 : , in kat5 : , in komentarz : )
+
+          //$this->id = $id;
+          $this->pracodawca = $pracodawca;
+          $this->pracownik = $pracownik;
+          $this->kat1 = $kat1;
+          $this->kat2 = $kat2;
+          $this->kat3 = $kat3;
+          $this->kat4 = $kat4;
+          $this->kat5 = $kat5;
+          $this->komentarz = $komentarz;
+!!!131842.php!!!	pokazOcena()
+   // podejrzenie wartości obiektu (do testów)
+          //echo $this->id .'<br>';
+          echo $this->pracodawca.'<br>';
+          echo $this->pracownik.'<br>';
+          echo 'Pierwsza kategoria: '. $this->kat1.'<br>';
+          echo 'Druga kategoria: '.$this->kat2.'<br>';
+          echo 'Trzecia kategoria: '.$this->kat3.'<br>';
+          echo 'Czwarta kategoria: '.$this->kat4.'<br>';
+          echo 'Czwarta kategoria: '.$this->kat5.'<br>';
+          echo $this->komentarz.'<br>';
+!!!131970.php!!!	checkEmptyFields()
+
+          if(empty($this->pracodawca) || empty($this->pracownik) || 
+            empty($this->kat1) || empty($this->kat2) ||
+            empty($this->kat3) || empty($this->kat4) ||
+            empty($this->kat5) || empty($this->komentarz) ||
+            $this->kat1 > 5 || $this->kat2 > 5 ||
+            $this->kat3 > 5 || $this->kat4 > 5 ||
+            $this->kat5 > 5 || $this->kat1 < 0 ||
+            $this->kat2 < 0 || $this->kat4 < 0 ||
+            $this->kat5 < 0){
+              return 1;
+          }
+!!!132098.php!!!	zapisz(in id : )
+   
+            $zapytanie = $this->connect()->prepare("INSERT oceny (Pracodawca, Pracownik, Kat1, Kat2, Kat3, Kat4,Kat5, Komentarz) VALUES (?,?,?,?,?,?,?,?)");
+            $zapytanie->bind_param("ssiiiiis",$this->pracodawca,$this->pracownik,$this->kat1,$this->kat2,$this->kat3,$this->kat4,$this->kat5,$this->komentarz);
+            $zapytanie->execute();
+            $zapytanie->close();
+
+              $el = 1;
+            $zapytanie = $this->connect()->prepare("UPDATE historiazatrudnienia  SET czyWystawionaOcena=? WHERE PracodawcaID=?");
+            $zapytanie->bind_param('ii',$el,$id);
+            $zapytanie->execute();
+            $zapytanie->close();
+          

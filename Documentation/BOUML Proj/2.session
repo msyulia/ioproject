@@ -1,0 +1,24 @@
+window_sizes 1800 910 450 1345 760 104
+
+diagrams
+  active  classdiagram_ref 128002 // Class diagram
+    1076 606 100 A4 0 0
+end
+show_stereotypes
+marked
+  class_ref 129154 // TopEmployers
+  class_ref 129026 // Sessions
+  class_ref 128898 // searchEngine
+  class_ref 128770 // reviewsAndComments
+  class_ref 128642 // Register
+  class_ref 128514 // Login
+  class_ref 128386 // Employers
+  class_ref 128258 // employee
+  class_ref 128130 // dbConnection
+  class_ref 128002 // accessAuthorization
+end
+selected class_ref 129154 // TopEmployers
+open
+  classview_ref 128002 // controllers
+end
+end

@@ -1,0 +1,46 @@
+class Register
+!!!130690.php!!!	__construct(in imie : , in nazwisko : , in pesel : )
+
+        $this->imie = $imie;
+        $this->nazwisko = $nazwisko;
+        $this->pesel = $pesel;
+!!!130818.php!!!	sprawdzWBazie()
+
+        if(empty($this->imie) || empty($this->nazwisko) || empty($this->pesel)){
+            return 0;
+        }else{
+            $dbRegister = $this->sendquery("SELECT * FROM pracownicy WHERE Imie='$this->imie' AND Nazwisko='$this->nazwisko' AND PESEL='$this->pesel'");
+            return $dbRegister;
+        }
+       return 0;
+!!!130946.php!!!	matchPasswords(in password1 : , in password2 : )
+
+        return $password1 == $password2 ? 1 : 0;
+!!!131074.php!!!	createAccount(in login : , in password : , in email : )
+
+        $cr_account = $this->connect()->prepare("UPDATE pracownicy SET login=?,password=?,firstlogin=?,email=? WHERE PESEL=?");
+        $cr_account->bind_param('ssiss',$login,password_hash($password, PASSWORD_DEFAULT),$i = 0,$email,$this->pesel);
+        $cr_account->execute();
+        $cr_account->close();
+
+!!!131202.php!!!	checkLogin(in login : )
+
+        $dbRegister = $this->sendquery("SELECT * FROM pracownicy WHERE login='$login'");
+        return $dbRegister;
+!!!131330.php!!!	checkFirstRegiser()
+
+        $dbFirstLogin = $this->sendquery("SELECT * FROM pracownicy WHERE PESEL='$this->pesel' AND firstlogin=0");
+        return $dbFirstLogin;
+!!!131458.php!!!	checkPESEL()
+
+        $dbCheckPesel = $this->sendquery("SELECT COUNT(*) FROM pracownicy WHERE PESEL='$this->pesel'");
+       if($dbCheckPesel['COUNT(*)'] == 1){
+           return 1;
+       }
+       else{
+           return 0;
+       }
+!!!131586.php!!!	checkEmail(in email : )
+
+        $dbEmail= $this->sendquery("SELECT * FROM pracownicy WHERE email='$email'");
+        return $dbEmail;

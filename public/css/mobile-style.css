@@ -1,0 +1,165 @@
+/* Style do wszystkich stron */
+@import url('https://fonts.googleapis.com/css?family=Roboto&subset=latin-ext');
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    top: 0;
+}
+
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    height: -moz-available;         
+    height: -webkit-fill-available;  
+    height: fill-available;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    display: flex;
+  }
+
+  footer {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    transition: bottom 0.2s ease-in-out;
+    width: 100%;
+    z-index: 9999;
+    /*padding: 1rem;*/
+}
+
+.logo-pracodawcy {
+    height: 2rem;
+    padding-right: 5px;
+}
+
+
+.navbar-brand {
+    width: min-content; /* Others */
+    width: -moz-min-content;    /* Firefox */
+    width: -webkit-min-content; /* Chrome */
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+.navbar .dropdown-menu {
+    margin: 0 25%;
+}
+
+/* Style do: index.html */
+
+.p-logo {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    display: table;
+}
+
+.ui.rating {
+    float: right;
+}
+
+.search-container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.ui.toggle.checkbox {
+    float: right;
+}
+
+.row-filter {
+    margin: 5px 0px;
+}
+
+.row-filter .card-text {
+    display: ruby-text;
+    width: min-content;
+    width: -moz-min-content;
+    width: -webkit-min-content;
+    margin: 0;
+    float: left;
+    display: contents;
+}
+
+.row-filter .form-control {
+    width: 25%;
+    height: 20px;
+    float: right;
+}
+/* Style do: login.html */
+
+.singupform {
+    display: table;
+    margin: 20px auto;
+    margin-bottom: 100px;
+    width: 90%;
+}
+
+.singinform {
+    display: table;
+    margin: 20px auto;
+    width: 90%;
+}
+
+/*.md-form {
+    padding-bottom: 15px;
+}*/
+
+.navbar-nav .nav-item .nav-link {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#wrong-pswd, #wrong-nickname {
+    cursor: text;
+    color: #ff3547;
+    font-size: 12px;
+    margin-left: 40px;
+}
+
+/* Style do top100 */
+
+.btn.btn-md {
+    font-size: .5rem;
+}
+
+table.table td, table.table th {
+    text-align: center;
+}
+
+/*.navbar.navbar-dark form .md-form input {
+    width: 700px;
+}*/
+
+
+/* Profil pracodawcy - employer */
+
+.list-group {
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#commentsContainer {
+    margin-bottom: 100px;
+}
+

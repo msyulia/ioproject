@@ -1,0 +1,1583 @@
+format 218
+"controllers" // ioproject::application::controllers
+  revision 1
+  modified_by 2 "Jakub"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  php_dir "C:\\Users\\Jakub\\Documents\\GitHub\\ioproject/application/controllers/"
+  deploymentview 128258 "controllers"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128258 "accessAuthorization"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+
+?>"
+      associated_elems
+	class_ref 128002 // accessAuthorization
+      end
+    end
+
+    artifact 128386 "addRating"
+      stereotype "source"
+      php_src "<?php
+    require \"../application.php\";
+
+    if(isset($_POST['submit'])){
+
+            Sessions::startSession();
+            $pracodawcaID = new accessAuthorization();
+            $zmienna = new reviewsAndComments($_SESSION['pracodawca'],
+            Sessions::getID(), 
+            $_POST['kat1'],
+            $_POST['kat2'],
+            $_POST['kat3'],
+            $_POST['kat4'],
+            $_POST['kat5'],
+            htmlspecialchars($_POST['komentarz']));
+            $el = $pracodawcaID->getPracodawcaID($_SESSION['pracodawca']);
+            if($zmienna->checkEmptyFields()){
+                $_SESSION['fillAllAreas'] = true;
+                header(\"Location: ../../views/addRating.php\");
+               // $_SESSION['pracodawca']
+                exit();
+            }else{
+                $zmienna->zapisz($el);       
+                unset($_SESSION['pracodawca']);
+                $_SESSION['addedReview'] = true;
+                header(\"Location: ../../views/oceny.php\");
+            }
+
+    }else{
+        header(\"Location: ../../index.php?rate=error\");
+        exit();
+    }
+
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 128514 "dbConnection"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>
+"
+      associated_elems
+	class_ref 128130 // dbConnection
+      end
+    end
+
+    artifact 128642 "employeeController"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>"
+      associated_elems
+	class_ref 128258 // employee
+      end
+    end
+
+    artifact 128770 "employers"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>
+"
+      associated_elems
+	class_ref 128386 // Employers
+      end
+    end
+
+    artifact 128898 "login"
+      stereotype "source"
+      php_src "<?php
+require \"../application.php\";
+Sessions::startSession();
+
+if(isset($_POST['submit'])){
+    $fLogin = $_POST['login'];
+    $fPwd =  $_POST['password'];
+    
+    if(empty($fLogin) || empty($fPwd))
+    {
+        $_SESSION['noLoginData'] = true;
+        header(\"Location: ../../views/login.php\");
+    }
+    else
+    {
+        $obj = new Login($fLogin,$fPwd);
+        $obj->login();
+    }
+}else{
+    header(\"Location: ../../views/login.php\");
+}
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 129026 "loginController"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+"
+      associated_elems
+	class_ref 128514 // Login
+      end
+    end
+
+    artifact 129154 "logout"
+      stereotype "source"
+      php_src "<?php
+    require \"../application.php\";
+    
+    Sessions::startSession();
+    Sessions::stopSession();
+    Sessions::startSession();
+    $_SESSION['loginLogout'] = true;
+    header(\"Location: ../../index.php\");
+    exit();
+
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 129282 "register"
+      stereotype "source"
+      php_src "<?PHP
+require \"../application.php\";
+Sessions::startSession();
+
+
+if(isset($_POST['submit'])){
+    $login = $_POST['login'];
+    $imie = $_POST['imie'];
+    $nazwisko = $_POST['nazwisko'];
+    $pesel = $_POST['pesel'];
+    $password1 = $_POST['pwd1'];
+    $password2 = $_POST['pwd2'];
+    $email = $_POST['email'];
+
+    if(empty($login) || empty($imie) || empty($nazwisko) || empty($pesel) || empty($password1) || empty($password2) || empty($email)){
+        $_SESSION['noRegisterData'] = true;
+        header(\"Location: ../../views/login.php\");
+        die();
+    }else{
+        $register = new Register($imie,$nazwisko,$pesel);
+        //if($register->sprawdzWBazie()){
+
+            //sprawdz PESEL
+            if(!$register->checkPESEL()){
+                $_SESSION['isPESELOccupied'] = true;
+                header(\"Location: ../../views/login.php\");
+                die();
+            }else{
+                if($register->checkFirstRegiser()){
+                    $_SESSION['isAlreadyRegistered'] = true;
+                    header(\"Location: ../../views/login.php\");
+                    die();
+                }else{
+                    if($register->checkLogin($login)){
+                        $_SESSION['isLoginOccupied'] = true;
+                        header(\"Location: ../../views/login.php\");
+                        die();
+                    }else{
+                        if($register->checkEmail($email)){
+                            $_SESSION['emailIsOccupied'] = true;
+                            header(\"Location: ../../views/login.php\");
+                            die();
+                        }else{
+                            if($register->sprawdzWBazie()){
+                                if($register->matchPasswords($password1,$password2)){
+    
+                                    $register->createAccount($login,$password1,$email);
+                                    $_SESSION['registerSuccess'] = true;
+                                    header(\"Location: ../../views/login.php\");
+                                }else{
+                                    $_SESSION['isPasswordsCorrect'] = true;
+                                    header(\"Location: ../../views/login.php\");
+                                    die();
+                                }
+                            }else{
+                                $_SESSION['badInputData'] = true;                        
+                                header(\"Location: ../../views/login.php\");
+                                die();
+                            }
+                        }
+
+
+                    }
+                }
+            }
+    }
+}else{
+   header(\"Location: ../../views/login.php\");
+}
+
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 129410 "registerController"
+      stereotype "source"
+      php_src "<?php
+header('Content-type: text/html; charset=utf-8'); 
+${definition}
+
+
+
+?>"
+      associated_elems
+	class_ref 128642 // Register
+      end
+    end
+
+    artifact 129538 "reviewsAndComments"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>
+"
+      associated_elems
+	class_ref 128770 // reviewsAndComments
+      end
+    end
+
+    artifact 129666 "searchEngine"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>"
+      associated_elems
+	class_ref 128898 // searchEngine
+      end
+    end
+
+    artifact 129794 "sessions"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>"
+      associated_elems
+	class_ref 129026 // Sessions
+      end
+    end
+
+    artifact 129922 "topRating"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+?>
+"
+      associated_elems
+	class_ref 129154 // TopEmployers
+      end
+    end
+  end
+
+  classview 128002 "controllers"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128002 "accessAuthorization"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "autoryzacja przed nie autoryzowanym dostępem do podstron przez osób/użytkowników 
+autoryzacja przed nie autoryzowanym dostępem do podstron przez osób/użytkowników "
+      classrelation 128002 // <generalisation>
+	relation 128002 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128002 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      operation 128002 "getPracownikID"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "login" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+	comment " protected function Authorization(){
+ public function Authorization(){
+     Sessions::startSession();
+ $login=Sessions::getLogin();
+czy był zatrudniony w danej firmie sprawdzenie
+ $imie zamienić na $login potem"
+      end
+
+      operation 128130 "getPracodawcaName"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "id_pracodawcy" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128258 "getPracodawcaID"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "nazwa_firmy" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128386 "wystawOcene"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "login" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128130 "dbConnection"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "połączenie z bazą danych"
+      attribute 128002 "dbHost"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128130 "dbUser"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128258 "dbPassword"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128386 "dbName"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128514 "connection"
+	class_attribute protected explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 128514 "sendquery"
+	protected explicit_return_type ""
+	nparams 1
+	  param in name "queryString" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128642 "getInfo"
+	class_operation protected explicit_return_type ""
+	nparams 1
+	  param in name "columnName" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128770 "getConnection"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 128898 "connect"
+	protected explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128258 "employee"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128130 // <generalisation>
+	relation 128130 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128130 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      operation 129026 "getEmployeeData"
+	protected explicit_return_type ""
+	nparams 1
+	  param in name "id" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129154 "printEmployeeData"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "id" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128386 "Employers"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " wyciąganie firm"
+      classrelation 128258 // <generalisation>
+	relation 128258 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128258 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      operation 129282 "getALL"
+	protected explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129410 "getRating"
+	protected explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128514 "Login"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128386 // <generalisation>
+	relation 128386 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128386 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      attribute 128642 "username"
+	private explicit_type ""
+	init_value "\"\""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128770 "pwd"
+	private explicit_type ""
+	init_value "\"\""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 129538 "getLogin"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129666 "getPwd"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129794 "setLogin"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "_username" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 129922 "setPwd"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "_pwd" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130050 "__construct"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "_username" explicit_type ""
+	  param in name "_pwd" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${visibility}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130178 "matchPassword"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "pwd1" explicit_type ""
+	  param in name "pwd2" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130306 "login"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130434 "errorRedirect"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "errorstring" explicit_type ""
+	    defaultvalue "''"
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130562 "redirect"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "path" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128642 "Register"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128514 // <generalisation>
+	relation 128514 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128514 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      attribute 128898 "imie"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129026 "naziwsko"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129154 "pesel"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 130690 "__construct"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "imie" explicit_type ""
+	  param in name "nazwisko" explicit_type ""
+	  param in name "pesel" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${visibility}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130818 "sprawdzWBazie"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 130946 "matchPasswords"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "password1" explicit_type ""
+	  param in name "password2" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 131074 "createAccount"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "login" explicit_type ""
+	  param in name "password" explicit_type ""
+	  param in name "email" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 131202 "checkLogin"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "login" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 131330 "checkFirstRegiser"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 131458 "checkPESEL"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 131586 "checkEmail"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "email" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128770 "reviewsAndComments"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "wystawiwanie ocen i komentarza => zapis do bazy danych
++ sprawdzenie czy user moze wystaić ocenę"
+      classrelation 128642 // <generalisation>
+	relation 128642 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128642 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      attribute 129282 "pracodawca"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Właściwości
+ public $id;"
+      end
+
+      attribute 129410 "pracownik"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129538 "kat1"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129666 "kat2"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129794 "kat3"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129922 "kat4"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130050 "kat5"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130178 "komentarz"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 131714 "__construct"
+	public explicit_return_type ""
+	nparams 8
+	  param in name "pracodawca" explicit_type ""
+	  param in name "pracownik" explicit_type ""
+	  param in name "kat1" explicit_type ""
+	  param in name "kat2" explicit_type ""
+	  param in name "kat3" explicit_type ""
+	  param in name "kat4" explicit_type ""
+	  param in name "kat5" explicit_type ""
+	  param in name "komentarz" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${visibility}function ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}, ${p3}${v3}, ${p4}${v4}, ${p5}${v5}, ${p6}${v6}, ${p7}${v7}${)}${type}
+{
+  ${body}}
+"
+	
+	
+	comment " Konstruktor"
+      end
+
+      operation 131842 "pokazOcena"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+	comment " Metody"
+      end
+
+      operation 131970 "checkEmptyFields"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132098 "zapisz"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "id" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 128898 "searchEngine"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128770 // <generalisation>
+	relation 128770 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128770 // <generalisation>
+	  b parent class_ref 128130 // dbConnection
+      end
+
+      operation 132226 "search"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "nameEmployer" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132354 "searchByRating"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132482 "getRating"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "nameEmployer" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132610 "getComments"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "nameEmployer" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132738 "getCommentsAndRatings"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "variable" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132866 "endMark"
+	private explicit_return_type ""
+	nparams 2
+	  param in name "nameEmployer" explicit_type ""
+	  param in name "katString" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 132994 "formatComments"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "nameEmployer" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 133122 "searchById"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "id" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+	comment "jezeli zero szukam id pracownika
+jezeli 1 szukam id pracodawcy"
+      end
+
+      operation 133250 "convertToJSON"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "id" explicit_type ""
+	  param in name "string" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}, ${p1}${v1}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 133378 "formatEmployer"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "nameEmployer" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 129026 "Sessions"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+Klasa obsługujaca sesje.
+"
+      attribute 130306 "_sessionStart"
+	class_attribute private explicit_type ""
+	init_value " false"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 133506 "startSession"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 133634 "stopSession"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 133762 "setImie"
+	class_operation public explicit_return_type ""
+	nparams 1
+	  param in name "imie" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 133890 "setID"
+	class_operation public explicit_return_type ""
+	nparams 1
+	  param in name "ID" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134018 "setNazwisko"
+	class_operation public explicit_return_type ""
+	nparams 1
+	  param in name "nazwisko" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134146 "setLogin"
+	class_operation public explicit_return_type ""
+	nparams 1
+	  param in name "login" explicit_type ""
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${p0}${v0}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134274 "getID"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134402 "getImie"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134530 "getNazwisko"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134658 "getLogin"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 134786 "isLogged"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    class 129154 "TopEmployers"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128898 // <generalisation>
+	relation 128898 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128898 // <generalisation>
+	  b parent class_ref 128386 // Employers
+      end
+
+      operation 134914 "getShowALL"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+
+      operation 135042 "calcAverage"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+	comment "obliczanie średniej ocen pracodawców i ich wyświetlenie"
+      end
+
+      operation 135170 "printEmployers"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	preserve_php_body_indent php_def "  ${comment}${final}${visibility}${abstract}${static}function ${name}${(}${)}${type}
+{
+  ${body}}
+"
+	
+	
+      end
+    end
+
+    classdiagram 128002 "Class diagram"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+  end
+end

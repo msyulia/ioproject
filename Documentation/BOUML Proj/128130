@@ -1,0 +1,55 @@
+format 218
+"application" // ioproject::application
+  revision 1
+  modified_by 2 "Jakub"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  php_dir "C:\\Users\\Jakub\\Documents\\GitHub\\ioproject/application/"
+  deploymentview 128130 "application"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128130 "application"
+      stereotype "source"
+      php_src "<?php
+
+    require 'controllers/dbConnection.php';
+    require 'controllers/sessions.php';
+    require 'controllers/accessAuthorization.php';
+    require 'controllers/reviewsAndComments.php';
+    require 'controllers/searchEngine.php';
+    require 'controllers/registerController.php';
+    require 'controllers/loginController.php';
+    require 'controllers/employers.php';
+    require 'controllers/employeeController.php';
+    require 'controllers/topRating.php';
+?>"
+      associated_elems
+      end
+    end
+  end
+
+  package_ref 128258 // controllers
+end

@@ -1,0 +1,40 @@
+class Sessions
+!!!133506.php!!!	startSession()
+
+            if(self::$_sessionStart == false){
+                session_start();
+                self::$_sessionStart = true;
+            }
+!!!133634.php!!!	stopSession()
+
+            if(self::$_sessionStart == true){
+                session_destroy();
+                self::$_sessionStart = false;
+            }
+!!!133762.php!!!	setImie(in imie : )
+
+            $_SESSION['imie'] = $imie;
+!!!133890.php!!!	setID(in ID : )
+
+            $_SESSION['id'] = $ID;
+!!!134018.php!!!	setNazwisko(in nazwisko : )
+
+            $_SESSION['nazwisko'] = $nazwisko;
+!!!134146.php!!!	setLogin(in login : )
+
+            $_SESSION['login'] = $login;
+!!!134274.php!!!	getID()
+
+            return $_SESSION['id'];
+!!!134402.php!!!	getImie()
+
+            return $_SESSION['imie'];
+!!!134530.php!!!	getNazwisko()
+
+            return $_SESSION['nazwisko'];
+!!!134658.php!!!	getLogin()
+
+            return $_SESSION['login'];
+!!!134786.php!!!	isLogged()
+
+            return isset($_SESSION['login']);

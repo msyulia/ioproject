@@ -1,0 +1,1033 @@
+format 218
+"views" // ioproject::views
+  revision 1
+  modified_by 2 "Jakub"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  php_dir "C:\\Users\\Jakub\\Documents\\GitHub\\ioproject/views/"
+  deploymentview 128386 "views"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 130050 "addRating"
+      stereotype "source"
+      php_src "<?php
+    require \"../application/application.php\";
+    Sessions::startSession();
+    if(Sessions::isLogged()){
+        if(isset($_POST['pracodawca']) || isset($_SESSION['pracodawca'])){       
+        ?>
+<html lang=\"pl\">
+
+<head>
+    <meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+    <title>Strona główna</title>
+    <!-- Font Awesome -->
+    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <!-- Bootstrap core CSS -->
+    <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Material Design Bootstrap -->
+    <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+    <!-- Semantic-UI-->
+    <link href=\"../public/css/semantic.min.css\" rel=\"stylesheet\">
+    <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+</head>
+
+<body>
+
+     <!--Navbar -->
+   <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+
+<a class=\"navbar-brand\" href=\"../index.php\">
+    <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">
+    Baza ocen pracodawców</a>
+<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\"
+    aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+    <span class=\"navbar-toggler-icon\"></span>
+</button>
+<div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+    <ul class=\"navbar-nav mr-auto\">
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+        </li>
+        <li class=\"nav-item\">
+            <form class=\"form-inline\" action=\"employer.php\" method=\"GET\"> 
+                <div class=\"md-form mt-0\">
+                    <input name=\"searchEmployer\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Wyszukaj pracodawców\" aria-label=\"Search\" style=\"padding-bottom: 0\">
+                </div>
+            </form>
+        </li>
+    </ul>
+    <ul class=\"navbar-nav ml-auto\">
+        <li class=\"nav-item dropdown\">
+            <?php
+                if(Sessions::isLogged()){
+
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                <i class=\"fa fa-user\"></i><?php  echo Sessions::getLogin();?> </a>
+                <!-- wstawka php sprawdza czy zalogowany -->
+
+            <!--Jeśli user jest zalogowany -->
+            
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"konto.php\">Moje konto</a>
+                <a class=\"dropdown-item\" href=\"oceny.php\">Wystaw oceny</a>
+                <a class=\"dropdown-item\" href=\"../application/controllers/logout.php\">Wyloguj</a>
+            </div>
+            <!-- else -->
+            <?php
+            }else{
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+            <i class=\"fa fa-user\"></i> Profil </a>
+            <!--Jeśli user się nie zalogował -->
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"login.php\">Zaloguj się</a>
+            </div>
+            <?php
+            }
+            ?>
+
+        </li>
+    </ul>
+</div>
+</nav>
+    <!--/.Navbar -->
+<div class=\"container\">
+    <?php if(isset($_SESSION['fillAllAreas'])) {
+                echo '<div class=\"alert alert-danger\">
+                        <strong>Uzupełnij wszystkie pola!</strong>
+                        </div>';
+                unset($_SESSION['fillAllAreas']);
+            }
+            
+        ?>
+    <span class=\"badge cyan\">Wystawiasz ocenę dla 
+    <?php 
+        if(isset($_POST['pracodawca'])){
+            echo $_POST['pracodawca'];
+            $_SESSION['pracodawca'] = $_POST['pracodawca'];
+        }else{
+            echo $_SESSION['pracodawca'];
+        }
+    ?>
+    </span>
+        <form action=\"../application/controllers/addRating.php\" method=\"POST\" style=\"margin-bottom: 100px; font-size: 0.8rem;\">
+            <input type=\"number\" placeholder=\"ocena 1\" id=\"kat1\" name=\"kat1\" hidden>
+            <input type=\"number\" placeholder=\"ocena 2\" id=\"kat2\" name=\"kat2\" hidden>
+            <input type=\"number\" placeholder=\"ocena 3\" id=\"kat3\" name=\"kat3\" hidden>
+            <input type=\"number\" placeholder=\"ocena 4\" id=\"kat4\" name=\"kat4\" hidden>
+            <input type=\"number\" placeholder=\"ocena 5\" id=\"kat5\" name=\"kat5\" hidden>
+        <div class=\"card\">
+                <ul class=\"list-group list-group-flush\">
+                    <li class=\"list-group-item\">
+                        <div class=\"row-filter\">
+                            <p class=\"card-text\">Wynagrodzenia</p>
+                            <div class=\"ui star rating\" data-id=\"kat1\" data-rating=\"0\" data-max-rating=\"5\"></div>
+                        </div>
+                    </li>
+                    <li class=\"list-group-item\">
+                        <div class=\"row-filter\">
+                            <p class=\"card-text\">Atmosfera</p>
+                            <div class=\"ui star rating\" data-id=\"kat2\" data-rating=\"0\" data-max-rating=\"5\"></div>
+                        </div>
+                    </li>
+                    <li class=\"list-group-item\">
+                        <div class=\"row-filter\">
+                            <p class=\"card-text\">Benefity</p>
+                            <div class=\"ui star rating\" data-id=\"kat3\" data-rating=\"0\" data-max-rating=\"5\"></div>
+                        </div>
+                    </li>
+                    <li class=\"list-group-item\">
+                        <div class=\"row-filter\">
+                            <p class=\"card-text\">Miejsce pracy</p>
+                            <div class=\"ui star rating\" data-id=\"kat4\" data-rating=\"0\" data-max-rating=\"5\"></div>
+                        </div>
+                    </li>
+                    <li class=\"list-group-item\">
+                        <div class=\"row-filter\">
+                            <p class=\"card-text\">Możliwości rozwoju</p>
+                            <div class=\"ui star rating\" data-id=\"kat5\" data-rating=\"0\" data-max-rating=\"5\"></div>
+                        </div>
+                    </li>
+                    <li class=\"list-group-item\">
+                        
+                        <div class=\"form-group shadow-textarea\">
+                            <label for=\"exampleFormControlTextarea6\" style=\"padding: 15px 0;\">Twoja opinia</label>
+                            <textarea name=\"komentarz\" class=\"form-control z-depth-1\" id=\"exampleFormControlTextarea6\" rows=\"3\" placeholder=\"Napisz coś o swoim pracodawcy...\"></textarea>
+                        </div>
+                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary\" 
+                        style=\"
+                            width: 100%;
+                            width: -moz-available;    
+                            width: -webkit-fill-available;
+                            width: fill-available;\"
+                        >Dodaj</button>
+                        
+                    </li>
+                </ul>
+            </div>
+                        
+            
+        </form>
+        <?php
+        }else{
+            //jeśli pracodawca nie wiadomy
+        header(\"Location: ../index.php\");
+        }    
+    }else{
+        //jeśli nie zalogowany
+       header(\"Location: ../index.php\");
+    }
+
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 130178 "employer"
+      stereotype "source"
+      php_src "<?php 
+    require \"../application/application.php\";
+    Sessions::startSession();
+?>
+
+<html lang=\"pl\">
+
+<head>
+    <meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+    <title>Strona główna</title>
+    <!-- Font Awesome -->
+    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <!-- Bootstrap core CSS -->
+    <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Material Design Bootstrap -->
+    <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+    <!-- Semantic-UI-->
+    <link href=\"../public/css/semantic.min.css\" rel=\"stylesheet\">
+    <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+</head>
+
+<body>
+
+   <!--Navbar -->
+   <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+
+<a class=\"navbar-brand\" href=\"../index.php\">
+    <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">
+    Baza ocen pracodawców</a>
+<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\"
+    aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+    <span class=\"navbar-toggler-icon\"></span>
+</button>
+<div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+    <ul class=\"navbar-nav mr-auto\">
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+        </li>
+        <li class=\"nav-item\">
+            <form class=\"form-inline\" action=\"employer.php\" method=\"GET\"> 
+                <div class=\"md-form mt-0\">
+                    <input name=\"searchEmployer\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Wyszukaj pracodawców\" aria-label=\"Search\" style=\"padding-bottom: 0\">
+                </div>
+            </form>
+        </li>
+    </ul>
+    <ul class=\"navbar-nav ml-auto\">
+        <li class=\"nav-item dropdown\">
+            <?php
+                if(Sessions::isLogged()){
+
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                <i class=\"fa fa-user\"></i><?php  echo Sessions::getLogin();?> </a>
+                <!-- wstawka php sprawdza czy zalogowany -->
+
+            <!--Jeśli user jest zalogowany -->
+            
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"konto.php\">Moje konto</a>
+                <a class=\"dropdown-item\" href=\"oceny.php\">Wystaw oceny</a>
+                <a class=\"dropdown-item\" href=\"../application/controllers/logout.php\">Wyloguj</a>
+            </div>
+            <!-- else -->
+            <?php
+            }else{
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+            <i class=\"fa fa-user\"></i> Profil </a>
+            <!--Jeśli user się nie zalogował -->
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"login.php\">Zaloguj się</a>
+            </div>
+            <?php
+            }
+            ?>
+
+        </li>
+    </ul>
+</div>
+</nav>
+    <!--/.Navbar -->
+
+
+    <div class=\"container\">
+        <?php 
+            $temp = new searchEngine();
+            if(isset($_GET['id'])){
+            $empName = $temp->searchById($_GET['id']);
+            $empDesc = $temp->search($empName);
+            $idEmp = $_GET['id'];
+            }
+            if(isset($_GET['searchEmployer'])){
+            $empName = preg_replace('!\\s+!', ' ', $_GET['searchEmployer']);
+            $empDesc = $temp->search($empName);
+            $idEmp = $empDesc['ID'];
+            }
+
+            if (!empty($empName) && !empty($idEmp)) {
+            echo 
+            '<div class=\"card card-cascade\" style=\"width: 50%; margin: 0 auto;\">
+                <div class=\"view overlay\" style=\"margin: 0 auto;\">
+                    <img class=\"img-thumbnail\" src=\"../public/img/no-user-image.png\" alt=\"Profile picture\">
+                </div>
+                <div class=\"card-body text-center\">
+                    <h4 class=\"card-title\"><strong>'.$empDesc['nazwa_firmy'].'</strong></h4>
+                    <h5 class=\"blue-text pb-2\"><strong>Profil</strong></h5>
+                    <p class=\"card-text\">'.$empDesc['opis'].'</p>
+                </div>
+            </div>';
+
+            $temp->formatEmployer($empName);
+        ?>
+        <h4 class=\"text-center\">Komentarze</h4>
+        <div id=\"commentsContainer\">
+
+        </div>
+        <?php
+            } else {
+            if(isset($_GET['salaryRate'])){
+            $matches = $temp->searchByRating(); 
+            if(isset($matches) && $matches != null){
+
+                echo '
+                <span class=\"badge cyan\">
+                    <p class=\"h4\">Wyniki</p>
+                    </span>
+                    <div class=\"card\">
+                    <div class=\"list-group\"
+                    style=\"
+                        text-align: center;
+                        margin: 0 auto;
+                    \">';
+
+                if(count($matches) >= 2 ){
+                    foreach($matches as &$row){
+                        foreach($row as &$v){ 
+                            echo '<a href=\"employer.php?searchEmployer='.$v.'\" class=\"list-group-item waves-effect\">'.$v.'</a>';
+                        }
+                        unset($v);
+                    }
+                } else { 
+                    foreach($matches as &$v){ 
+                        echo '<a href=\"employer.php?searchEmployer='.$v.'\" class=\"list-group-item waves-effect\">'.$v.'</a>'; 
+                    }
+                }
+                unset($row);
+                echo '</div></div>';
+            } else {
+                $_SESSION['noEmployerFound'] = true;
+               
+                    ?>
+                         <script type=\"text/javascript\">
+                            window.location.href = '../index.php';
+                         </script>
+                    <?php
+
+                exit();
+            }
+        } else {
+            $_SESSION['noEmployerFound'] = true;
+                    ?>
+                        <script type=\"text/javascript\">
+                        window.location.href = '../index.php';
+                        </script>
+                    <?php
+                
+            exit();
+        }
+    }
+    ?>
+    </div>
+
+    <!--Footer--> 
+    <footer class=\"page-footer font-small mdb-color lighten-3\"> 
+ 
+    <!--Copyright--> 
+        <div class=\"footer-copyright py-3 text-center\"> 
+            © 2018 Copyright: 
+            <a href=\"https://github.com/KowalikJakub/ioproject\"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+        </div> 
+    <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
+
+
+    <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script src=\"../public/js/jquery-3.2.1.min.js\"></script>
+        <!-- Bootstrap tooltips -->
+        <script src=\"../public/js/popper.min.js\"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src=\"../public/js/bootstrap.min.js\"></script>
+        <!-- MDB core JavaScript -->
+        <script src=\"../public/js/mdb.min.js\"></script>
+        <!-- Semantic JavaScript -->
+        <script src=\"../public/js/semantic.min.js\"></script>
+
+        <script src=\"getComments.js\"></script>
+                
+    <?php 
+        $getComments = new searchEngine();
+        echo '
+        <script>         
+        getComments('.json_encode($getComments->convertToJSON($idEmp,\"employer\")).');
+        </script>
+        ';
+   
+    ?>"
+      associated_elems
+      end
+    end
+
+    artifact 130306 "konto"
+      stereotype "source"
+      php_src "<?php 
+    require \"../application/application.php\";
+    Sessions::startSession();
+    if(!Sessions::isLogged()) {
+        header(\"Location: ../index.php\");
+    }
+?>
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+<meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+    <title>Konto użytkownika</title>
+    <!-- Font Awesome -->
+    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <!-- Bootstrap core CSS -->
+    <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Material Design Bootstrap -->
+    <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+    <!-- Semantic-UI-->
+    <link href=\"../public/css/semantic.min.css\" rel=\"stylesheet\">
+    <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+</head>
+<body>
+     <!--Navbar -->
+   <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+
+<a class=\"navbar-brand\" href=\"../index.php\">
+    <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">
+    Baza ocen pracodawców</a>
+<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\"
+    aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+    <span class=\"navbar-toggler-icon\"></span>
+</button>
+<div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+    <ul class=\"navbar-nav mr-auto\">
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+        </li>
+        <li class=\"nav-item\">
+            <form class=\"form-inline\">
+                <div class=\"md-form mt-0\">
+                    <form action=\"employer.php\" method=\"GET\">
+                        <input name=\"searchEmployer\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Wyszukaj pracodawców\" aria-label=\"Search\" style=\"padding-bottom: 0\">
+                    </form>
+                </div>
+            </form>
+        </li>
+    </ul>
+    <ul class=\"navbar-nav ml-auto\">
+        <li class=\"nav-item dropdown\">
+            <?php
+                if(Sessions::isLogged()){
+
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                <i class=\"fa fa-user\"></i><?php  echo Sessions::getLogin();?> </a>
+                <!-- wstawka php sprawdza czy zalogowany -->
+
+            <!--Jeśli user jest zalogowany -->
+            
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"konto.php\">Moje konto</a>
+                <a class=\"dropdown-item\" href=\"oceny.php\">Wystaw oceny</a>
+                <a class=\"dropdown-item\" href=\"../application/controllers/logout.php\">Wyloguj</a>
+            </div>
+            <!-- else -->
+            <?php
+            }else{
+            ?>
+            <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+            <i class=\"fa fa-user\"></i> Profil </a>
+            <!--Jeśli user się nie zalogował -->
+            <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                <a class=\"dropdown-item\" href=\"login.php\">Zaloguj się</a>
+            </div>
+            <?php
+            }
+            ?>
+
+        </li>
+    </ul>
+</div>
+</nav>
+    <!--/.Navbar -->
+<div class=\"container\">
+    <h1 class=\"text-center\">Panel użytkownika</h1>
+    <?php 
+    $employee = new employee();
+    // $employee->getEmployeeData();
+    ?>
+
+    <?php
+
+    $employee->printEmployeeData(Sessions::getID());
+    ?>
+    <div id=\"commentsContainer\"></div>
+
+</div>
+    <!--Footer--> 
+    <footer class=\"page-footer font-small mdb-color lighten-3\"> 
+                    
+    <!--Copyright--> 
+    <div class=\"footer-copyright py-3 text-center\"> 
+         © 2018 Copyright: 
+        <a href=\"https://github.com/KowalikJakub/ioproject\"> Inżynieria Oprogramowania - Projekt Oceny Pracodawców</a> 
+    </div> 
+    <!--/.Copyright--> 
+    </footer> 
+    <!--/.Footer--> 
+
+        <!-- SCRIPTS -->
+       
+    <!-- JQuery -->
+    <script type=\"text/javascript\" src=\"../public/js/jquery-3.2.1.min.js\"></script>
+    <!-- Bootstrap tooltips -->
+    <script type=\"text/javascript\" src=\"../public/js/popper.min.js\"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type=\"text/javascript\" src=\"../public/js/bootstrap.min.js\"></script>
+    <!-- MDB core JavaScript -->
+    <script type=\"text/javascript\" src=\"../public/js/mdb.min.js\"></script>
+    
+    <script type=\"text/javascript\" src=\"getComments.js\"></script>
+
+
+            <?php
+            $getComments = new searchEngine();
+            echo '
+            <script>         
+            getComments('.json_encode($getComments->convertToJSON(Sessions::getID(),\"employee\")).');
+            </script>
+            ';?>"
+      associated_elems
+      end
+    end
+
+    artifact 130434 "login"
+      stereotype "source"
+      php_src "<?php 
+
+    require \"../application/application.php\";
+    Sessions::startSession();
+
+?>
+<!DOCTYPE html>
+<html lang=\"pl\">
+
+    <head>
+        <meta charset=\"utf-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+        <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+        <title>Logowanie</title>
+        <!-- Font Awesome -->
+        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+        <!-- Bootstrap core CSS -->
+        <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+        <!-- Material Design Bootstrap -->
+        <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+        <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+    </head>
+
+    <body>
+        <!--Navbar -->
+        <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+            <a class=\"navbar-brand\" href=\"../index.php\"> <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">&nbsp;&nbsp;&nbsp;Baza ocen pracodawców</a>
+            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+                <span class=\"navbar-toggler-icon\"></span>
+            </button>
+            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+                <ul class=\"navbar-nav mr-auto\">
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+        <div class=\"container\" style=\"margin-bottom: 100px\">
+            <div class=\"singinform\">
+            <?php 
+            if(isset($_GET['form'])){
+                if($_GET['form'] == \"incorrect\"){
+                    echo '<div class=\"alert alert-danger\">
+                    <strong>Błędny login lub hasło!</strong>
+                    </div>';
+                }
+            }
+            if(isset($_SESSION['noLoginData'])) {
+               echo '<div class=\"alert alert-danger\">
+                <strong>Uzupełnij wszystkie pola!</strong>
+                </div>';
+                unset($_SESSION['noLoginData']);
+            }
+            ?>
+                <!-- Material form login -->
+                <?php
+                    if(Sessions::isLogged()){
+                       // echo Sessions::getLogin();
+                ?>
+                <form action=\"../application/controllers/logout.php\" method=\"POST\">
+                    <div class=\"text-center mt-4\">
+                       <button class=\"btn btn-default\" type=\"submit\" name=\"submit\"><a>Logout</a></button>            
+                    </div>
+              
+                </form>
+                <?php
+                }else{
+                ?>
+                <form action=\"../application/controllers/login.php\" method=\"POST\">
+                    <p class=\"h4 text-center mb-4\">Logowanie</p>
+
+                    <!-- Material input text -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-user prefix grey-text\"></i>
+                        <input type=\"text\" id=\"materialFormLoginNicknameEx\" class=\"form-control\" name=\"login\">
+                        <label for=\"materialFormLoginNicknameEx\">Nazwa użytkownika</label>
+                    </div>
+
+                    <!-- Material input password -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-key prefix grey-text\"></i>
+                        <input type=\"password\" id=\"materialFormLoginPasswordEx\" class=\"form-control\" name=\"password\">
+                        <label for=\"materialFormLoginPasswordEx\">Hasło</label>
+                    </div>
+
+                    <div class=\"text-center mt-4\">
+                        <button class=\"btn btn-default\" type=\"submit\" name=\"submit\">Zaloguj</button>
+                    </div>
+                </form>
+                <?php
+                }
+                ?>
+                <!-- Material form login -->
+            </div>
+
+            <br>
+            <?php
+                    if(!Sessions::isLogged()){
+                       // echo Sessions::getLogin();
+
+            ?>
+            <!--Form-->
+            <div class=\"singupform\">
+                <?php
+                    if(isset($_SESSION['noRegisterData'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Uzupełnij wszystkie pola!</strong>
+                            </div>';
+                        unset($_SESSION['noRegisterData']);
+                    } else if(isset($_SESSION['isAlreadyRegistered'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Jesteś już zarejestrowany!</strong>
+                            </div>';
+                        unset($_SESSION['isAlreadyRegistered']);
+                    } else if(isset($_SESSION['isLoginOccupied'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Login jest już zajęty!</strong>
+                            </div>';
+                        unset($_SESSION['isLoginOccupied']);
+                    } else if(isset($_SESSION['isPasswordsCorrect'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Hasła nie są zgodne!</strong>
+                            </div>';
+                        unset($_SESSION['isPasswordsCorrect']);
+                    } else if(isset($_SESSION['noRecordInDatabase'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Brak wpisu w bazie danych!</strong>
+                            <strong>Sprawdź poprawność wprowadzonych danych</strong>
+                            </div>';
+                        unset($_SESSION['noRecordInDatabase']);
+                    } else if(isset($_SESSION['isPESELOccupied'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Brak numeru pesel w bazie danych!</strong>
+                            </div>';
+                        unset($_SESSION['isPESELOccupied']);
+                    } else if(isset($_SESSION['badInputData'])) {
+                        echo '<div class=\"alert alert-danger\">
+                            <strong>Imię i nazwisko nie są zgodne z numerem PESEL!</strong>
+                            </div>';
+                        unset($_SESSION['badInputData']);
+                    } else if(isset($_SESSION['registerSuccess'])){
+                        echo '<div class=\"alert alert-success\">
+                        <strong>Zarejestrowano pomyślnie! Możesz się teraz zalogować.</strong>
+                        </div>';
+                        unset($_SESSION['registerSuccess']);
+                    } else if(isset($_SESSION['emailIsOccupied'])){
+                        echo '<div class=\"alert alert-danger\">
+                        <strong>Adres email zajęty.</strong>
+                        </div>';
+                        unset($_SESSION['emailIsOccupied']);
+                    }
+
+
+                    
+                ?>
+                <!-- Material form register -->
+                <form id=\"formularz\" action=\"../application/controllers/register.php\" method=\"post\" autocomplete=\"off\" onsubmit=\"return Send()\">
+                    <p class=\"h4 text-center mb-4\">Rejestracja</p>
+
+                    <!-- Material input text -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-user prefix grey-text\"></i>
+                        <input name=\"login\" type=\"text\" id=\"materialFormRegisterNicknameEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterNicknameEx\">Nazwa użytkownika</label>
+                        <p id=\"wrong-nickname\" hidden>Nazwa użytkownika powinna składać się z 4 - 20 liter lub cyfr </p>
+                    </div>
+
+                    <!-- Material input text -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-user-circle prefix grey-text\"></i>
+                        <input name=\"imie\" type=\"text\" id=\"materialFormRegisterNameEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterNameEx\">Imię</label>
+                    </div>
+
+                    <!-- Material input text -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-user-circle prefix grey-text\"></i>
+                        <input name=\"nazwisko\" type=\"text\" id=\"materialFormRegisterSurNameEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterSurNameEx\">Nazwisko</label>
+                    </div>
+
+                    <!-- Material input pesel -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-id-card prefix grey-text\"></i>
+                        <input name=\"pesel\" type=\"text\" id=\"materialFormPeselEx\" class=\"form-control\">
+                        <label for=\"materialFormPeselEx\">Numer PESEL</label>
+                    </div>
+
+                    <!-- Material input email -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-envelope prefix grey-text\"></i>
+                        <input name=\"email\" type=\"email\" id=\"materialFormRegisterEmailEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterEmailEx\">E-mail</label>
+                    </div>
+
+                    <!-- Material input email -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-exclamation-triangle prefix grey-text\"></i>
+                        <input type=\"email\" id=\"materialFormRegisterConfirmEmailEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterConfirmEmailEx\">Potwierdź e-mail</label>
+                    </div>
+
+                    <!-- Material input password -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-key prefix grey-text\"></i>
+                        <input name=\"pwd1\" type=\"password\" id=\"materialFormRegisterPasswordEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterPasswordEx\">Hasło</label>
+                        <p id=\"wrong-pswd\" hidden>Hasło musi się składać przynajmniej z 8 liter lub cyfr</p>
+                    </div>
+
+                    <!-- Material input password -->
+                    <div class=\"md-form\">
+                        <i class=\"fa fa-exclamation-triangle prefix grey-text\"></i>
+                        <input name=\"pwd2\" type=\"password\" id=\"materialFormRegisterConfirmPasswordEx\" class=\"form-control\">
+                        <label for=\"materialFormRegisterConfirmPasswordEx\">Potwierdź hasło</label>
+                    </div>
+
+                    <div class=\"text-center mt-4\">
+                        <button class=\"btn btn-primary\" type=\"submit\" name=\"submit\">Zarejestruj</button>
+                    </div>
+                </form>
+                <?php 
+                } 
+                ?>"
+      associated_elems
+      end
+    end
+
+    artifact 130562 "oceny"
+      stereotype "source"
+      php_src "<?php 
+    require \"../application/application.php\";
+    Sessions::startSession();
+
+?>
+<html lang=\"pl\">
+
+<head>
+    <meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+    <title>Oceny</title>
+    <!-- Font Awesome -->
+    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <!-- Bootstrap core CSS -->
+    <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Material Design Bootstrap -->
+    <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+    <!-- Semantic-UI-->
+    <link href=\"../public/css/semantic.min.css\" rel=\"stylesheet\">
+    <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+</head>
+
+<body>
+
+    <!--Navbar -->
+    <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+
+        <a class=\"navbar-brand\" href=\"../index.php\">
+            <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">
+            Baza ocen pracodawców</a>
+        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\"
+            aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+            <span class=\"navbar-toggler-icon\"></span>
+        </button>
+        <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+            <ul class=\"navbar-nav mr-auto\">
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+                </li>
+                <li class=\"nav-item\">
+                    <form class=\"form-inline\" action=\"employer.php\" methon=\"GET\"> 
+                        <div class=\"md-form mt-0\">
+                            <input name=\"searchEmployer\" class=\"form-control mr-sm-1\" type=\"text\" placeholder=\"Wyszukaj pracodawców\" aria-label=\"Search\" style=\"padding-bottom: 0\">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            <ul class=\"navbar-nav ml-auto\">
+                <li class=\"nav-item dropdown\">
+                    <?php
+                        if(Sessions::isLogged()){
+
+                    ?>
+                    <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                        <i class=\"fa fa-user\"></i><?php  echo Sessions::getLogin();?> </a>
+                        <!-- wstawka php sprawdza czy zalogowany -->
+   
+                    <!--Jeśli user jest zalogowany -->
+                    
+                    <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                        <a class=\"dropdown-item\" href=\"konto.php\">Moje konto</a>
+                        <a class=\"dropdown-item\" href=\"oceny.php\">Wystaw oceny</a>
+                        <a class=\"dropdown-item\" href=\"../application/controllers/logout.php\">Wyloguj</a>
+                    </div>
+                    <!-- else -->
+                    <?php
+                    }else{
+                    ?>
+                    <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    <i class=\"fa fa-user\"></i> Profil </a>
+                    <!--Jeśli user się nie zalogował -->
+                    <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                        <a class=\"dropdown-item\" href=\"login.php\">Zaloguj się</a>
+                    </div>
+                    <?php
+                    }
+                    ?>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+
+    <div class=\"container\">
+
+        <?php if(isset($_SESSION['addedReview'])) {
+                echo '<div class=\"alert alert-success\">
+                        <strong>Ocena wystawiona pomyślnie!</strong>
+                        </div>';
+                unset($_SESSION['addedReview']);
+            }
+            
+        ?>
+
+        <div class=\"card\" style=\"margin-bottom: 100px;\">
+            <br>
+
+        <?php
+        if(Sessions::isLogged()){
+            $wystawOcene = new accessAuthorization();
+            $wystawOcene->wystawOcene(Sessions::getLogin());
+        }else{
+            header(\"Location: ../index.php\");
+        }   
+?>"
+      associated_elems
+      end
+    end
+
+    artifact 130690 "top100"
+      stereotype "source"
+      php_src "<?php 
+    require \"../application/application.php\";
+    Sessions::startSession();
+
+?>
+
+<!DOCTYPE html>
+<html lang=\"pl\">
+
+<head>
+    <meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">
+    <title>Strona główna</title>
+    <!-- Font Awesome -->
+    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <!-- Bootstrap core CSS -->
+    <link href=\"../public/css/bootstrap.min.css\" rel=\"stylesheet\">
+    <!-- Material Design Bootstrap -->
+    <link href=\"../public/css/mdb.min.css\" rel=\"stylesheet\">
+    <!-- Semantic-UI-->
+    <link href=\"../public/css/semantic.min.css\" rel=\"stylesheet\">
+    <!-- Your custom styles (optional) -->
+    <link href=\"../public/css/style.css\" media=\"only screen and (min-width: 481px)\" rel=\"stylesheet\">
+    <link rel=\"stylesheet\" media=\"only screen and (max-device-width: 480px)\" href=\"../public/css/mobile-style.css\" />
+</head>
+
+<body>
+    <!--Navbar -->
+    <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark info-color\">
+
+        <a class=\"navbar-brand\" href=\"../index.php\">
+            <img src=\"../public/img/logo.png\" class=\"logo-pracodawcy\" alt=\"logo\">
+            Baza ocen pracodawców</a>
+        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent-4\" aria-controls=\"navbarSupportedContent-4\"
+            aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+            <span class=\"navbar-toggler-icon\"></span>
+        </button>
+        <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent-4\">
+            <ul class=\"navbar-nav mr-auto\">
+                <li class=\"nav-item\">
+                    <a class=\"nav-link\" href=\"top100.php\">Top 100</a>
+                </li>
+                <li class=\"nav-item\">
+                    <form class=\"form-inline\" action=\"employer.php\" method=\"GET\"> 
+                        <div class=\"md-form mt-0\">
+                            <input name=\"searchEmployer\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Wyszukaj pracodawców\" aria-label=\"Search\" style=\"padding-bottom: 0\">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            <ul class=\"navbar-nav ml-auto\">
+                <li class=\"nav-item dropdown\">
+                    <?php
+                        if(Sessions::isLogged()){
+
+                    ?>
+                    <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                        <i class=\"fa fa-user\"></i><?php  echo Sessions::getLogin();?> </a>
+                        <!-- wstawka php sprawdza czy zalogowany -->
+   
+                    <!--Jeśli user jest zalogowany -->
+                    
+                    <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                        <a class=\"dropdown-item\" href=\"konto.php\">Moje konto</a>
+                        <a class=\"dropdown-item\" href=\"oceny.php\">Wystaw oceny</a>
+                        <a class=\"dropdown-item\" href=\"../application/controllers/logout.php\">Wyloguj</a>
+                    </div>
+                    <!-- else -->
+                    <?php
+                    }else{
+                    ?>
+                    <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdownMenuLink-4\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    <i class=\"fa fa-user\"></i> Profil </a>
+                    <!--Jeśli user się nie zalogował -->
+                    <div class=\"dropdown-menu dropdown-menu-right dropdown-info\" aria-labelledby=\"navbarDropdownMenuLink-4\">
+                        <a class=\"dropdown-item\" href=\"login.php\">Zaloguj się</a>
+                    </div>
+                    <?php
+                    }
+                    ?>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+   
+	<div class=\"container\">
+    
+        <span class=\"badge cyan\"
+        >
+        <p class=\"h4\">Top 100 pracodawców</p>
+        </span>
+        <div class=\"card\" 
+        style=\"
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 100px;
+        \">
+    <?php
+        $pracodawcy = new TopEmployers(); 
+        $pracodawcy->  calcAverage();    
+    ?>"
+      associated_elems
+      end
+    end
+  end
+end
